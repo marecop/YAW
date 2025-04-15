@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import AdminLayout from '../../../../../components/AdminLayout';
+import AdminLayout from '@/app/admin/components/AdminLayout';
 import { FaArrowLeft } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
