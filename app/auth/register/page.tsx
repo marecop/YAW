@@ -105,7 +105,7 @@ export default function RegisterPage() {
         }, 300);
       } else {
         // 註冊失敗，顯示錯誤信息
-        setErrors({ general: result.error || '註冊失敗，請稍後再試' });
+        setErrors({ general: '註冊失敗，請稍後再試' });
         setIsLoading(false);
       }
     } catch (error: any) {
