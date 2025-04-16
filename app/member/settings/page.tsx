@@ -8,7 +8,7 @@ import { FaChevronLeft, FaSave, FaUser } from 'react-icons/fa';
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { isAuthenticated, user, loading } = useAuth();
+  const { isLoggedIn, user, loading } = useAuth();
   const [formLoading, setFormLoading] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [formError, setFormError] = useState('');
@@ -38,7 +38,7 @@ export default function SettingsPage() {
     if (loading) return;
     
     // 如果未登錄，重定向到登錄頁面
-    if (!loading && !isAuthenticated) {
+    if (!loading && !isLoggedIn) {
       router.push('/auth/login?redirect=/member/settings');
       return;
     }
@@ -52,7 +52,7 @@ export default function SettingsPage() {
         email: user.email || ''
       }));
     }
-  }, [loading, isAuthenticated, user, router]);
+  }, [loading, isLoggedIn, user, router]);
   
   // 處理表單變化
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -101,7 +101,7 @@ export default function SettingsPage() {
   }
   
   // 如果未登入，顯示登入提示（通常不會到這裡，因為會被重定向）
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="bg-white p-8 rounded-lg shadow-md text-center">
