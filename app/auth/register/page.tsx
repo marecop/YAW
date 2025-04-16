@@ -97,7 +97,7 @@ export default function RegisterPage() {
       const result = await register(formData);
       console.log('註冊結果:', result);
       
-      if (result.success) {
+      if (result) {
         // 短暫延遲再重定向，確保狀態已完全更新
         setTimeout(() => {
           // 註冊成功，導航到首頁
