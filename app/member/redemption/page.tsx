@@ -9,7 +9,7 @@ import { FaChevronLeft, FaPlane, FaHotel, FaCar, FaTicketAlt, FaUtensils, FaShop
 
 export default function RedemptionPage() {
   const router = useRouter();
-  const { isAuthenticated, user, loading } = useAuth();
+  const { isLoggedIn, user, loading } = useAuth();
   const [milesBalance, setMilesBalance] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +24,7 @@ export default function RedemptionPage() {
     if (loading) return;
     
     // 如果未登錄，重定向到登錄頁面
-    if (!loading && !isAuthenticated) {
+    if (!loading && !isLoggedIn) {
       router.push('/auth/login?redirect=/member/redemption');
       return;
     }
@@ -131,7 +131,7 @@ export default function RedemptionPage() {
     };
     
     loadRedemptionData();
-  }, [loading, isAuthenticated, user, router]);
+  }, [loading, isLoggedIn, user, router]);
   
   // 過濾兌換項目
   const filteredItems = redemptionItems.filter(item => {
@@ -204,7 +204,7 @@ export default function RedemptionPage() {
   }
   
   // 如果未登入，顯示登入提示（通常不會到這裡，因為會被重定向）
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="bg-white p-8 rounded-lg shadow-md text-center">
