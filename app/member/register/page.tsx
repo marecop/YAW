@@ -96,12 +96,12 @@ export default function MemberRegisterPage() {
       console.log('發送註冊請求:', formData);
       const result = await register(formData);
       
-      if (result.success) {
+      if (result === true) {
         // 註冊成功後導航到會員中心
         router.push('/member');
       } else {
         // 註冊失敗，顯示錯誤
-        setErrors({ general: result.error || '註冊失敗，請稍後再試' });
+        setErrors({ general: '註冊失敗，請稍後再試' });
       }
     } catch (error: any) {
       console.error('註冊過程中發生錯誤:', error);
