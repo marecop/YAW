@@ -303,9 +303,8 @@ const FlightsPage = () => {
                 to: to || '',
                 departDate: departDate || '',
                 returnDate: returnDate || '',
-                cabinClass: cabinClass as 'economy' | 'business' | 'first',
                 tripType: tripType as 'oneway' | 'roundtrip'
-              }}
+              } as any}
             />
           </div>
         )}
