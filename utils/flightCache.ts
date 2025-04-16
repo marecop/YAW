@@ -29,7 +29,9 @@ export function cacheFlights(from: string, to: string, date: string, flights: Fl
   // 為避免內存洩漏，限制快取大小，當快取鍵超過100個時，清除最舊的條目
   if (flightCache.size > 100) {
     const oldestKey = flightCache.keys().next().value;
-    flightCache.delete(oldestKey);
+    if (oldestKey !== undefined) {
+      flightCache.delete(oldestKey);
+    }
   }
 }
 
