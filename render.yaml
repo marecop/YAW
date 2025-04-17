@@ -9,4 +9,12 @@ services:
       - key: NODE_ENV
         value: production
       - key: NEXT_PUBLIC_BASE_URL
-        sync: false # 用戶需要手動設置這個值 
+        sync: false # 用戶需要手動設置這個值
+    buildFilter:
+      paths:
+        - build.sh
+        - next.config.js
+        - package.json
+        - tailwind.config.js
+        - postcss.config.js
+        - app/**/*.js 
