@@ -3,7 +3,7 @@
 rm -rf node_modules
 
 # 安裝基本依賴
-npm ci || npm install
+npm install
 
 # 直接安裝特定版本的 tailwindcss 和相關依賴
 npm install tailwindcss@3.3.5 postcss@8.4.31 autoprefixer@10.4.16 --no-save
