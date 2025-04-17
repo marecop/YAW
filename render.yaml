@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: yellairlines
+    env: node
+    plan: free
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_BASE_URL
+        sync: false # 用戶需要手動設置這個值 
