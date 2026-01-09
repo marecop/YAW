@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
         totalFlights: flights.length
       })
       
-      filteredFlights = flights.filter(flight => {
+      filteredFlights = flights.filter((flight: any) => {
         const operates = flight.operatingDays.includes(dayOfWeek.toString())
         if (operates) {
           console.log('✅ Flight operates:', flight.flightNumber, 'operatingDays:', flight.operatingDays)
