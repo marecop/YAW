@@ -115,7 +115,7 @@ export async function GET(request: Request) {
     let shortestDirectFlightMinutes: number | null = null
     if (directFlights.length > 0) {
       shortestDirectFlightMinutes = Math.min(
-        ...directFlights.map(f => parseDuration(f.duration))
+        ...directFlights.map((f: any) => parseDuration(f.duration))
       )
     }
 
