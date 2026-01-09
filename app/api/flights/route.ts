@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
       // 如果提供了日期，組合日期和時間
       if (date) {
         const [depHour, depMin] = flight.departureTime.split(':')
-        const [arrHour, arrMin] = flight.arrivalTime.split(':').map(t => t.replace('+1', ''))
+        const [arrHour, arrMin] = flight.arrivalTime.split(':').map((t: string) => t.replace('+1', ''))
         const isNextDay = flight.arrivalTime.includes('+1')
         
         const depDate = new Date(date)
