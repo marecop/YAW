@@ -1,0 +1,128 @@
+{
+  "airlineCode": "NH",
+  "airlineName": "全日空航空",
+  "airlineLogo": "/images/airlines/ana.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "NH919-PVG-NRT",
+      "flightNumber": "NH919",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "東京成田國際機場",
+      "arrivalAirportCode": "NRT",
+      "arrivalTerminal": "T1",
+      "departureTime": "08:20:00",
+      "durationMinutes": 175,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 3600,
+          "business": 11500,
+          "first": 24000
+        }
+      },
+      "seatsAvailable": 255,
+      "distance": 1780,
+      "aircraftType": "Boeing 787-10",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "NH920-NRT-PVG",
+      "flightNumber": "NH920",
+      "departureAirport": "東京成田國際機場",
+      "departureAirportCode": "NRT",
+      "departureTerminal": "T1",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T1",
+      "departureTime": "17:15:00",
+      "durationMinutes": 185,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 3700,
+          "business": 12000,
+          "first": 25000
+        }
+      },
+      "seatsAvailable": 250,
+      "distance": 1780,
+      "aircraftType": "Boeing 787-10",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "NH1929-HND-HKG",
+      "flightNumber": "NH1929",
+      "departureAirport": "東京羽田國際機場",
+      "departureAirportCode": "HND",
+      "departureTerminal": "3",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "08:50:00",
+      "durationMinutes": 260,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 4100,
+          "business": 13000,
+          "first": 27000
+        }
+      },
+      "seatsAvailable": 245,
+      "distance": 2900,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "NH1930-HKG-HND",
+      "flightNumber": "NH1930",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "東京羽田國際機場",
+      "arrivalAirportCode": "HND",
+      "arrivalTerminal": "3",
+      "departureTime": "14:20:00",
+      "durationMinutes": 250,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 4000,
+          "business": 12800,
+          "first": 26500
+        }
+      },
+      "seatsAvailable": 250,
+      "distance": 2900,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

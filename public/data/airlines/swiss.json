@@ -1,0 +1,128 @@
+{
+  "airlineCode": "LX",
+  "airlineName": "瑞士國際航空",
+  "airlineLogo": "/images/airlines/swiss.svg",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "LX138-ZRH-PVG",
+      "flightNumber": "LX138",
+      "departureAirport": "蘇黎世機場",
+      "departureAirportCode": "ZRH",
+      "departureTerminal": "E",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "12:40:00",
+      "durationMinutes": 710,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7400,
+          "business": 31000,
+          "first": 67000
+        }
+      },
+      "seatsAvailable": 230,
+      "distance": 9000,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "LX139-PVG-ZRH",
+      "flightNumber": "LX139",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T2",
+      "arrivalAirport": "蘇黎世機場",
+      "arrivalAirportCode": "ZRH",
+      "arrivalTerminal": "E",
+      "departureTime": "23:45:00",
+      "durationMinutes": 740,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7300,
+          "business": 30500,
+          "first": 66000
+        }
+      },
+      "seatsAvailable": 235,
+      "distance": 9000,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "LX158-ZRH-HKG",
+      "flightNumber": "LX158",
+      "departureAirport": "蘇黎世機場",
+      "departureAirportCode": "ZRH",
+      "departureTerminal": "E",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "22:40:00",
+      "durationMinutes": 730,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7500,
+          "business": 32000,
+          "first": 68000
+        }
+      },
+      "seatsAvailable": 225,
+      "distance": 9300,
+      "aircraftType": "Airbus A340-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "LX159-HKG-ZRH",
+      "flightNumber": "LX159",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "蘇黎世機場",
+      "arrivalAirportCode": "ZRH",
+      "arrivalTerminal": "E",
+      "departureTime": "23:45:00",
+      "durationMinutes": 765,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7600,
+          "business": 32500,
+          "first": 69000
+        }
+      },
+      "seatsAvailable": 220,
+      "distance": 9300,
+      "aircraftType": "Airbus A340-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

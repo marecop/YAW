@@ -1,0 +1,229 @@
+{
+  "airline": {
+    "code": "SQ",
+    "name": "新加坡航空",
+    "logo": "/images/airlines/singaporeairlines.png"
+  },
+  "flights": [
+    {
+      "flightNumber": "SQ711",
+      "origin": "SIN",
+      "destination": "HKG",
+      "departureTime": "09:30",
+      "arrivalTime": "13:20",
+      "duration": "3h 50m",
+      "aircraft": "Boeing 777-300ER",
+      "status": "準時",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "price": {
+        "economy": 1900,
+        "premium_economy": 2800,
+        "business": 4500,
+        "first": 8200
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 95
+    },
+    {
+      "flightNumber": "SQ712",
+      "origin": "HKG",
+      "destination": "SIN",
+      "departureTime": "14:50",
+      "arrivalTime": "18:40",
+      "duration": "3h 50m",
+      "aircraft": "Boeing 777-300ER",
+      "status": "準時",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "price": {
+        "economy": 1900,
+        "premium_economy": 2800,
+        "business": 4500,
+        "first": 8200
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 93
+    },
+    {
+      "flightNumber": "SQ978",
+      "origin": "SIN",
+      "destination": "TPE",
+      "departureTime": "08:25",
+      "arrivalTime": "13:10",
+      "duration": "4h 45m",
+      "aircraft": "Airbus A350-900",
+      "status": "準時",
+      "days": [1, 3, 5, 7],
+      "price": {
+        "economy": 2300,
+        "premium_economy": 3400,
+        "business": 5600,
+        "first": 9500
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 91
+    },
+    {
+      "flightNumber": "SQ979",
+      "origin": "TPE",
+      "destination": "SIN",
+      "departureTime": "14:40",
+      "arrivalTime": "19:05",
+      "duration": "4h 25m",
+      "aircraft": "Airbus A350-900",
+      "status": "準時",
+      "days": [1, 3, 5, 7],
+      "price": {
+        "economy": 2300,
+        "premium_economy": 3400,
+        "business": 5600,
+        "first": 9500
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 92
+    },
+    {
+      "flightNumber": "SQ321",
+      "origin": "SIN",
+      "destination": "LHR",
+      "departureTime": "23:45",
+      "arrivalTime": "06:10+1",
+      "duration": "13h 25m",
+      "aircraft": "Airbus A380-800",
+      "status": "準時",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "price": {
+        "economy": 6200,
+        "premium_economy": 8800,
+        "business": 16000,
+        "first": 26500
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 89
+    },
+    {
+      "flightNumber": "SQ322",
+      "origin": "LHR",
+      "destination": "SIN",
+      "departureTime": "11:30",
+      "arrivalTime": "07:30+1",
+      "duration": "13h 00m",
+      "aircraft": "Airbus A380-800",
+      "status": "準時",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "price": {
+        "economy": 6200,
+        "premium_economy": 8800,
+        "business": 16000,
+        "first": 26500
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 90
+    },
+    {
+      "flightNumber": "SQ231",
+      "origin": "SIN",
+      "destination": "SYD",
+      "departureTime": "20:10",
+      "arrivalTime": "06:35+1",
+      "duration": "7h 25m",
+      "aircraft": "Airbus A350-900",
+      "status": "準時",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "price": {
+        "economy": 4500,
+        "premium_economy": 6300,
+        "business": 10500,
+        "first": 17000
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 94
+    },
+    {
+      "flightNumber": "SQ232",
+      "origin": "SYD",
+      "destination": "SIN",
+      "departureTime": "08:15",
+      "arrivalTime": "14:35",
+      "duration": "8h 20m",
+      "aircraft": "Airbus A350-900",
+      "status": "準時",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "price": {
+        "economy": 4500,
+        "premium_economy": 6300,
+        "business": 10500,
+        "first": 17000
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 92
+    },
+    {
+      "flightNumber": "SQ25",
+      "origin": "SIN",
+      "destination": "JFK",
+      "departureTime": "11:50",
+      "arrivalTime": "18:30",
+      "duration": "18h 40m",
+      "aircraft": "Airbus A350-900ULR",
+      "status": "準時",
+      "days": [1, 3, 5, 7],
+      "price": {
+        "economy": 7000,
+        "premium_economy": 9800,
+        "business": 19000,
+        "first": null
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 88
+    },
+    {
+      "flightNumber": "SQ26",
+      "origin": "JFK",
+      "destination": "SIN",
+      "departureTime": "21:15",
+      "arrivalTime": "06:50+2",
+      "duration": "19h 35m",
+      "aircraft": "Airbus A350-900ULR",
+      "status": "準時",
+      "days": [1, 3, 5, 7],
+      "price": {
+        "economy": 7000,
+        "premium_economy": 9800,
+        "business": 19000,
+        "first": null
+      },
+      "baggage": {
+        "cabin": "7kg",
+        "checked": "30kg"
+      },
+      "onTimePerformance": 87
+    }
+  ]
+} 

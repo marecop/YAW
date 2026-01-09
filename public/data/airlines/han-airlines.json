@@ -1,0 +1,46 @@
+{
+  "airlineCode": "HA",
+  "airlineName": "大漢航空",
+  "airlineLogo": "/images/airlines/koreanairlines.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "HA-TPE-HKG-001",
+      "flightNumber": "HA1234",
+      "departureAirport": "TPE",
+      "departureCity": "台北",
+      "departureTerminal": "T1",
+      "arrivalAirport": "HKG",
+      "arrivalCity": "香港",
+      "arrivalTerminal": "T2",
+      "departureTime": "2023-07-01T08:30:00",
+      "arrivalTime": "2023-07-01T10:15:00",
+      "durationMinutes": 105,
+      "distance": 810,
+      "aircraftType": "Boeing 737-800",
+      "hasStops": false,
+      "stops": [],
+      "isRegular": true,
+      "hasFirstClass": true,
+      "seatsAvailable": {
+        "economy": 120,
+        "business": 25,
+        "first": 8
+      },
+      "prices": [
+        {
+          "currency": "TWD",
+          "economy": 3800,
+          "business": 12000,
+          "first": 25000
+        },
+        {
+          "currency": "HKD",
+          "economy": 950,
+          "business": 3000,
+          "first": 6250
+        }
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,428 @@
+{
+  "airlineCode": "YA",
+  "airlineName": "黃色航空",
+  "airlineLogo": "/images/airlines/logoremovebkgnd.png",
+  "isPrimary": true,
+  "flights": [
+    {
+      "id": "YA101-PVG-HKG",
+      "flightNumber": "YA101",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "08:45:00",
+      "durationMinutes": 155,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1800,
+          "business": 5500,
+          "first": 10000
+        }
+      },
+      "seatsAvailable": 180,
+      "distance": 1255,
+      "aircraftType": "A319neo",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA102-CAN-HKG",
+      "flightNumber": "YA102",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T1",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "09:55:00",
+      "durationMinutes": 70,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1100,
+          "business": 3800,
+          "first": 7500
+        }
+      },
+      "seatsAvailable": 150,
+      "distance": 130,
+      "aircraftType": "A319neo",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA103-CAN-PVG",
+      "flightNumber": "YA103",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T1",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "10:15:00",
+      "durationMinutes": 150,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1500,
+          "business": 4800,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 180,
+      "distance": 1200,
+      "aircraftType": "B737-800",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA201-CAN-NRT",
+      "flightNumber": "YA201",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "東京成田國際機場",
+      "arrivalAirportCode": "NRT",
+      "arrivalTerminal": "T2",
+      "departureTime": "11:20:00",
+      "durationMinutes": 240,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 2200,
+          "business": 6800,
+          "first": 12000
+        }
+      },
+      "seatsAvailable": 180,
+      "distance": 2500,
+      "aircraftType": "A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA301-CAN-SIN",
+      "flightNumber": "YA301",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "新加坡樟宜機場",
+      "arrivalAirportCode": "SIN",
+      "arrivalTerminal": "T3",
+      "departureTime": "14:50:00",
+      "durationMinutes": 220,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1800,
+          "business": 5500,
+          "first": 10000
+        }
+      },
+      "seatsAvailable": 200,
+      "distance": 2400,
+      "aircraftType": "Boeing 787-8",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA401-CAN-BKK",
+      "flightNumber": "YA401",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "曼谷素萬那普機場",
+      "arrivalAirportCode": "BKK",
+      "arrivalTerminal": "T1",
+      "departureTime": "10:20:00",
+      "durationMinutes": 180,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1600,
+          "business": 5200,
+          "first": 9800
+        }
+      },
+      "seatsAvailable": 150,
+      "distance": 1700,
+      "aircraftType": "A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA402-CAN-BKK",
+      "flightNumber": "YA402",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "曼谷素萬那普機場",
+      "arrivalAirportCode": "BKK",
+      "arrivalTerminal": "T1",
+      "departureTime": "16:45:00",
+      "durationMinutes": 185,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1650,
+          "business": 5300,
+          "first": 10000
+        }
+      },
+      "seatsAvailable": 160,
+      "distance": 1700,
+      "aircraftType": "A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA403-CAN-BKK",
+      "flightNumber": "YA403",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "曼谷素萬那普機場",
+      "arrivalAirportCode": "BKK",
+      "arrivalTerminal": "T1",
+      "departureTime": "21:30:00",
+      "durationMinutes": 175,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1550,
+          "business": 5100,
+          "first": 9600
+        }
+      },
+      "seatsAvailable": 140,
+      "distance": 1700,
+      "aircraftType": "A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA301-PEK-LHR",
+      "flightNumber": "YA301",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T3",
+      "arrivalAirport": "倫敦希斯羅機場",
+      "arrivalAirportCode": "LHR",
+      "arrivalTerminal": "T5",
+      "departureTime": "13:20:00",
+      "durationMinutes": 660,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 4800,
+          "business": 15000,
+          "first": 28000
+        }
+      },
+      "seatsAvailable": 290,
+      "distance": 8210,
+      "aircraftType": "B777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA302-LHR-PEK",
+      "flightNumber": "YA302",
+      "departureAirport": "倫敦希斯羅機場",
+      "departureAirportCode": "LHR",
+      "departureTerminal": "T5",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T3",
+      "departureTime": "22:10:00",
+      "durationMinutes": 635,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 4700,
+          "business": 14500,
+          "first": 27500
+        }
+      },
+      "seatsAvailable": 288,
+      "distance": 8210,
+      "aircraftType": "B777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA303-PVG-LAX",
+      "flightNumber": "YA303",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T2",
+      "arrivalAirport": "洛杉磯國際機場",
+      "arrivalAirportCode": "LAX",
+      "arrivalTerminal": "TBIT",
+      "departureTime": "19:00:00",
+      "durationMinutes": 810,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 5300,
+          "business": 16000,
+          "first": 30000
+        }
+      },
+      "seatsAvailable": 300,
+      "distance": 10400,
+      "aircraftType": "A350-1000",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA304-LAX-PVG",
+      "flightNumber": "YA304",
+      "departureAirport": "洛杉磯國際機場",
+      "departureAirportCode": "LAX",
+      "departureTerminal": "TBIT",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "23:55:00",
+      "durationMinutes": 785,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 5200,
+          "business": 15800,
+          "first": 29800
+        }
+      },
+      "seatsAvailable": 298,
+      "distance": 10400,
+      "aircraftType": "A350-1000",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA31-JFK-CAN",
+      "flightNumber": "YA31",
+      "departureAirport": "紐約肯尼迪國際機場",
+      "departureAirportCode": "JFK",
+      "departureTerminal": "T4",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T2",
+      "departureTime": "10:10:00",
+      "durationMinutes": 785,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 5200,
+          "business": 15800,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 298,
+      "distance": 10400,
+      "aircraftType": "A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {  
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "YA32-CAN-JFK",
+      "flightNumber": "YA32",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "紐約肯尼迪國際機場",
+      "arrivalAirportCode": "JFK",
+      "arrivalTerminal": "T4",
+      "departureTime": "23:55:00",
+      "durationMinutes": 785,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 5200,
+          "business": 15800,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 298,
+      "distance": 10400,
+      "aircraftType": "A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {  
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "airlineCode": "LH",
+  "airlineName": "漢莎航空",
+  "airlineLogo": "/images/airlines/icon-LH.svg",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "LH722-PVG-FRA",
+      "flightNumber": "LH722",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T2",
+      "arrivalAirport": "法蘭克福國際機場",
+      "arrivalAirportCode": "FRA",
+      "arrivalTerminal": "T1",
+      "departureTime": "23:55:00",
+      "durationMinutes": 720,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7500,
+          "business": 32000,
+          "first": 68000
+        }
+      },
+      "seatsAvailable": 250,
+      "distance": 9000,
+      "aircraftType": "Boeing 747-8",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "LH723-FRA-PVG",
+      "flightNumber": "LH723",
+      "departureAirport": "法蘭克福國際機場",
+      "departureAirportCode": "FRA",
+      "departureTerminal": "T1",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "17:30:00",
+      "durationMinutes": 720,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7600,
+          "business": 32500,
+          "first": 69000
+        }
+      },
+      "seatsAvailable": 245,
+      "distance": 9000,
+      "aircraftType": "Boeing 747-8",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "LH780-PEK-MUC",
+      "flightNumber": "LH780",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T3",
+      "arrivalAirport": "慕尼黑國際機場",
+      "arrivalAirportCode": "MUC",
+      "arrivalTerminal": "T2",
+      "departureTime": "00:30:00",
+      "durationMinutes": 660,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7300,
+          "business": 31000,
+          "first": 65000
+        }
+      },
+      "seatsAvailable": 220,
+      "distance": 8500,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "LH781-MUC-PEK",
+      "flightNumber": "LH781",
+      "departureAirport": "慕尼黑國際機場",
+      "departureAirportCode": "MUC",
+      "departureTerminal": "T2",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T3",
+      "departureTime": "19:15:00",
+      "durationMinutes": 670,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7400,
+          "business": 31500,
+          "first": 66000
+        }
+      },
+      "seatsAvailable": 210,
+      "distance": 8500,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

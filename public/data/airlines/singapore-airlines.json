@@ -1,0 +1,128 @@
+{
+  "airlineCode": "SQ",
+  "airlineName": "新加坡航空",
+  "airlineLogo": "/images/airlines/sq.svg",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "SQ831-SIN-CAN",
+      "flightNumber": "SQ831",
+      "departureAirport": "新加坡樟宜機場",
+      "departureAirportCode": "SIN",
+      "departureTerminal": "T3",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T2",
+      "departureTime": "08:15:00",
+      "durationMinutes": 240,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 2800,
+          "business": 8500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 280,
+      "distance": 2500,
+      "aircraftType": "Boeing 787-10",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "SQ861-SIN-HKG",
+      "flightNumber": "SQ861",
+      "departureAirport": "新加坡樟宜機場",
+      "departureAirportCode": "SIN",
+      "departureTerminal": "T3",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "09:55:00",
+      "durationMinutes": 235,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 3000,
+          "business": 9000,
+          "first": 18000
+        }
+      },
+      "seatsAvailable": 320,
+      "distance": 2570,
+      "aircraftType": "Airbus A380-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "SQ26-SIN-JFK",
+      "flightNumber": "SQ26",
+      "departureAirport": "新加坡樟宜機場",
+      "departureAirportCode": "SIN",
+      "departureTerminal": "T3",
+      "arrivalAirport": "紐約甘迺迪國際機場",
+      "arrivalAirportCode": "JFK",
+      "arrivalTerminal": "T4",
+      "departureTime": "10:25:00",
+      "durationMinutes": 1080,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 8500,
+          "business": 35000,
+          "first": 75000
+        }
+      },
+      "seatsAvailable": 250,
+      "distance": 15350,
+      "aircraftType": "Airbus A350-900ULR",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "SQ336-SIN-CDG",
+      "flightNumber": "SQ336",
+      "departureAirport": "新加坡樟宜機場",
+      "departureAirportCode": "SIN",
+      "departureTerminal": "T3",
+      "arrivalAirport": "巴黎戴高樂機場",
+      "arrivalAirportCode": "CDG",
+      "arrivalTerminal": "T1",
+      "departureTime": "00:15:00",
+      "durationMinutes": 840,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6800,
+          "business": 28000,
+          "first": 62000
+        }
+      },
+      "seatsAvailable": 260,
+      "distance": 10730,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

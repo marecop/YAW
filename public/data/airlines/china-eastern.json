@@ -1,0 +1,128 @@
+{
+  "airlineCode": "MU",
+  "airlineName": "中國東方航空",
+  "airlineLogo": "/images/airlines/chinaeastern.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "MU5137-PVG-PEK",
+      "flightNumber": "MU5137",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T2",
+      "departureTime": "07:30:00",
+      "durationMinutes": 130,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1550,
+          "business": 5200,
+          "first": 8500
+        }
+      },
+      "seatsAvailable": 200,
+      "distance": 1075,
+      "aircraftType": "Airbus A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "MU5138-PEK-PVG",
+      "flightNumber": "MU5138",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T2",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T1",
+      "departureTime": "12:00:00",
+      "durationMinutes": 135,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1600,
+          "business": 5300,
+          "first": 8700
+        }
+      },
+      "seatsAvailable": 195,
+      "distance": 1075,
+      "aircraftType": "Airbus A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "MU703-PVG-HKG",
+      "flightNumber": "MU703",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "09:20:00",
+      "durationMinutes": 150,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1700,
+          "business": 5500,
+          "first": 9000
+        }
+      },
+      "seatsAvailable": 180,
+      "distance": 1255,
+      "aircraftType": "Boeing 737-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "MU704-HKG-PVG",
+      "flightNumber": "MU704",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T1",
+      "departureTime": "14:30:00",
+      "durationMinutes": 155,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1750,
+          "business": 5600,
+          "first": 9200
+        }
+      },
+      "seatsAvailable": 175,
+      "distance": 1255,
+      "aircraftType": "Boeing 737-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

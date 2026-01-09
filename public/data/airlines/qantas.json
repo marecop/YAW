@@ -1,0 +1,128 @@
+{
+  "airlineCode": "QF",
+  "airlineName": "澳洲航空",
+  "airlineLogo": "/images/airlines/qantas.svg",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "QF129-SYD-HKG",
+      "flightNumber": "QF129",
+      "departureAirport": "悉尼金斯福德·史密斯機場",
+      "departureAirportCode": "SYD",
+      "departureTerminal": "1",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "09:30:00",
+      "durationMinutes": 570,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6700,
+          "business": 28000,
+          "first": 59000
+        }
+      },
+      "seatsAvailable": 290,
+      "distance": 7500,
+      "aircraftType": "Airbus A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "QF130-HKG-SYD",
+      "flightNumber": "QF130",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "悉尼金斯福德·史密斯機場",
+      "arrivalAirportCode": "SYD",
+      "arrivalTerminal": "1",
+      "departureTime": "20:10:00",
+      "durationMinutes": 590,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6800,
+          "business": 28500,
+          "first": 60000
+        }
+      },
+      "seatsAvailable": 285,
+      "distance": 7500,
+      "aircraftType": "Airbus A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "QF127-SYD-PVG",
+      "flightNumber": "QF127",
+      "departureAirport": "悉尼金斯福德·史密斯機場",
+      "departureAirportCode": "SYD",
+      "departureTerminal": "1",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T1",
+      "departureTime": "11:00:00",
+      "durationMinutes": 640,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7000,
+          "business": 29000,
+          "first": 61000
+        }
+      },
+      "seatsAvailable": 280,
+      "distance": 8100,
+      "aircraftType": "Boeing 787-9",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "QF128-PVG-SYD",
+      "flightNumber": "QF128",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "悉尼金斯福德·史密斯機場",
+      "arrivalAirportCode": "SYD",
+      "arrivalTerminal": "1",
+      "departureTime": "19:50:00",
+      "durationMinutes": 655,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7100,
+          "business": 29500,
+          "first": 62000
+        }
+      },
+      "seatsAvailable": 275,
+      "distance": 8100,
+      "aircraftType": "Boeing 787-9",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

@@ -1,0 +1,188 @@
+{
+  "airlineCode": "CA",
+  "airlineName": "中國國際航空",
+  "airlineLogo": "/images/airlines/airchina.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "CA937-PEK-CAN",
+      "flightNumber": "CA937",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T3",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T1",
+      "departureTime": "08:35:00",
+      "durationMinutes": 210,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1800,
+          "business": 5500,
+          "first": 9000
+        }
+      },
+      "seatsAvailable": 180,
+      "distance": 1880,
+      "aircraftType": "Boeing 737-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CA938-CAN-PEK",
+      "flightNumber": "CA938",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T1",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T3",
+      "departureTime": "14:20:00",
+      "durationMinutes": 215,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1850,
+          "business": 5600,
+          "first": 9200
+        }
+      },
+      "seatsAvailable": 175,
+      "distance": 1880,
+      "aircraftType": "Boeing 737-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CA935-PEK-SHA",
+      "flightNumber": "CA935",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T3",
+      "arrivalAirport": "上海虹橋國際機場",
+      "arrivalAirportCode": "SHA",
+      "arrivalTerminal": "T2",
+      "departureTime": "07:00:00",
+      "durationMinutes": 130,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1400,
+          "business": 4800,
+          "first": 8500
+        }
+      },
+      "seatsAvailable": 190,
+      "distance": 1075,
+      "aircraftType": "Airbus A321neo",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CA936-SHA-PEK",
+      "flightNumber": "CA936",
+      "departureAirport": "上海虹橋國際機場",
+      "departureAirportCode": "SHA",
+      "departureTerminal": "T2",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T3",
+      "departureTime": "10:15:00",
+      "durationMinutes": 135,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1450,
+          "business": 4900,
+          "first": 8600
+        }
+      },
+      "seatsAvailable": 185,
+      "distance": 1075,
+      "aircraftType": "Airbus A321neo",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CA985-PEK-LAX",
+      "flightNumber": "CA985",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T3",
+      "arrivalAirport": "洛杉磯國際機場",
+      "arrivalAirportCode": "LAX",
+      "arrivalTerminal": "B",
+      "departureTime": "15:40:00",
+      "durationMinutes": 750,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6900,
+          "business": 29000,
+          "first": 62000
+        }
+      },
+      "seatsAvailable": 245,
+      "distance": 10000,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CA986-LAX-PEK",
+      "flightNumber": "CA986",
+      "departureAirport": "洛杉磯國際機場",
+      "departureAirportCode": "LAX",
+      "departureTerminal": "B",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T3",
+      "departureTime": "00:50:00",
+      "durationMinutes": 780,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7000,
+          "business": 29500,
+          "first": 63000
+        }
+      },
+      "seatsAvailable": 240,
+      "distance": 10000,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

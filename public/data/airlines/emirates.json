@@ -1,0 +1,128 @@
+{
+  "airlineCode": "EK",
+  "airlineName": "阿聯酋航空",
+  "airlineLogo": "/images/airlines/emirates.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "EK304-PVG-DXB",
+      "flightNumber": "EK304",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T2",
+      "arrivalAirport": "杜拜國際機場",
+      "arrivalAirportCode": "DXB",
+      "arrivalTerminal": "T3",
+      "departureTime": "00:05:00",
+      "durationMinutes": 555,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6800,
+          "business": 29000,
+          "first": 58000
+        }
+      },
+      "seatsAvailable": 360,
+      "distance": 7500,
+      "aircraftType": "Airbus A380-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "EK306-DXB-PVG",
+      "flightNumber": "EK306",
+      "departureAirport": "杜拜國際機場",
+      "departureAirportCode": "DXB",
+      "departureTerminal": "T3",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "02:50:00",
+      "durationMinutes": 540,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6500,
+          "business": 28000,
+          "first": 56000
+        }
+      },
+      "seatsAvailable": 350,
+      "distance": 7500,
+      "aircraftType": "Airbus A380-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "EK385-HKG-DXB",
+      "flightNumber": "EK385",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "杜拜國際機場",
+      "arrivalAirportCode": "DXB",
+      "arrivalTerminal": "T3",
+      "departureTime": "07:10:00",
+      "durationMinutes": 580,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7200,
+          "business": 30000,
+          "first": 60000
+        }
+      },
+      "seatsAvailable": 355,
+      "distance": 7700,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "EK382-DXB-HKG",
+      "flightNumber": "EK382",
+      "departureAirport": "杜拜國際機場",
+      "departureAirportCode": "DXB",
+      "departureTerminal": "T3",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "10:45:00",
+      "durationMinutes": 570,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7100,
+          "business": 29500,
+          "first": 59000
+        }
+      },
+      "seatsAvailable": 350,
+      "distance": 7700,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

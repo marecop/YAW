@@ -1,0 +1,128 @@
+{
+  "airlineCode": "UA",
+  "airlineName": "聯合航空",
+  "airlineLogo": "/images/airlines/unitedairlines.svg",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "UA836-PVG-SFO",
+      "flightNumber": "UA836",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T2",
+      "arrivalAirport": "舊金山國際機場",
+      "arrivalAirportCode": "SFO",
+      "arrivalTerminal": "I",
+      "departureTime": "15:50:00",
+      "durationMinutes": 715,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7200,
+          "business": 29000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 280,
+      "distance": 10200,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "UA857-SFO-PVG",
+      "flightNumber": "UA857",
+      "departureAirport": "舊金山國際機場",
+      "departureAirportCode": "SFO",
+      "departureTerminal": "I",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "13:55:00",
+      "durationMinutes": 730,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7300,
+          "business": 29500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 275,
+      "distance": 10200,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "UA179-HKG-SFO",
+      "flightNumber": "UA179",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "舊金山國際機場",
+      "arrivalAirportCode": "SFO",
+      "arrivalTerminal": "I",
+      "departureTime": "12:20:00",
+      "durationMinutes": 770,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7500,
+          "business": 30000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 270,
+      "distance": 11120,
+      "aircraftType": "Boeing 777-200",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "UA862-SFO-HKG",
+      "flightNumber": "UA862",
+      "departureAirport": "舊金山國際機場",
+      "departureAirportCode": "SFO",
+      "departureTerminal": "I",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "13:05:00",
+      "durationMinutes": 780,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7600,
+          "business": 30500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 265,
+      "distance": 11120,
+      "aircraftType": "Boeing 777-200",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    }
+  ]
+} 

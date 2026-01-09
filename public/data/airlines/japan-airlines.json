@@ -1,0 +1,128 @@
+{
+  "airlineCode": "JL",
+  "airlineName": "日本航空",
+  "airlineLogo": "/images/airlines/japanair.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "JL829-PVG-NRT",
+      "flightNumber": "JL829",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "東京成田國際機場",
+      "arrivalAirportCode": "NRT",
+      "arrivalTerminal": "T2",
+      "departureTime": "09:05:00",
+      "durationMinutes": 180,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 3800,
+          "business": 12000,
+          "first": 25000
+        }
+      },
+      "seatsAvailable": 240,
+      "distance": 1780,
+      "aircraftType": "Boeing 787-9",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "JL830-NRT-PVG",
+      "flightNumber": "JL830",
+      "departureAirport": "東京成田國際機場",
+      "departureAirportCode": "NRT",
+      "departureTerminal": "T2",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T1",
+      "departureTime": "16:45:00",
+      "durationMinutes": 190,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 3900,
+          "business": 12500,
+          "first": 26000
+        }
+      },
+      "seatsAvailable": 230,
+      "distance": 1780,
+      "aircraftType": "Boeing 787-9",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "JL736-HKG-NRT",
+      "flightNumber": "JL736",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "東京成田國際機場",
+      "arrivalAirportCode": "NRT",
+      "arrivalTerminal": "T2",
+      "departureTime": "15:10:00",
+      "durationMinutes": 250,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 4200,
+          "business": 13000,
+          "first": 28000
+        }
+      },
+      "seatsAvailable": 235,
+      "distance": 2900,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "JL735-NRT-HKG",
+      "flightNumber": "JL735",
+      "departureAirport": "東京成田國際機場",
+      "departureAirportCode": "NRT",
+      "departureTerminal": "T2",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "08:30:00",
+      "durationMinutes": 260,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 4300,
+          "business": 13500,
+          "first": 29000
+        }
+      },
+      "seatsAvailable": 230,
+      "distance": 2900,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

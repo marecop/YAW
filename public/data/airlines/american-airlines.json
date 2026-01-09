@@ -1,0 +1,128 @@
+{
+  "airlineCode": "AA",
+  "airlineName": "美國航空",
+  "airlineLogo": "/images/airlines/americanair.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "AA127-PVG-DFW",
+      "flightNumber": "AA127",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T2",
+      "arrivalAirport": "達拉斯沃斯堡國際機場",
+      "arrivalAirportCode": "DFW",
+      "arrivalTerminal": "D",
+      "departureTime": "10:20:00",
+      "durationMinutes": 810,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6800,
+          "business": 28000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 230,
+      "distance": 12200,
+      "aircraftType": "Boeing 787-9",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "AA128-DFW-PVG",
+      "flightNumber": "AA128",
+      "departureAirport": "達拉斯沃斯堡國際機場",
+      "departureAirportCode": "DFW",
+      "departureTerminal": "D",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T2",
+      "departureTime": "11:35:00",
+      "durationMinutes": 820,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6900,
+          "business": 28500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 225,
+      "distance": 12200,
+      "aircraftType": "Boeing 787-9",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "AA37-LAX-HKG",
+      "flightNumber": "AA37",
+      "departureAirport": "洛杉磯國際機場",
+      "departureAirportCode": "LAX",
+      "departureTerminal": "5",
+      "arrivalAirport": "香港國際機場",
+      "arrivalAirportCode": "HKG",
+      "arrivalTerminal": "T1",
+      "departureTime": "01:40:00",
+      "durationMinutes": 900,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7000,
+          "business": 29500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 235,
+      "distance": 11700,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "AA38-HKG-LAX",
+      "flightNumber": "AA38",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "洛杉磯國際機場",
+      "arrivalAirportCode": "LAX",
+      "arrivalTerminal": "5",
+      "departureTime": "20:15:00",
+      "durationMinutes": 860,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7100,
+          "business": 30000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 220,
+      "distance": 11700,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    }
+  ]
+} 

@@ -1,0 +1,188 @@
+{
+  "airlineCode": "CZ",
+  "airlineName": "中國南方航空",
+  "airlineLogo": "/images/airlines/chinasouthern.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "CZ3101-CAN-PEK",
+      "flightNumber": "CZ3101",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T2",
+      "departureTime": "07:05:00",
+      "durationMinutes": 205,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1750,
+          "business": 5300,
+          "first": 8800
+        }
+      },
+      "seatsAvailable": 190,
+      "distance": 1880,
+      "aircraftType": "Airbus A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CZ3102-PEK-CAN",
+      "flightNumber": "CZ3102",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T2",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T2",
+      "departureTime": "13:30:00",
+      "durationMinutes": 200,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1780,
+          "business": 5350,
+          "first": 8900
+        }
+      },
+      "seatsAvailable": 185,
+      "distance": 1880,
+      "aircraftType": "Airbus A330-300",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CZ3001-CAN-SHA",
+      "flightNumber": "CZ3001",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "上海虹橋國際機場",
+      "arrivalAirportCode": "SHA",
+      "arrivalTerminal": "T2",
+      "departureTime": "08:20:00",
+      "durationMinutes": 155,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1550,
+          "business": 4900,
+          "first": 8200
+        }
+      },
+      "seatsAvailable": 170,
+      "distance": 1275,
+      "aircraftType": "Boeing 737-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CZ3002-SHA-CAN",
+      "flightNumber": "CZ3002",
+      "departureAirport": "上海虹橋國際機場",
+      "departureAirportCode": "SHA",
+      "departureTerminal": "T2",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T2",
+      "departureTime": "11:50:00",
+      "durationMinutes": 160,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1580,
+          "business": 4950,
+          "first": 8300
+        }
+      },
+      "seatsAvailable": 165,
+      "distance": 1275,
+      "aircraftType": "Boeing 737-800",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CZ327-CAN-SYD",
+      "flightNumber": "CZ327",
+      "departureAirport": "廣州白雲國際機場",
+      "departureAirportCode": "CAN",
+      "departureTerminal": "T2",
+      "arrivalAirport": "悉尼金斯福德史密斯機場",
+      "arrivalAirportCode": "SYD",
+      "arrivalTerminal": "T1",
+      "departureTime": "22:30:00",
+      "durationMinutes": 600,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 5900,
+          "business": 25000,
+          "first": 48000
+        }
+      },
+      "seatsAvailable": 235,
+      "distance": 7500,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CZ328-SYD-CAN",
+      "flightNumber": "CZ328",
+      "departureAirport": "悉尼金斯福德史密斯機場",
+      "departureAirportCode": "SYD",
+      "departureTerminal": "T1",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T2",
+      "departureTime": "10:10:00",
+      "durationMinutes": 590,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6000,
+          "business": 25500,
+          "first": 49000
+        }
+      },
+      "seatsAvailable": 230,
+      "distance": 7500,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 

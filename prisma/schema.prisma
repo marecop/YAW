@@ -1,0 +1,323 @@
+// Yellow Airlines Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 用户表
+model User {
+  id                     String    @id @default(cuid())
+  email                  String    @unique
+  password               String
+  name                   String
+  membershipLevel        String    @default("SILVER") // SILVER, GOLD, PLATINUM
+  points                 Int       @default(0)
+  phone                  String?
+  dateOfBirth            DateTime?
+  nationality            String?
+  passportNumber         String?
+  passwordResetToken     String?
+  passwordResetExpires   DateTime?
+  emailVerified          DateTime?
+  emailVerificationToken String?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  
+  bookings               Booking[]
+  redemptions            Redemption[]
+}
+
+// 航班表
+model Flight {
+  id              String    @id @default(cuid())
+  flightNumber    String    @unique
+  airline         String    @default("Yellow Airlines") // 航空公司名称
+  airlineCode     String    @default("YA") // 航空公司代码
+  airlineLogo     String?   // 航空公司logo文件名
+  from            String    // 出发地城市代码 e.g., HKG
+  fromCity        String    // 出发地城市名称
+  fromAirport     String    // 出发机场全名
+  to              String    // 目的地城市代码 e.g., FRA
+  toCity          String    // 目的地城市名称
+  toAirport       String    // 到达机场全名
+  departureTime   String    // 只存储时间，例如 "10:30"
+  arrivalTime     String    // 只存储时间，例如 "14:45"
+  duration        String    // 例如 "2h 30m"
+  aircraft        String    // 飞机型号 e.g., A350-900
+  status          String    @default("SCHEDULED") // SCHEDULED, BOARDING, DEPARTED, ARRIVED, DELAYED, CANCELLED
+  operatingDays        String    @default("1234567")  // 运营日期：1=周一，7=周日
+  
+  // 舱等价格
+  economyPrice         Float
+  premiumEconomyPrice  Float     @default(0)
+  businessPrice        Float
+  firstClassPrice      Float
+  
+  // 舱等座位数
+  economySeats         Int       // 可用经济舱座位数
+  premiumEconomySeats  Int       @default(0) // 可用进阶经济舱座位数
+  businessSeats        Int       // 可用商务舱座位数
+  firstClassSeats      Int       // 可用头等舱座位数
+  
+  // 舱等可用性标记
+  hasEconomy           Boolean   @default(true)
+  hasPremiumEconomy    Boolean   @default(false)
+  hasBusiness          Boolean   @default(true)
+  hasFirstClass        Boolean   @default(true)
+  
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  
+  bookings        Booking[]
+  flightInstances FlightInstance[]
+}
+
+// 每日航班實例（用於模擬狀態）
+model FlightInstance {
+  id                    String    @id @default(cuid())
+  flightId              String
+  date                  DateTime  // 航班日期 (00:00:00)
+  status                String    @default("SCHEDULED") // SCHEDULED, DELAYED, CANCELLED, PREPARING, BOARDING, GATE_CLOSED, DEPARTED, IN_AIR, LANDED, ARRIVED
+  
+  scheduledDeparture    DateTime
+  scheduledArrival      DateTime
+  actualDeparture       DateTime?
+  actualArrival         DateTime?
+  
+  aircraftRegistration  String?   // 飛機註冊號 B-XXXX
+  aircraftType          String?   // 機型 (緩存自 Flight)
+  
+  gate                  String?
+  terminal              String?
+  baggageClaim          String?
+  
+  weatherOrigin         String?   // 出發地天氣: SUNNY, CLOUDY, RAINY, STORMY, SNOWY
+  weatherDestination    String?   // 目的地天氣
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  flight                Flight    @relation(fields: [flightId], references: [id], onDelete: Cascade)
+
+  @@unique([flightId, date]) // 每個航班每天只有一個實例
+}
+
+// 預訂表
+model Booking {
+  id              String    @id @default(cuid())
+  userId          String
+  flightId        String
+  bookingNumber   String    @unique
+  flightDate      DateTime  // 具体的飞行日期
+  passengerName   String
+  passengerEmail  String
+  passengerPhone  String
+  passportNumber  String?
+  cabinClass      String    // ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST_CLASS
+  seatNumber      String?
+  status          String    @default("CONFIRMED") // CONFIRMED, CHECKED_IN, CANCELLED, COMPLETED
+  totalPrice      Float
+  specialMeal     String?   // 特殊餐食
+  extraBaggage    Int       @default(0) // 额外行李件数
+  checkedIn       Boolean   @default(false)
+  memberNumber    String?   // 累積里程的會員號碼
+  pointsAwarded   Boolean   @default(false) // 是否已發放里程
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flight          Flight    @relation(fields: [flightId], references: [id], onDelete: Cascade)
+}
+
+// 促销活动表
+model Promotion {
+  id          String    @id @default(cuid())
+  title       String
+  titleDe     String?   // 德语标题
+  titleEn     String?   // 英语标题
+  titleZhCn   String?   // 简体中文标题
+  titleZhHk   String?   // 粤语繁体标题
+  description String
+  descDe      String?
+  descEn      String?
+  descZhCn    String?
+  descZhHk    String?
+  discount    Float     // 折扣百分比
+  validFrom   DateTime
+  validUntil  DateTime
+  imageUrl    String?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// 政策表
+model Policy {
+  id          String    @id @default(cuid())
+  category    String    // BAGGAGE, CANCELLATION, REFUND, TERMS
+  title       String
+  titleDe     String?
+  titleEn     String?
+  titleZhCn   String?
+  titleZhHk   String?
+  content     String
+  contentDe   String?
+  contentEn   String?
+  contentZhCn String?
+  contentZhHk String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// 会员权益表
+model Benefit {
+  id           String   @id @default(cuid())
+  level        String   // SILVER, GOLD, PLATINUM
+  title        String
+  titleDe      String?
+  titleEn      String?
+  titleZhCn    String?
+  titleZhHk    String?
+  description  String
+  descDe       String?
+  descEn       String?
+  descZhCn     String?
+  descZhHk     String?
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// 订阅邮箱表
+model Newsletter {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  subscribed  Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 特殊需求申请表
+model SpecialAssistanceRequest {
+  id              String   @id @default(cuid())
+  requestNumber   String   @unique
+  type            String   // SPECIAL_MEAL, UNACCOMPANIED_MINOR, DISABILITY_CARE, PET_IN_CABIN, MEDICAL_CARE, TRANSFER_ASSISTANCE, PRIORITY_BOARDING
+  status          String   @default("PENDING") // PENDING, APPROVED, REJECTED, PROCESSING
+  
+  // 申请人信息
+  passengerName   String
+  email           String
+  phone           String
+  
+  // 航班信息（可选）
+  bookingNumber   String?
+  flightNumber    String?
+  flightDate      String?
+  
+  // 特殊需求详情（JSON格式存储不同类型的具体信息）
+  details         String   // JSON string
+  
+  // 附件（如医疗证明、宠物疫苗证书等）
+  attachments     String?  // JSON array of file URLs
+  
+  // 备注
+  notes           String?
+  adminNotes      String?  // 管理员备注
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// 通知表
+model Notification {
+  id              String   @id @default(cuid())
+  type            String   // SYSTEM, TRAVEL_UPDATE, FLIGHT_STATUS, SPECIAL_ASSISTANCE, PROMOTION, POLICY
+  title           String
+  message         String
+  
+  // 多语言支持
+  titleDe         String?
+  titleEn         String?
+  titleZhCn       String?
+  titleZhHk       String?
+  messageDe       String?
+  messageEn       String?
+  messageZhCn     String?
+  messageZhHk     String?
+  
+  // 接收者
+  recipientType   String   // ALL, SPECIFIC_USER
+  recipientUserId String?  // 如果是特定用户，存储用户ID
+  
+  // 关联信息
+  relatedType     String?  // BOOKING, SPECIAL_ASSISTANCE, FLIGHT
+  relatedId       String?  // 关联的ID
+  
+  // 优先级和样式
+  priority        String   @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  icon            String?  // 图标名称或emoji
+  link            String?  // 点击后跳转的链接
+  
+  // 发送者（管理员）
+  senderId        String?
+  
+  createdAt       DateTime @default(now())
+  expiresAt       DateTime? // 通知过期时间
+  
+  reads           NotificationRead[]
+}
+
+// 通知已读记录表
+model NotificationRead {
+  id              String       @id @default(cuid())
+  notificationId  String
+  userId          String
+  readAt          DateTime     @default(now())
+  
+  notification    Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
+  
+  @@unique([notificationId, userId])
+}
+
+// 积分商品表
+model Reward {
+  id          String   @id @default(cuid())
+  title       String
+  titleDe     String?
+  titleEn     String?
+  titleZhCn   String?
+  titleZhHk   String?
+  description String
+  descDe      String?
+  descEn      String?
+  descZhCn    String?
+  descZhHk    String?
+  points      Int      // 所需积分
+  imageUrl    String?  // 商品图片
+  category    String   // 例如: UPGRADE, LOUNGE, BAGGAGE, SHOPPING
+  stock       Int?     // 库存，null表示无限
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  redemptions Redemption[]
+}
+
+// 积分兑换记录表
+model Redemption {
+  id          String   @id @default(cuid())
+  userId      String
+  rewardId    String
+  pointsSpent Int
+  status      String   @default("COMPLETED") // PENDING, COMPLETED, CANCELLED
+  redeemedAt  DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reward      Reward   @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+}

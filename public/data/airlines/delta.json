@@ -1,0 +1,128 @@
+{
+  "airlineCode": "DL",
+  "airlineName": "達美航空",
+  "airlineLogo": "/images/airlines/delta.svg",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "DL281-PVG-SEA",
+      "flightNumber": "DL281",
+      "departureAirport": "上海浦東國際機場",
+      "departureAirportCode": "PVG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "西雅圖-塔科馬國際機場",
+      "arrivalAirportCode": "SEA",
+      "arrivalTerminal": "S",
+      "departureTime": "15:40:00",
+      "durationMinutes": 760,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6800,
+          "business": 26000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 220,
+      "distance": 9800,
+      "aircraftType": "Airbus A330-900neo",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "DL288-SEA-PVG",
+      "flightNumber": "DL288",
+      "departureAirport": "西雅圖-塔科馬國際機場",
+      "departureAirportCode": "SEA",
+      "departureTerminal": "S",
+      "arrivalAirport": "上海浦東國際機場",
+      "arrivalAirportCode": "PVG",
+      "arrivalTerminal": "T1",
+      "departureTime": "13:15:00",
+      "durationMinutes": 790,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6900,
+          "business": 26500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 215,
+      "distance": 9800,
+      "aircraftType": "Airbus A330-900neo",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "DL129-DTW-PEK",
+      "flightNumber": "DL129",
+      "departureAirport": "底特律都會韋恩縣機場",
+      "departureAirportCode": "DTW",
+      "departureTerminal": "M",
+      "arrivalAirport": "北京首都國際機場",
+      "arrivalAirportCode": "PEK",
+      "arrivalTerminal": "T3",
+      "departureTime": "14:25:00",
+      "durationMinutes": 830,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7100,
+          "business": 27000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 225,
+      "distance": 10400,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "DL128-PEK-DTW",
+      "flightNumber": "DL128",
+      "departureAirport": "北京首都國際機場",
+      "departureAirportCode": "PEK",
+      "departureTerminal": "T3",
+      "arrivalAirport": "底特律都會韋恩縣機場",
+      "arrivalAirportCode": "DTW",
+      "arrivalTerminal": "M",
+      "departureTime": "08:30:00",
+      "durationMinutes": 810,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7200,
+          "business": 27500,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 210,
+      "distance": 10400,
+      "aircraftType": "Airbus A350-900",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    }
+  ]
+} 

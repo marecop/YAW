@@ -1,0 +1,128 @@
+{
+  "airlineCode": "CX",
+  "airlineName": "國泰航空",
+  "airlineLogo": "/images/airlines/cathaypacific.png",
+  "isPrimary": false,
+  "flights": [
+    {
+      "id": "CX701-HKG-CAN",
+      "flightNumber": "CX701",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "廣州白雲國際機場",
+      "arrivalAirportCode": "CAN",
+      "arrivalTerminal": "T2",
+      "departureTime": "09:30:00",
+      "durationMinutes": 75,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 850,
+          "business": 3000,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 140,
+      "distance": 140,
+      "aircraftType": "A320neo",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CX503-HKG-TPE",
+      "flightNumber": "CX503",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "台北桃園國際機場",
+      "arrivalAirportCode": "TPE",
+      "arrivalTerminal": "T1",
+      "departureTime": "12:40:00",
+      "durationMinutes": 95,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 1300,
+          "business": 4200,
+          "first": 0
+        }
+      },
+      "seatsAvailable": 160,
+      "distance": 800,
+      "aircraftType": "A330-300",
+      "hasFirstClass": false,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": false
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CX831-HKG-JFK",
+      "flightNumber": "CX831",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "紐約甘迺迪國際機場",
+      "arrivalAirportCode": "JFK",
+      "arrivalTerminal": "T8",
+      "departureTime": "10:05:00",
+      "durationMinutes": 960,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 7500,
+          "business": 35000,
+          "first": 68000
+        }
+      },
+      "seatsAvailable": 220,
+      "distance": 12980,
+      "aircraftType": "Boeing 777-300ER",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    },
+    {
+      "id": "CX271-HKG-LHR",
+      "flightNumber": "CX271",
+      "departureAirport": "香港國際機場",
+      "departureAirportCode": "HKG",
+      "departureTerminal": "T1",
+      "arrivalAirport": "倫敦希思羅機場",
+      "arrivalAirportCode": "LHR",
+      "arrivalTerminal": "T3",
+      "departureTime": "23:55:00",
+      "durationMinutes": 780,
+      "hasStops": false,
+      "prices": {
+        "CNY": {
+          "economy": 6800,
+          "business": 30000,
+          "first": 58000
+        }
+      },
+      "seatsAvailable": 240,
+      "distance": 9640,
+      "aircraftType": "Airbus A350-1000",
+      "hasFirstClass": true,
+      "cabinAvailability": {
+        "economy": true,
+        "business": true,
+        "first": true
+      },
+      "isRegular": true
+    }
+  ]
+} 
