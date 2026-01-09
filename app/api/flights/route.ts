@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 為前端返回的數據添加完整的日期時間
-    const flightsWithDates = filteredFlights.map(flight => {
+    const flightsWithDates = filteredFlights.map((flight: any) => {
       let departureTime = flight.departureTime
       let arrivalTime = flight.arrivalTime
       
