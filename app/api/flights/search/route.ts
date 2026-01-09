@@ -98,7 +98,7 @@ export async function GET(request: Request) {
     })
 
     // Return all cabin classes with their pricing and availability
-    const flightsWithPricing = flights.map((flight) => {
+    const flightsWithPricing = flights.map((flight: any) => {
       // Debug log
       if (flight.flightNumber === 'CX831') {
         console.log('=== CX831 Debug ===')
