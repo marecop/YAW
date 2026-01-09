@@ -263,7 +263,7 @@ function FlightsPageContent() {
                     </label>
                   ))}
                 </div>
-              </div>
+                </div>
 
               {/* Stops Filter (Placeholder) */}
               <div>
@@ -301,46 +301,46 @@ function FlightsPageContent() {
                   </div>
                   <div className="text-sm text-gray-600 mt-1">
                     {new Date(departDate).toLocaleDateString('zh-HK', { weekday: 'short', month: 'long', day: 'numeric' })}
-                  </div>
-                </div>
-                <button
-                  onClick={() => setShowSearch(!showSearch)}
+              </div>
+            </div>
+            <button
+              onClick={() => setShowSearch(!showSearch)}
                   className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700 transition-colors"
-                >
+            >
                   <SearchIcon className="w-4 h-4" />
                   {showSearch ? t('flights.hideSearch') : t('flights.modifySearch')}
-                </button>
-              </div>
+            </button>
+          </div>
 
               {/* Collapsible Search Form */}
-              {showSearch && (
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <FlightSearchForm />
-                </div>
-              )}
+          {showSearch && (
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <FlightSearchForm />
             </div>
+          )}
+        </div>
 
             {/* Results Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="text-gray-600">
+        <div className="flex items-center justify-between mb-6">
+          <div className="text-gray-600">
                 顯示 <span className="font-bold text-gray-900">{filteredFlights.length}</span> 個航班
-              </div>
-              <div className="flex items-center gap-2">
+          </div>
+          <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-600 hidden sm:inline">{t('flights.sortBy')}</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
                   className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ya-yellow-500 bg-white"
-                >
-                  <option value="departure">{t('flights.sortByDeparture')}</option>
-                  <option value="price">{t('flights.sortByPrice')}</option>
-                  <option value="duration">{t('flights.sortByDuration')}</option>
-                </select>
-              </div>
-            </div>
+            >
+              <option value="departure">{t('flights.sortByDeparture')}</option>
+              <option value="price">{t('flights.sortByPrice')}</option>
+              <option value="duration">{t('flights.sortByDuration')}</option>
+            </select>
+          </div>
+        </div>
 
             {/* Flight List */}
-            <div className="space-y-4">
+        <div className="space-y-4">
               {filteredFlights.length === 0 ? (
                 <div className="bg-white rounded-xl shadow-sm p-12 text-center">
                   <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -360,12 +360,12 @@ function FlightsPageContent() {
                 </div>
               ) : (
                 filteredFlights.map((flight) => (
-                  <FlightCard 
-                    key={flight.id} 
-                    flight={flight}
-                    passengers={passengers}
-                    departDate={departDate}
-                  />
+            <FlightCard 
+              key={flight.id} 
+              flight={flight}
+              passengers={passengers}
+              departDate={departDate}
+            />
                 ))
               )}
             </div>

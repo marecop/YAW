@@ -30,7 +30,7 @@ function PassengersPageContent() {
   const passengerCount = parseInt(searchParams.get('passengers') || '1')
   const price = parseFloat(searchParams.get('price') || '0')
   const flightDate = searchParams.get('flightDate') || ''  // 新增：獲取具體日期
-
+  
   // 往返机票参数
   const outboundFlightId = searchParams.get('outboundFlightId')
   const inboundFlightId = searchParams.get('inboundFlightId')

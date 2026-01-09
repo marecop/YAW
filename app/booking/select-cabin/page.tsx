@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useEffect, useState } from 'react'
+import { use, useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
@@ -49,7 +49,7 @@ interface CabinOption {
   }
 }
 
-export default function SelectCabinPage() {
+function SelectCabinContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { t } = useLanguage()
@@ -595,3 +595,17 @@ export default function SelectCabinPage() {
   )
 }
 
+export default function SelectCabinPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ya-yellow-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">載入中...</p>
+        </div>
+      </div>
+    }>
+      <SelectCabinContent />
+    </Suspense>
+  )
+}

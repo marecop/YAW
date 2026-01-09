@@ -130,12 +130,12 @@ export async function POST(request: NextRequest) {
         cabinClass: cabinClass.toUpperCase(),
         seatNumber: seatNumber || null,
       memberNumber,
-      totalPrice,
-      status: 'CONFIRMED',
-      checkedIn: false,
-    },
-    include: {
-      flight: true,
+        totalPrice,
+        status: 'CONFIRMED',
+        checkedIn: false,
+      },
+      include: {
+        flight: true,
         user: {
           select: {
             id: true,

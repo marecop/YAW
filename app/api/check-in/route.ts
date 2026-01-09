@@ -37,10 +37,11 @@ export async function POST(request: NextRequest) {
 
     // ========== 检查值机时间窗口（48小时限制）==========
     // 构建完整的航班起飞时间
-    let flightDateStr = booking.flightDate
-    
-    // 如果没有 flightDate，尝试从 createdAt 推断或使用当前日期
-    if (!flightDateStr) {
+    let flightDateStr: string
+
+    if (booking.flightDate) {
+      flightDateStr = booking.flightDate.toISOString().split('T')[0]
+    } else {
       console.warn('⚠️ 預訂缺少 flightDate，使用當前日期')
       flightDateStr = new Date().toISOString().split('T')[0]
     }

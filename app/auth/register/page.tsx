@@ -57,8 +57,8 @@ export default function RegisterPage() {
         // maybe we shouldn't auto-login or we should but with limited access.
         // For now, let's just show success message.
         if (data.token) {
-            localStorage.setItem('token', data.token)
-            localStorage.setItem('user', JSON.stringify(data.user))
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('user', JSON.stringify(data.user))
         }
         
         setIsSuccess(true)

@@ -127,7 +127,7 @@ export default function Footer() {
             {languageOptions.map((option) => (
               <button
                 key={option.code}
-                onClick={() => setLanguage(option.code)}
+                onClick={() => setLanguage(option.code as any)}
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
                   language === option.code
                     ? 'bg-ya-yellow-500 text-black'

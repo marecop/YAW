@@ -13,12 +13,7 @@ export async function GET(request: NextRequest) {
         pointsAwarded: false,
         status: {
           in: ['CONFIRMED', 'CHECKED_IN', 'COMPLETED']
-        },
-        // 確保有關聯的用戶或提供了會員號碼
-        OR: [
-          { memberNumber: { not: null } },
-          { userId: { not: null } } // 默認關聯到預訂用戶
-        ]
+        }
       },
       include: {
         flight: true,

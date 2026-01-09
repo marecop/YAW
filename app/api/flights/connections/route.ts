@@ -115,7 +115,7 @@ export async function GET(request: Request) {
     let shortestDirectFlightMinutes: number | null = null
     if (directFlights.length > 0) {
       shortestDirectFlightMinutes = Math.min(
-        ...directFlights.map(f => parseDuration(f.duration))
+          ...directFlights.map((f: any) => parseDuration(f.duration))
       )
     }
 
@@ -130,7 +130,7 @@ export async function GET(request: Request) {
 
     // 獲取所有唯一機場代碼
     const airportSet = new Set<string>()
-    allAirports.forEach(f => {
+    allAirports.forEach((f: any) => {
       airportSet.add(f.from)
       airportSet.add(f.to)
     })

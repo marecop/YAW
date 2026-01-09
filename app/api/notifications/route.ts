@@ -25,16 +25,22 @@ export async function GET(request: NextRequest) {
     // 获取所有发送给该用户或所有人的通知
     const notifications = await prisma.notification.findMany({
       where: {
-        OR: [
-          { recipientType: 'ALL' },
-          { 
-            recipientType: 'SPECIFIC_USER',
-            recipientUserId: payload.userId
+        AND: [
+          {
+            OR: [
+              { recipientType: 'ALL' },
+              { 
+                recipientType: 'SPECIFIC_USER',
+                recipientUserId: payload.userId
+              }
+            ]
+          },
+          {
+            OR: [
+              { expiresAt: null },
+              { expiresAt: { gt: new Date() } }
+            ]
           }
-        ],
-        OR: [
-          { expiresAt: null },
-          { expiresAt: { gt: new Date() } }
         ]
       },
       include: {

@@ -250,7 +250,7 @@ export default function NotificationBell() {
             ) : (
               <div className="divide-y divide-gray-100">
                 {notifications.map((notification) => {
-                  const NotificationWrapper = notification.link ? Link : 'div'
+                  const NotificationWrapper = (notification.link ? Link : 'div') as any
                   const wrapperProps = notification.link
                     ? { href: notification.link }
                     : {}

@@ -502,7 +502,7 @@ export default function FlightSearchPage() {
                 connection={connection}
                 passengers={passengers}
                 cabinClass={cabinClass}
-                flightDate={selectedDate || departureDate}
+                departDate={selectedDate || departureDate}
               />
             ))}
           </div>

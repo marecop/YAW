@@ -80,12 +80,12 @@ export default function FlightCard({ flight, passengers, departDate }: FlightCar
           <div className="flex-1">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <AirlineLogo 
-                  airline={flight.airline || 'Yellow Airlines'}
-                  airlineCode={flight.airlineCode || 'YA'}
-                  airlineLogo={flight.airlineLogo}
-                  size="sm"
-                />
+                  <AirlineLogo 
+                    airline={flight.airline || 'Yellow Airlines'}
+                    airlineCode={flight.airlineCode || 'YA'}
+                    airlineLogo={flight.airlineLogo}
+                    size="sm"
+                  />
                 <div>
                   <span className="font-bold text-gray-900">{flight.airline || 'Yellow Airlines'}</span>
                   <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -155,7 +155,7 @@ export default function FlightCard({ flight, passengers, departDate }: FlightCar
               <div className="text-xs text-gray-400 mt-1">餘 {flight.businessSeats} 位</div>
             </button>
           </div>
-        </div>
+                </div>
 
         {/* Footer Actions */}
         <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
@@ -192,7 +192,7 @@ export default function FlightCard({ flight, passengers, departDate }: FlightCar
 
                 <div className="flex gap-4 relative">
                   <div className="w-4 h-4 rounded-full bg-white border-2 border-gray-400 z-10 mt-1"></div>
-                  <div>
+            <div>
                     <div className="font-bold text-gray-900">{formatTime(flight.departureTime)}</div>
                     <div className="text-sm text-gray-600">{flight.fromCity} ({flight.from})</div>
                     <div className="text-xs text-gray-500">香港國際機場 T1</div>
@@ -202,15 +202,15 @@ export default function FlightCard({ flight, passengers, departDate }: FlightCar
                 <div className="flex gap-4 relative py-2">
                   <div className="w-4 flex justify-center">
                     <Clock className="w-3 h-3 text-gray-400 bg-gray-50 z-10" />
-                  </div>
-                  <div>
+            </div>
+            <div>
                     <div className="text-sm text-gray-500">{flight.duration}</div>
                   </div>
-                </div>
+            </div>
 
                 <div className="flex gap-4 relative">
                   <div className="w-4 h-4 rounded-full bg-white border-2 border-ya-yellow-500 z-10 mt-1"></div>
-                  <div>
+            <div>
                     <div className="font-bold text-gray-900">{formatTime(flight.arrivalTime)}</div>
                     <div className="text-sm text-gray-600">{flight.toCity} ({flight.to})</div>
                     <div className="text-xs text-gray-500">目的地機場 T1</div>

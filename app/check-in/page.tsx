@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { Plane, Calendar, User, Hash, CheckCircle, Download, Printer } from 'lucide-react'
 import { generateOccupiedSeats, getOccupancyPercentage } from '@/lib/seatOccupancy'
 
-export default function CheckInPage() {
+function CheckInContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { t } = useLanguage()
@@ -519,3 +519,17 @@ export default function CheckInPage() {
   )
 }
 
+export default function CheckInPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ya-yellow-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">載入中...</p>
+        </div>
+      </div>
+    }>
+      <CheckInContent />
+    </Suspense>
+  )
+}
