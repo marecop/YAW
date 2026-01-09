@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { FlightInstance, Flight } from '@prisma/client'
+import type { FlightInstance, Flight } from '@prisma/client'
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { Plane, Clock, MapPin, AlertTriangle, CheckCircle } from 'lucide-react'
