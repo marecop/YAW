@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 4. 执行兑换事务
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // 扣除用户积分
       const updatedUser = await tx.user.update({
         where: { id: userId },
