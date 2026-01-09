@@ -56,10 +56,10 @@ export async function GET(request: NextRequest) {
     })
 
     // 计算未读数量
-    const unreadCount = notifications.filter(n => n.reads.length === 0).length
+    const unreadCount = notifications.filter((n: any) => n.reads.length === 0).length
 
     return NextResponse.json({
-      notifications: notifications.map(n => ({
+      notifications: notifications.map((n: any) => ({
         ...n,
         isRead: n.reads.length > 0,
         reads: undefined // 移除 reads 数组，只保留 isRead 布尔值
