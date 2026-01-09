@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 
     // 批量标记为已读
     await Promise.all(
-      notifications.map(notification =>
+      notifications.map((notification: any) =>
         prisma.notificationRead.create({
           data: {
             notificationId: notification.id,
