@@ -65,7 +65,20 @@ export async function ensureDailyFlights(date: Date = new Date()) {
   console.log(`🔍 檢查 ${startOfDay.toISOString().split('T')[0]} 的航班實例...`)
 
   // 獲取當前所有活躍航班（模擬模板）
-  const flights = await prisma.flight.findMany({})
+  // 只選必要欄位，避免每次請求拉回大量不需要的欄位造成記憶體壓力
+  const flights = await prisma.flight.findMany({
+    select: {
+      id: true,
+      operatingDays: true,
+      departureTime: true,
+      arrivalTime: true,
+      aircraft: true,
+      airline: true,
+      from: true,
+      to: true,
+      flightNumber: true
+    }
+  })
   const dayOfWeek = startOfDay.getDay() || 7 // 1-7 (Mon-Sun)
   
   const todaysFlights = flights.filter(f => {
@@ -76,8 +89,11 @@ export async function ensureDailyFlights(date: Date = new Date()) {
 
   // 檢查已存在的實例
   const existingInstances = await prisma.flightInstance.findMany({
-    where: {
-      date: startOfDay
+    where: { date: startOfDay },
+    select: {
+      id: true,
+      flightId: true,
+      aircraftRegistration: true
     }
   })
 
@@ -89,8 +105,6 @@ export async function ensureDailyFlights(date: Date = new Date()) {
 
   if (missingFlights.length === 0) {
     console.log('✨ 所有航班實例已就緒')
-    // 更新狀態
-    await updateFlightStatuses(date)
     return
   }
 
@@ -294,12 +308,18 @@ export async function updateFlightStatuses(date: Date = new Date()) {
   
   const now = new Date()
   
+  // 僅選需要的欄位；這個函式不需要 flight 關聯資料
   const instances = await prisma.flightInstance.findMany({
-    where: {
-      date: startOfDay
-    },
-    include: {
-      flight: true
+    where: { date: startOfDay },
+    select: {
+      id: true,
+      status: true,
+      scheduledDeparture: true,
+      scheduledArrival: true,
+      actualDeparture: true,
+      actualArrival: true,
+      weatherOrigin: true,
+      weatherDestination: true
     }
   })
 

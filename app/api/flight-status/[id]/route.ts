@@ -7,8 +7,31 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     
     const instance = await prisma.flightInstance.findUnique({
       where: { id },
-      include: {
-        flight: true
+      select: {
+        id: true,
+        date: true,
+        status: true,
+        scheduledDeparture: true,
+        scheduledArrival: true,
+        actualDeparture: true,
+        actualArrival: true,
+        aircraftType: true,
+        aircraftRegistration: true,
+        gate: true,
+        terminal: true,
+        weatherOrigin: true,
+        weatherDestination: true,
+        flight: {
+          select: {
+            flightNumber: true,
+            airline: true,
+            from: true,
+            to: true,
+            fromCity: true,
+            toCity: true,
+            duration: true
+          }
+        }
       }
     })
 
