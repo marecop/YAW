@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Bell, X, Check, CheckCheck } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 interface Notification {
   id: string
@@ -27,24 +27,93 @@ interface Notification {
 }
 
 export default function NotificationBell() {
-  const { t, language } = useLanguage()
   const { user } = useAuth()
+  const pathname = usePathname()
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // 获取翻译后的标题和消息
-  const getLocalizedText = (notification: Notification, field: 'title' | 'message') => {
-    const langMap: Record<string, string> = {
-      'de': field === 'title' ? notification.titleDe || notification.title : notification.messageDe || notification.message,
-      'en': field === 'title' ? notification.titleEn || notification.title : notification.messageEn || notification.message,
-      'zh-cn': field === 'title' ? notification.titleZhCn || notification.title : notification.messageZhCn || notification.message,
-      'zh-hk': field === 'title' ? notification.titleZhHk || notification.title : notification.messageZhHk || notification.message,
-    }
-    return langMap[language] || (field === 'title' ? notification.title : notification.message)
+  // Helper to get current language prefix
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
   }
+  const langPrefix = getLangPrefix()
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': {
+      notifications: '通知',
+      unread: '未讀',
+      markAllRead: '全部標記已讀',
+      noNotifications: '暫無通知',
+      markRead: '標記已讀',
+      justNow: '剛剛',
+      minsAgo: '分鐘前',
+      hoursAgo: '小時前',
+      daysAgo: '天前'
+    },
+    'zh-cn': {
+      notifications: '通知',
+      unread: '未读',
+      markAllRead: '全部标记已读',
+      noNotifications: '暂无通知',
+      markRead: '标记已读',
+      justNow: '刚刚',
+      minsAgo: '分钟前',
+      hoursAgo: '小时前',
+      daysAgo: '天前'
+    },
+    'en': {
+      notifications: 'Notifications',
+      unread: 'unread',
+      markAllRead: 'Mark all as read',
+      noNotifications: 'No notifications',
+      markRead: 'Mark as read',
+      justNow: 'Just now',
+      minsAgo: 'mins ago',
+      hoursAgo: 'hours ago',
+      daysAgo: 'days ago'
+    },
+    'de': {
+      notifications: 'Benachrichtigungen',
+      unread: 'ungelesen',
+      markAllRead: 'Alle als gelesen markieren',
+      noNotifications: 'Keine Benachrichtigungen',
+      markRead: 'Als gelesen markieren',
+      justNow: 'Gerade eben',
+      minsAgo: 'Minuten her',
+      hoursAgo: 'Stunden her',
+      daysAgo: 'Tage her'
+    },
+    'jp': {
+      notifications: '通知',
+      unread: '未読',
+      markAllRead: 'すべて既読にする',
+      noNotifications: '通知はありません',
+      markRead: '既読にする',
+      justNow: 'たった今',
+      minsAgo: '分前',
+      hoursAgo: '時間前',
+      daysAgo: '日前'
+    },
+    'es': {
+      notifications: 'Notificaciones',
+      unread: 'no leídas',
+      markAllRead: 'Marcar todo como leído',
+      noNotifications: 'No hay notificaciones',
+      markRead: 'Marcar como leído',
+      justNow: 'Justo ahora',
+      minsAgo: 'minutos atrás',
+      hoursAgo: 'horas atrás',
+      daysAgo: 'días atrás'
+    }
+  }
+
+  const t = translations[currentLangCode] || translations['zh-hk']
 
   // 获取通知列表
   const fetchNotifications = async () => {
@@ -152,10 +221,10 @@ export default function NotificationBell() {
     const hours = Math.floor(diff / 3600000)
     const days = Math.floor(diff / 86400000)
 
-    if (minutes < 1) return t('notifications.justNow')
-    if (minutes < 60) return `${minutes} ${t('notifications.minutesAgo').replace('{count}', '')}`
-    if (hours < 24) return `${hours} ${t('notifications.hoursAgo').replace('{count}', '')}`
-    if (days < 7) return `${days} ${t('notifications.daysAgo').replace('{count}', '')}`
+    if (minutes < 1) return '剛剛'
+    if (minutes < 60) return `${minutes} 分鐘前`
+    if (hours < 24) return `${hours} 小時前`
+    if (days < 7) return `${days} 天前`
     return date.toLocaleDateString()
   }
 
@@ -197,7 +266,7 @@ export default function NotificationBell() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 text-gray-700 hover:text-ya-yellow-600 transition-colors"
-        aria-label={t('notifications.title')}
+        aria-label={t.notifications}
       >
         <Bell className="w-6 h-6" />
         {unreadCount > 0 && (
@@ -213,10 +282,10 @@ export default function NotificationBell() {
           {/* 头部 */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <h3 className="text-lg font-bold text-gray-900">
-              {t('notifications.title')}
+              {t.notifications}
               {unreadCount > 0 && (
                 <span className="ml-2 text-sm font-normal text-gray-500">
-                  ({unreadCount} {t('notifications.unread')})
+                  ({unreadCount} {t.unread})
                 </span>
               )}
             </h3>
@@ -226,7 +295,7 @@ export default function NotificationBell() {
                   onClick={markAllAsRead}
                   disabled={loading}
                   className="text-sm text-ya-yellow-600 hover:text-ya-yellow-700 flex items-center gap-1 disabled:opacity-50"
-                  title={t('notifications.markAllRead')}
+                  title={t.markAllRead}
                 >
                   <CheckCheck className="w-4 h-4" />
                 </button>
@@ -245,7 +314,7 @@ export default function NotificationBell() {
             {notifications.length === 0 ? (
               <div className="p-8 text-center text-gray-500">
                 <Bell className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-                <p>{t('notifications.noNotifications')}</p>
+                <p>{t.noNotifications}</p>
               </div>
             ) : (
               <div className="divide-y divide-gray-100">
@@ -262,8 +331,8 @@ export default function NotificationBell() {
                       onClick={() => handleNotificationClick(notification)}
                       className={`
                         p-4 transition-colors cursor-pointer
-                        ${!notification.isRead ? 'bg-blue-50' : 'bg-white hover:bg-gray-50'}
-                        ${getPriorityColor(notification.priority)}
+                        \${!notification.isRead ? 'bg-blue-50' : 'bg-white hover:bg-gray-50'}
+                        \${getPriorityColor(notification.priority)}
                       `}
                     >
                       <div className="flex gap-3">
@@ -275,15 +344,15 @@ export default function NotificationBell() {
                         {/* 内容 */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between gap-2">
-                            <h4 className={`text-sm font-semibold ${!notification.isRead ? 'text-gray-900' : 'text-gray-700'}`}>
-                              {getLocalizedText(notification, 'title')}
+                            <h4 className={`text-sm font-semibold \${!notification.isRead ? 'text-gray-900' : 'text-gray-700'}`}>
+                              {notification.title}
                             </h4>
                             {!notification.isRead && (
                               <span className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
                             )}
                           </div>
                           <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                            {getLocalizedText(notification, 'message')}
+                            {notification.message}
                           </p>
                           <p className="text-xs text-gray-400 mt-2">
                             {formatTime(notification.createdAt)}
@@ -299,7 +368,7 @@ export default function NotificationBell() {
                               markAsRead(notification.id)
                             }}
                             className="flex-shrink-0 text-gray-400 hover:text-ya-yellow-600 transition-colors"
-                            title={t('notifications.markRead')}
+                            title={t.markRead}
                           >
                             <Check className="w-4 h-4" />
                           </button>

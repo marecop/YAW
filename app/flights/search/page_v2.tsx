@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Plane, Clock, Calendar, MapPin, ArrowRight, Filter, ChevronDown, ChevronLeft, ChevronRight, Users } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { format, addDays, subDays, parse } from 'date-fns'
 import Link from 'next/link'
 import ConnectionFlightCard from '@/components/ConnectionFlightCard'
@@ -59,8 +58,7 @@ interface ConnectionFlight {
 export default function FlightSearchPage() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { t } = useLanguage()
-  
+    
   const [flights, setFlights] = useState<Flight[]>([])
   const [connections, setConnections] = useState<ConnectionFlight[]>([])
   const [isLoading, setIsLoading] = useState(true)

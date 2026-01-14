@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import { ArrowLeft, Check, Loader2 } from 'lucide-react'
 
 export default function UnaccompaniedMinorPage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     passengerName: '',
@@ -68,14 +66,14 @@ export default function UnaccompaniedMinorPage() {
 
       if (response.ok) {
         const data = await response.json()
-        alert(`✅ ${t('specialAssistance.requestSubmitted')}\n\n${t('specialAssistance.requestNumber')}: ${data.requestNumber}`)
+        alert(`✅ 申請已提交\n\n申請編號: ${data.requestNumber}`)
         router.push('/special-assistance')
       } else {
-        alert(t('specialAssistance.requestFailed'))
+        alert('申請提交失敗，請稍後重試')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(t('specialAssistance.requestFailed'))
+      alert('申請提交失敗，請稍後重試')
     } finally {
       setIsSubmitting(false)
     }
@@ -86,7 +84,7 @@ export default function UnaccompaniedMinorPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/special-assistance" className="inline-flex items-center text-ya-yellow-600 hover:text-ya-yellow-700 mb-6">
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('specialAssistance.backToServices')}
+          返回特別協助服務
         </Link>
 
         <div className="bg-white rounded-2xl shadow-md p-8 mb-8">
@@ -95,28 +93,28 @@ export default function UnaccompaniedMinorPage() {
               <span className="text-2xl">👶</span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900">
-              {t('specialAssistance.unaccompaniedMinor.title')}
+              無人陪同兒童服務
             </h1>
           </div>
           <p className="text-gray-600">
-            {t('specialAssistance.unaccompaniedMinor.longDescription')}
+            我們為單獨旅行的兒童提供全程陪伴服務。從辦理登機手續到抵達目的地與接機人會合，我們的工作人員會全程悉心照料，確保您孩子的旅程安全、愉快。適用於 5-11 歲單獨旅行的兒童（必須申請），12-17 歲兒童可自願申請。
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            {t('specialAssistance.applicationForm')}
+            服務申請表
           </h2>
 
           {/* Guardian Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.unaccompaniedMinor.guardianInfo')}
+              監護人/申請人信息
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.guardianName')} *
+                  申請人姓名 *
                 </label>
                 <input
                   type="text"
@@ -128,7 +126,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.email')} *
+                  電子郵箱 *
                 </label>
                 <input
                   type="email"
@@ -140,7 +138,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.phone')} *
+                  聯絡電話 *
                 </label>
                 <input
                   type="tel"
@@ -156,12 +154,12 @@ export default function UnaccompaniedMinorPage() {
           {/* Child Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.unaccompaniedMinor.childInfo')}
+              兒童信息
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.childName')} *
+                  兒童姓名 *
                 </label>
                 <input
                   type="text"
@@ -173,7 +171,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.childAge')} *
+                  年齡 *
                 </label>
                 <input
                   type="number"
@@ -187,7 +185,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.gender')} *
+                  性別 *
                 </label>
                 <select
                   required
@@ -195,9 +193,9 @@ export default function UnaccompaniedMinorPage() {
                   onChange={(e) => setFormData({ ...formData, childGender: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
                 >
-                  <option value="">{t('specialAssistance.form.selectOption')}</option>
-                  <option value="MALE">{t('specialAssistance.form.male')}</option>
-                  <option value="FEMALE">{t('specialAssistance.form.female')}</option>
+                  <option value="">請選擇</option>
+                  <option value="MALE">男</option>
+                  <option value="FEMALE">女</option>
                 </select>
               </div>
             </div>
@@ -206,12 +204,12 @@ export default function UnaccompaniedMinorPage() {
           {/* Flight Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.flightInfo')}
+              航班信息
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.bookingNumber')}
+                  預訂編號
                 </label>
                 <input
                   type="text"
@@ -222,7 +220,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.flightNumber')}
+                  航班號
                 </label>
                 <input
                   type="text"
@@ -233,7 +231,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.flightDate')}
+                  航班日期
                 </label>
                 <input
                   type="date"
@@ -248,12 +246,12 @@ export default function UnaccompaniedMinorPage() {
           {/* Pickup Person Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.unaccompaniedMinor.pickupInfo')}
+              接機人信息
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.pickupPersonName')} *
+                  接機人姓名 *
                 </label>
                 <input
                   type="text"
@@ -265,7 +263,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.pickupPersonPhone')} *
+                  接機人電話 *
                 </label>
                 <input
                   type="tel"
@@ -277,7 +275,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.pickupPersonID')} *
+                  接機人證件號碼 *
                 </label>
                 <input
                   type="text"
@@ -285,7 +283,7 @@ export default function UnaccompaniedMinorPage() {
                   value={formData.pickupPersonID}
                   onChange={(e) => setFormData({ ...formData, pickupPersonID: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
-                  placeholder={t('specialAssistance.form.pickupPersonIDPlaceholder')}
+                  placeholder="接機時需出示此證件"
                 />
               </div>
             </div>
@@ -294,12 +292,12 @@ export default function UnaccompaniedMinorPage() {
           {/* Emergency Contact */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.unaccompaniedMinor.emergencyContact')}
+              緊急聯絡人
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.emergencyContactName')} *
+                  姓名 *
                 </label>
                 <input
                   type="text"
@@ -311,7 +309,7 @@ export default function UnaccompaniedMinorPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.emergencyContactPhone')} *
+                  電話 *
                 </label>
                 <input
                   type="tel"
@@ -327,23 +325,23 @@ export default function UnaccompaniedMinorPage() {
           {/* Additional Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.additionalInfo')}
+              其他信息
             </h3>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.form.medicalConditions')}
+                醫療狀況/過敏史
               </label>
               <textarea
                 value={formData.medicalConditions}
                 onChange={(e) => setFormData({ ...formData, medicalConditions: e.target.value })}
                 rows={3}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
-                placeholder={t('specialAssistance.form.medicalConditionsPlaceholder')}
+                placeholder="如有特殊醫療狀況或過敏，請在此說明"
               />
             </div>
             <div className="mt-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.form.additionalNotes')}
+                備註
               </label>
               <textarea
                 value={formData.additionalNotes}
@@ -356,7 +354,7 @@ export default function UnaccompaniedMinorPage() {
 
           <div className="flex items-center justify-between pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-500">
-              * {t('specialAssistance.form.requiredFields')}
+              * 必填項目
             </p>
             <button
               type="submit"
@@ -366,12 +364,12 @@ export default function UnaccompaniedMinorPage() {
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  {t('specialAssistance.form.submitting')}
+                  提交中...
                 </>
               ) : (
                 <>
                   <Check className="w-5 h-5 mr-2" />
-                  {t('specialAssistance.form.submit')}
+                  提交申請
                 </>
               )}
             </button>

@@ -2,18 +2,16 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function BaggagePage() {
-  const { t } = useLanguage()
   const [activeTab, setActiveTab] = useState('allowance')
   const [activeCabinClass, setActiveCabinClass] = useState('economy')
   
   const tabs = [
-    { id: 'allowance', label: t('baggage.allowance') },
-    { id: 'restricted', label: t('baggage.restricted') },
-    { id: 'special', label: t('baggage.special') },
-    { id: 'fees', label: t('baggage.fees') },
+    { id: 'allowance', label: '行李限額' },
+    { id: 'restricted', label: '限制物品' },
+    { id: 'special', label: '特殊行李' },
+    { id: 'fees', label: '超額費用' },
   ]
 
   // 不同艙等的行李限額
@@ -57,7 +55,7 @@ export default function BaggagePage() {
   // 限制物品列表
   const restrictedItems = [
     {
-      category: t("嚴禁攜帶物品 - 國內航班"),
+      category: "嚴禁攜帶物品 - 國內航班",
       items: [
         '爆炸物和煙火製品（包括仿真爆炸裝置）',
         '壓縮氣體、易燃液體和固體',
@@ -74,7 +72,7 @@ export default function BaggagePage() {
       ]
     },
     {
-      category: t("嚴禁攜帶物品 - 國際航班"),
+      category: "嚴禁攜帶物品 - 國際航班",
       items: [
         '爆炸物和煙火製品（包括仿真爆炸裝置）',
         '壓縮氣體、易燃液體和固體',
@@ -89,7 +87,7 @@ export default function BaggagePage() {
       ]
     },
     {
-      category: t('禁止隨身攜帶，僅限托運 - 國內航班'),
+      category: '禁止隨身攜帶，僅限托運 - 國內航班',
       items: [
         '鈍器及勞動用具',
         '小型尖銳物品（刀刃長度小於6cm的刀具，或尖刺等）',
@@ -98,7 +96,7 @@ export default function BaggagePage() {
       ]
     },
     {
-      category: t('禁止隨身攜帶，僅限托運 - 國際航班'),
+      category: '禁止隨身攜帶，僅限托運 - 國際航班',
       items: [
         '刀具和剪刀（刀刃長度超過6厘米）',
         '棒球棒、高爾夫球桿等體育器材',
@@ -109,7 +107,7 @@ export default function BaggagePage() {
       ]
     },
     {
-      category: t('可以攜帶但有限制的物品 - 國內航班'),
+      category: '可以攜帶但有限制的物品 - 國內航班',
       items: [
         '液體、凝膠和噴霧（每個容器不超過100毫升，總量不超過1升）',
         '嬰兒食品（適量）',
@@ -119,7 +117,7 @@ export default function BaggagePage() {
       ]
     },
     {
-      category: t('可以攜帶但有限制的物品 - 國際航班'),
+      category: '可以攜帶但有限制的物品 - 國際航班',
       items: [
         '液體、凝膠和噴霧（每個容器不超過100毫升，總量不超過1升）',
         '嬰兒食品（適量）',
@@ -141,19 +139,19 @@ export default function BaggagePage() {
                   className={`py-2 px-4 font-medium text-sm ${activeCabinClass === 'economy' ? 'border-b-2 border-ya-yellow-500 text-ya-yellow-700' : 'text-gray-500'}`}
                   onClick={() => setActiveCabinClass('economy')}
                 >
-                  {t('baggage.economy')}
+                  經濟艙
                 </button>
                 <button 
                   className={`py-2 px-4 font-medium text-sm ${activeCabinClass === 'business' ? 'border-b-2 border-ya-yellow-500 text-ya-yellow-700' : 'text-gray-500'}`}
                   onClick={() => setActiveCabinClass('business')}
                 >
-                  {t('baggage.business')}
+                  商務艙
                 </button>
                 <button 
                   className={`py-2 px-4 font-medium text-sm ${activeCabinClass === 'first' ? 'border-b-2 border-ya-yellow-500 text-ya-yellow-700' : 'text-gray-500'}`}
                   onClick={() => setActiveCabinClass('first')}
                 >
-                  {t('baggage.firstClass')}
+                  頭等艙
                 </button>
               </div>
             </div>
@@ -166,7 +164,7 @@ export default function BaggagePage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{t('baggage.cabinBaggage')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">手提行李</h3>
                 </div>
                 <p className="text-gray-600">{baggageAllowance[activeCabinClass as keyof typeof baggageAllowance].cabinBaggage}</p>
                 <p className="mt-2 text-sm text-gray-500">
@@ -181,7 +179,7 @@ export default function BaggagePage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{t('baggage.checkedBaggage')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">託運行李</h3>
                 </div>
                 <p className="text-gray-600">{baggageAllowance[activeCabinClass as keyof typeof baggageAllowance].checkedBaggage}</p>
                 <p className="mt-2 text-sm text-gray-500">
@@ -191,14 +189,14 @@ export default function BaggagePage() {
             </div>
 
             <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('baggage.infantBaggage')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">嬰兒行李</h3>
               <p className="text-gray-600">
-                {t('baggage.infantBaggageDesc')}
+                乘坐嬰兒票的旅客可額外攜帶一件嬰兒用品（如嬰兒車或嬰兒床），具體以機場實際規定為準。
               </p>
             </div>
 
             <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('baggage.tips')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">小貼士</h3>
               <ul className="list-disc pl-5 text-gray-600 space-y-2">
                 <li>建議在行李上貼上姓名標籤，並記錄行李的特徵</li>
                 <li>貴重物品、易碎物品、重要文件和藥物應隨身攜帶</li>
@@ -213,7 +211,7 @@ export default function BaggagePage() {
         return (
           <div className="mt-6">
             <p className="text-gray-600 mb-6">
-              {t('baggage.restrictedItemsDesc')}
+              以下為行李限制與禁運物品清單，請於出行前確認。
             </p>
             
             {restrictedItems.map((category, index) => (
@@ -247,7 +245,7 @@ export default function BaggagePage() {
         return (
           <div className="mt-6">
             <p className="text-gray-600 mb-6">
-              {t('baggage.specialDesc')}
+              特殊行李需要特別處理和額外收費。請提前至少24小時聯繫我們的客服，以確保您的特殊物品能夠被安全運輸。
             </p>
             
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -255,10 +253,10 @@ export default function BaggagePage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {t('baggage.itemType')}
+                      物品類型
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {t('baggage.feeStandard')}
+                      收費標準
                     </th>
                   </tr>
                 </thead>
@@ -278,7 +276,7 @@ export default function BaggagePage() {
             </div>
             
             <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('baggage.specialNotes')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">特殊行李注意事項</h3>
               <ul className="list-disc pl-5 text-gray-600 space-y-2">
                 <li>運動設備必須妥善包裝，以防止在運輸過程中受損</li>
                 <li>樂器應放置在堅固的硬殼箱中，並鬆弛琴弦以減少壓力</li>
@@ -300,7 +298,7 @@ export default function BaggagePage() {
         return (
           <div className="mt-6">
             <p className="text-gray-600 mb-6">
-              {t('baggage.excessDesc')}
+              超出免費行李限額的行李將產生額外費用。以下是各艙等超額行李的收費標準。
             </p>
             
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -308,16 +306,16 @@ export default function BaggagePage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {t('baggage.excessType')}
+                      超額類型
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {t('baggage.economy')}
+                      經濟艙
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {t('baggage.business')}
+                      商務艙
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {t('baggage.firstClass')}
+                      頭等艙
                     </th>
                   </tr>
                 </thead>
@@ -343,7 +341,7 @@ export default function BaggagePage() {
             </div>
             
             <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('baggage.otherFeesNotes')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">其他費用注意事項</h3>
               <ul className="list-disc pl-5 text-gray-600 space-y-2">
                 <li>會員身份可能會影響超額行李的收費標準</li>
                 <li>提前在網上購買超額行李服務比在機場付費要便宜約15%</li>
@@ -381,19 +379,19 @@ export default function BaggagePage() {
           <ol className="flex items-center space-x-2">
             <li>
               <Link href="/" className="text-gray-500 hover:text-gray-700">
-                {t('baggage.home')}
+                主頁
               </Link>
             </li>
             <li className="flex items-center">
               <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
-              <span className="ml-2 text-gray-900 font-medium">{t('baggage.title')}</span>
+              <span className="ml-2 text-gray-900 font-medium">行李規定</span>
             </li>
           </ol>
         </nav>
-        <h1 className="mt-4 text-3xl font-bold text-gray-900">{t('baggage.title')}</h1>
-        <p className="mt-2 text-lg text-gray-600">{t('baggage.subtitle')}</p>
+        <h1 className="mt-4 text-3xl font-bold text-gray-900">行李規定</h1>
+        <p className="mt-2 text-lg text-gray-600">了解手提、託運、限制物品及超額費用等行李政策</p>
       </div>
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -421,9 +419,9 @@ export default function BaggagePage() {
       </div>
 
       <div className="mt-10 bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">{t('baggage.haveQuestions')}</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">還有疑問？</h2>
         <p className="text-gray-600 mb-6">
-          {t('baggage.contactDesc')}
+          如果您對行李規定有任何疑問，請隨時聯繫我們的客服團隊。我們會很樂意為您提供協助。
         </p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="flex">
@@ -433,9 +431,9 @@ export default function BaggagePage() {
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-lg font-semibold text-gray-900">{t('baggage.email')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900">電子郵件</h3>
               <p className="text-gray-600">baggage@yellowairlines.com</p>
-              <p className="text-sm text-gray-500">{t('baggage.emailResponse')}</p>
+              <p className="text-sm text-gray-500">我們會在24小時內回覆您的郵件</p>
             </div>
           </div>
           <div className="flex">
@@ -445,9 +443,9 @@ export default function BaggagePage() {
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-lg font-semibold text-gray-900">{t('baggage.phone')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900">電話</h3>
               <p className="text-gray-600">+86 181 2231 7910</p>
-              <p className="text-sm text-gray-500">{t('baggage.phoneHours')}</p>
+              <p className="text-sm text-gray-500">週一至週日 9:00-21:00（當地時間）</p>
             </div>
           </div>
         </div>

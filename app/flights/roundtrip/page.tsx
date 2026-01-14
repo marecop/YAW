@@ -1,9 +1,8 @@
-'use client'
+ 'use client'
 
 import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Plane, Calendar, Users, ArrowRight, Check, Loader2 } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { format } from 'date-fns'
 import AirlineLogo from '@/components/AirlineLogo'
 
@@ -30,7 +29,6 @@ interface Flight {
 function RoundtripSearchContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { t } = useLanguage()
 
   // 先获取 URL 参数
   const from = searchParams.get('from') || ''
@@ -240,7 +238,7 @@ function RoundtripSearchContent() {
       <div className="min-h-screen flex items-center justify-center bg-background-gray">
         <div className="text-center">
           <Loader2 className="w-16 h-16 text-primary animate-spin mx-auto mb-4" />
-          <p className="text-xl text-navy font-semibold">{t('common.loading')}</p>
+          <p className="text-xl text-navy font-semibold">載入中...</p>
           <p className="text-text-secondary mt-2">正在搜索最佳往返航班...</p>
         </div>
       </div>

@@ -3,13 +3,11 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { User, Award, Plane, Settings, LogOut, CreditCard, ChevronRight, ArrowRight } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
 
 export default function MemberPage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const { user, logout, isAuthenticated, isLoading } = useAuth()
   const [pointsUpdated, setPointsUpdated] = useState(false)
 
@@ -55,11 +53,11 @@ export default function MemberPage() {
   const getMembershipName = (level: string) => {
     switch (level) {
       case 'PLATINUM':
-        return t('member.platinum')
+        return '白金會員'
       case 'GOLD':
-        return t('member.gold')
+        return '黃金會員'
       default:
-        return t('member.silver')
+        return '銀卡會員'
     }
   }
 
@@ -68,7 +66,7 @@ export default function MemberPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <Plane className="w-16 h-16 text-ya-yellow-500 animate-bounce mx-auto mb-4" />
-          <p className="text-xl text-gray-700 font-semibold">{t('common.loading')}</p>
+          <p className="text-xl text-gray-700 font-semibold">載入中...</p>
         </div>
       </div>
     )
@@ -107,14 +105,14 @@ export default function MemberPage() {
               </div>
 
               <div className="mb-8 relative z-10">
-                <p className="text-xs font-medium opacity-80 mb-1 uppercase">會員姓名</p>
-                <p className="text-xl font-semibold tracking-wide">{user.name}</p>
+                <p className="text-xs font-medium opacity-80 mb-1 uppercaset(">會員姓名</p>
+                <p className=")text-xl font-semibold tracking-wide">{user.name}</p>
               </div>
 
               <div className="flex justify-between items-end relative z-10">
                 <div>
-                  <p className="text-xs font-medium opacity-80 mb-1 uppercase">{t('member.points')}</p>
-                  <p className="text-4xl font-bold tracking-tight">{(user.points || 0).toLocaleString()}</p>
+                  <p className="text-xs font-medium opacity-80 mb-1 uppercaset(">積分</p>
+                  <p className=")text-4xl font-bold tracking-tight">{(user.points || 0).toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -171,7 +169,7 @@ export default function MemberPage() {
             {/* Account Information */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
               <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
-                <h2 className="text-2xl font-bold text-gray-900">{t('member.profile')}</h2>
+                <h2 className="text-2xl font-bold text-gray-900">個人資料</h2>
                 <Link
                   href="/settings"
                   className="text-ya-yellow-600 font-semibold hover:text-ya-yellow-700 transition-colors text-sm flex items-center gap-1"

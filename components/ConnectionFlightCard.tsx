@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { ChevronDown, Plane, Clock, MapPin } from 'lucide-react'
 import AirlineLogo from './AirlineLogo'
 import { format } from 'date-fns'
@@ -52,7 +52,130 @@ export default function ConnectionFlightCard({
   cabinClass 
 }: ConnectionFlightCardProps) {
   const router = useRouter()
+  const pathname = usePathname()
   const [showDetails, setShowDetails] = useState(false)
+
+  // Helper to get current language prefix
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+  }
+  const langPrefix = getLangPrefix()
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': {
+      stops: '次中轉',
+      totalDuration: '總時長',
+      via: '經',
+      layover: '中轉',
+      viewDetails: '檢視航段詳細資料',
+      perPerson: '每位',
+      total: '總計',
+      select: '選擇',
+      departure: '出發',
+      flightTime: '飛行時間',
+      arrival: '到達',
+      stopAt: '在',
+      stopAtSuffix: '中轉',
+      stay: '停留',
+      hideDetails: '隱藏詳情',
+      flightDetails: '航班詳情'
+    },
+    'zh-cn': {
+      stops: '次中转',
+      totalDuration: '总时长',
+      via: '经',
+      layover: '中转',
+      viewDetails: '查看航段详情',
+      perPerson: '每位',
+      total: '总计',
+      select: '选择',
+      departure: '出发',
+      flightTime: '飞行时间',
+      arrival: '到达',
+      stopAt: '在',
+      stopAtSuffix: '中转',
+      stay: '停留',
+      hideDetails: '隐藏详情',
+      flightDetails: '航班详情'
+    },
+    'en': {
+      stops: 'stops',
+      totalDuration: 'Total Duration',
+      via: 'Via',
+      layover: 'Layover',
+      viewDetails: 'View Flight Details',
+      perPerson: 'Per Person',
+      total: 'Total',
+      select: 'Select',
+      departure: 'Depart',
+      flightTime: 'Flight Time',
+      arrival: 'Arrive',
+      stopAt: 'Stop at',
+      stopAtSuffix: '',
+      stay: 'Stay',
+      hideDetails: 'Hide Details',
+      flightDetails: 'Flight Details'
+    },
+    'de': {
+      stops: 'Stopps',
+      totalDuration: 'Gesamtdauer',
+      via: 'Über',
+      layover: 'Aufenthalt',
+      viewDetails: 'Details anzeigen',
+      perPerson: 'Pro Person',
+      total: 'Gesamt',
+      select: 'Auswählen',
+      departure: 'Abflug',
+      flightTime: 'Flugzeit',
+      arrival: 'Ankunft',
+      stopAt: 'Zwischenstopp in',
+      stopAtSuffix: '',
+      stay: 'Aufenthalt',
+      hideDetails: 'Details ausblenden',
+      flightDetails: 'Flugdetails'
+    },
+    'jp': {
+      stops: '経由',
+      totalDuration: '所要時間',
+      via: '経由',
+      layover: '乗り継ぎ',
+      viewDetails: '詳細を表示',
+      perPerson: '1名様',
+      total: '合計',
+      select: '選択',
+      departure: '出発',
+      flightTime: '飛行時間',
+      arrival: '到着',
+      stopAt: '',
+      stopAtSuffix: 'で乗り継ぎ',
+      stay: '滞在',
+      hideDetails: '詳細を隠す',
+      flightDetails: 'フライト詳細'
+    },
+    'es': {
+      stops: 'escalas',
+      totalDuration: 'Duración total',
+      via: 'Vía',
+      layover: 'Escala',
+      viewDetails: 'Ver detalles',
+      perPerson: 'Por persona',
+      total: 'Total',
+      select: 'Seleccionar',
+      departure: 'Salida',
+      flightTime: 'Tiempo de vuelo',
+      arrival: 'Llegada',
+      stopAt: 'Escala en',
+      stopAtSuffix: '',
+      stay: 'Estancia',
+      hideDetails: 'Ocultar detalles',
+      flightDetails: 'Detalles del vuelo'
+    }
+  }
+
+  const t = translations[currentLangCode] || translations['zh-hk']
 
   const formatDuration = (minutes: number) => {
     const hours = Math.floor(minutes / 60)
@@ -82,7 +205,7 @@ export default function ConnectionFlightCard({
       cabinClass,
       flightDate: departDate,
     })
-    router.push(`/booking/connection-passengers?${params.toString()}`)
+    router.push(`${langPrefix}/booking/connection-passengers?${params.toString()}`)
   }
 
   return (

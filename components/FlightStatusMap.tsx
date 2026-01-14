@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { airportCoordinates } from '@/lib/airportCoordinates'
+import { usePathname } from 'next/navigation'
 
 // Fix for Leaflet icons in Next.js
 const iconUrl = 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png'
@@ -52,8 +53,29 @@ function MapUpdater({ center }: { center: [number, number] }) {
 }
 
 export default function FlightStatusMap({ originCode, destinationCode, progress }: FlightStatusMapProps) {
+  const pathname = usePathname()
   const origin = airportCoordinates[originCode] || [22.3080, 113.9185] // Default HKG
   const dest = airportCoordinates[destinationCode] || [51.4700, -0.4543] // Default LHR
+
+  // Helper to get current language prefix
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+  }
+  const langPrefix = getLangPrefix()
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': { origin: '起點', destination: '終點', currentPosition: '當前位置' },
+    'zh-cn': { origin: '起点', destination: '终点', currentPosition: '当前位置' },
+    'en': { origin: 'Origin', destination: 'Destination', currentPosition: 'Current Position' },
+    'de': { origin: 'Start', destination: 'Ziel', currentPosition: 'Aktuelle Position' },
+    'jp': { origin: '出発地', destination: '目的地', currentPosition: '現在地' },
+    'es': { origin: 'Origen', destination: 'Destino', currentPosition: 'Posición actual' }
+  }
+
+  const t = translations[currentLangCode] || translations['zh-hk']
 
   // Calculate plane position - Linear Interpolation (consistent with Leaflet Polyline)
   const lat = origin[0] + (dest[0] - origin[0]) * progress
@@ -101,11 +123,11 @@ export default function FlightStatusMap({ originCode, destinationCode, progress 
         />
         
         <Marker position={origin} icon={DefaultIcon}>
-          <Popup>{originCode} (Origin)</Popup>
+          <Popup>{originCode} ({t.origin})</Popup>
         </Marker>
         
         <Marker position={dest} icon={DefaultIcon}>
-          <Popup>{destinationCode} (Destination)</Popup>
+          <Popup>{destinationCode} ({t.destination})</Popup>
         </Marker>
         
         <Polyline positions={[origin, dest]} color="#F59E0B" weight={3} dashArray="10, 10" />
@@ -115,7 +137,7 @@ export default function FlightStatusMap({ originCode, destinationCode, progress 
             icon={createPlaneIcon(bearing - 90)} 
             zIndexOffset={1000}
         >
-           <Popup>Current Position</Popup>
+           <Popup>{t.currentPosition}</Popup>
         </Marker>
         
         {/* <MapUpdater center={[lat, lng]} /> */}

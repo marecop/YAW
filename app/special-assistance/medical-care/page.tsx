@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import { ArrowLeft, Check, Loader2 } from 'lucide-react'
 
 export default function MedicalCarePage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     passengerName: '',
@@ -31,17 +29,17 @@ export default function MedicalCarePage() {
   const [bookingFound, setBookingFound] = useState(false)
 
   const medicalEquipmentOptions = [
-    { value: 'OXYGEN', label: t('specialAssistance.medicalCare.equipment.oxygen') },
-    { value: 'CPAP', label: t('specialAssistance.medicalCare.equipment.cpap') },
-    { value: 'VENTILATOR', label: t('specialAssistance.medicalCare.equipment.ventilator') },
-    { value: 'WHEELCHAIR_MEDICAL', label: t('specialAssistance.medicalCare.equipment.wheelchairMedical') },
-    { value: 'STRETCHER', label: t('specialAssistance.medicalCare.equipment.stretcher') },
-    { value: 'OTHER', label: t('specialAssistance.medicalCare.equipment.other') }
+    { value: 'OXYGEN', label: '氧氣' },
+    { value: 'CPAP', label: 'CPAP 呼吸機' },
+    { value: 'VENTILATOR', label: '呼吸機' },
+    { value: 'WHEELCHAIR_MEDICAL', label: '醫療輪椅' },
+    { value: 'STRETCHER', label: '擔架' },
+    { value: 'OTHER', label: '其他' }
   ]
 
   const handleBookingLookup = async () => {
     if (!bookingLookupNumber) {
-      alert(t('specialAssistance.form.pleaseEnterBookingNumber'))
+      alert('請輸入預訂編號')
       return
     }
 
@@ -64,11 +62,11 @@ export default function MedicalCarePage() {
         
         setBookingFound(true)
       } else {
-        alert(t('specialAssistance.form.bookingNotFound'))
+        alert('找不到該預訂')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(t('specialAssistance.form.bookingLookupFailed'))
+      alert('查詢預訂失敗，請稍後重試')
     } finally {
       setLookingUpBooking(false)
     }
@@ -78,7 +76,7 @@ export default function MedicalCarePage() {
     e.preventDefault()
     
     if (!bookingFound) {
-      alert(t('specialAssistance.form.pleaseSearchBookingFirst'))
+      alert('請先查詢預訂')
       return
     }
     
@@ -111,14 +109,14 @@ export default function MedicalCarePage() {
 
       if (response.ok) {
         const data = await response.json()
-        alert(`✅ ${t('specialAssistance.requestSubmitted')}\n\n${t('specialAssistance.requestNumber')}: ${data.requestNumber}`)
+        alert(`✅ 申請已提交\n\n申請編號: ${data.requestNumber}`)
         router.push('/special-assistance')
       } else {
-        alert(t('specialAssistance.requestFailed'))
+        alert('申請提交失敗，請重試')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(t('specialAssistance.requestFailed'))
+      alert('申請提交失敗，請重試')
     } finally {
       setIsSubmitting(false)
     }
@@ -129,7 +127,7 @@ export default function MedicalCarePage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/special-assistance" className="inline-flex items-center text-ya-yellow-600 hover:text-ya-yellow-700 mb-6">
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('specialAssistance.backToServices')}
+          返回服務列表
         </Link>
 
         <div className="bg-white rounded-2xl shadow-md p-8 mb-8">
@@ -138,33 +136,33 @@ export default function MedicalCarePage() {
               <span className="text-2xl">❤️</span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900">
-              {t('specialAssistance.medicalCare.title')}
+              醫療協助
             </h1>
           </div>
           <p className="text-gray-600">
-            {t('specialAssistance.medicalCare.longDescription')}
+            如您有醫療需求或需要攜帶醫療設備，請提前提交申請，我哋會與您確認安排。
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            {t('specialAssistance.applicationForm')}
+            申請表格
           </h2>
 
           {/* Booking Number Lookup */}
           <div className="mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.form.bookingNumberLookup')} *
+              預訂編號查詢 *
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              {t('specialAssistance.form.bookingNumberLookupDesc')}
+              輸入您的預訂編號以自動填入航班與乘客資料。
             </p>
             <div className="flex gap-4">
               <input
                 type="text"
                 value={bookingLookupNumber}
                 onChange={(e) => setBookingLookupNumber(e.target.value.toUpperCase())}
-                placeholder={t('specialAssistance.form.enterBookingNumber')}
+                placeholder="輸入預訂編號"
                 disabled={bookingFound}
                 className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent disabled:bg-gray-100"
               />
@@ -177,15 +175,15 @@ export default function MedicalCarePage() {
                 {lookingUpBooking ? (
                   <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    {t('specialAssistance.form.searching')}
+                    查詢中...
                   </>
                 ) : bookingFound ? (
                   <>
                     <Check className="w-5 h-5 mr-2" />
-                    {t('specialAssistance.form.found')}
+                    已找到
                   </>
                 ) : (
-                  t('specialAssistance.form.search')
+                  '查詢'
                 )}
               </button>
             </div>
@@ -194,12 +192,12 @@ export default function MedicalCarePage() {
           {/* Passenger Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.passengerInfo')}
+              乘客資料
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.passengerName')} *
+                  乘客姓名 *
                 </label>
                 <input
                   type="text"
@@ -212,7 +210,7 @@ export default function MedicalCarePage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.email')} *
+                  電郵 *
                 </label>
                 <input
                   type="email"
@@ -225,7 +223,7 @@ export default function MedicalCarePage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.phone')} *
+                  電話 *
                 </label>
                 <input
                   type="tel"
@@ -243,24 +241,24 @@ export default function MedicalCarePage() {
             <div className="mb-8 p-6 bg-green-50 border-2 border-green-200 rounded-xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Check className="w-5 h-5 mr-2 text-green-600" />
-                {t('specialAssistance.flightInfo')}
+                航班資料（選填）
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.bookingNumber')}
+                    預訂編號
                   </label>
                   <input type="text" value={formData.bookingNumber} readOnly className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.flightNumber')}
+                    航班號
                   </label>
                   <input type="text" value={formData.flightNumber} readOnly className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.flightDate')}
+                    航班日期
                   </label>
                   <input type="date" value={formData.flightDate} readOnly className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" />
                 </div>
@@ -271,33 +269,33 @@ export default function MedicalCarePage() {
           {/* Medical Details */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.medicalCare.medicalDetails')}
+              醫療資料
             </h3>
             
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.medicalCare.medicalCondition')} *
+                病況 / 需求 *
               </label>
               <textarea
                 required
                 value={formData.medicalCondition}
                 onChange={(e) => setFormData({ ...formData, medicalCondition: e.target.value })}
                 rows={3}
-                placeholder={t('specialAssistance.medicalCare.medicalConditionPlaceholder')}
+                placeholder="請描述您的病況或需要的協助"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               />
             </div>
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.medicalCare.medicalEquipment')}
+                醫療設備
               </label>
               <select
                 value={formData.medicalEquipment}
                 onChange={(e) => setFormData({ ...formData, medicalEquipment: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               >
-                <option value="">{t('specialAssistance.form.selectOption')}</option>
+                <option value="">請選擇...</option>
                 {medicalEquipmentOptions.map((option) => (
                   <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
@@ -313,33 +311,33 @@ export default function MedicalCarePage() {
                   className="w-5 h-5 text-ya-yellow-600 border-gray-300 rounded focus:ring-ya-yellow-500"
                 />
                 <span className="ml-3 text-sm font-medium text-gray-700">
-                  {t('specialAssistance.medicalCare.oxygenRequired')}
+                  需要氧氣
                 </span>
               </label>
             </div>
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.medicalCare.medicationDetails')}
+                藥物資訊
               </label>
               <textarea
                 value={formData.medicationDetails}
                 onChange={(e) => setFormData({ ...formData, medicationDetails: e.target.value })}
                 rows={3}
-                placeholder={t('specialAssistance.medicalCare.medicationDetailsPlaceholder')}
+                placeholder="請填寫需要攜帶或服用的藥物資訊"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               />
             </div>
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.medicalCare.doctorCertificate')}
+                醫生證明
               </label>
               <input
                 type="text"
                 value={formData.doctorCertificate}
                 onChange={(e) => setFormData({ ...formData, doctorCertificate: e.target.value })}
-                placeholder={t('specialAssistance.medicalCare.doctorCertificatePlaceholder')}
+                placeholder="請填寫/上傳醫生證明資訊"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               />
             </div>
@@ -347,7 +345,7 @@ export default function MedicalCarePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.emergencyContactName')} *
+                  緊急聯絡人 *
                 </label>
                 <input
                   type="text"
@@ -359,7 +357,7 @@ export default function MedicalCarePage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.emergencyContactPhone')} *
+                  緊急聯絡電話 *
                 </label>
                 <input
                   type="tel"
@@ -373,7 +371,7 @@ export default function MedicalCarePage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.form.additionalNotes')}
+                額外資料
               </label>
               <textarea
                 value={formData.additionalNotes}
@@ -386,7 +384,7 @@ export default function MedicalCarePage() {
 
           <div className="flex items-center justify-between pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-500">
-              * {t('specialAssistance.form.requiredFields')}
+              * 必填項目
             </p>
             <button
               type="submit"
@@ -396,12 +394,12 @@ export default function MedicalCarePage() {
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  {t('specialAssistance.form.submitting')}
+                  提交中...
                 </>
               ) : (
                 <>
                   <Check className="w-5 h-5 mr-2" />
-                  {t('specialAssistance.form.submit')}
+                  提交申請
                 </>
               )}
             </button>

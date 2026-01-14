@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { Plane, ChevronDown, ChevronUp } from 'lucide-react'
 import { format } from 'date-fns'
 import AirlineLogo from './AirlineLogo'
@@ -36,7 +37,28 @@ interface FlightCardProps {
 }
 
 export default function FlightCardModern({ flight, passengers, onSelectCabin }: FlightCardProps) {
+  const pathname = usePathname()
   const [expandedCabin, setExpandedCabin] = useState<string | null>(null)
+  
+  // Helper to get current language prefix
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+  }
+  const langPrefix = getLangPrefix()
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': { direct: '直達', stops: '次中轉', from: '從', available: '有空座', unavailable: '不可用', economy: '經濟艙', premiumEconomy: '進階經濟艙', business: '商務艙', first: '頭等艙' },
+    'zh-cn': { direct: '直达', stops: '次中转', from: '从', available: '有空座', unavailable: '不适用', economy: '经济舱', premiumEconomy: '进阶经济舱', business: '商务舱', first: '头等舱' },
+    'en': { direct: 'Direct', stops: 'stops', from: 'From', available: 'seats left', unavailable: 'N/A', economy: 'Economy', premiumEconomy: 'Premium Economy', business: 'Business', first: 'First Class' },
+    'de': { direct: 'Direkt', stops: 'Stopps', from: 'Ab', available: 'Plätze', unavailable: 'N/A', economy: 'Economy', premiumEconomy: 'Premium Economy', business: 'Business', first: 'First Class' },
+    'jp': { direct: '直行便', stops: '経由', from: '～', available: '席あり', unavailable: '不可', economy: 'エコノミー', premiumEconomy: 'プレミアムエコノミー', business: 'ビジネス', first: 'ファースト' },
+    'es': { direct: 'Directo', stops: 'escalas', from: 'Desde', available: 'plazas', unavailable: 'N/A', economy: 'Económica', premiumEconomy: 'Económica Premium', business: 'Business', first: 'Primera Clase' }
+  }
+  
+  const t = translations[currentLangCode] || translations['zh-hk']
 
   const formatDuration = (minutes: number) => {
     const hours = Math.floor(minutes / 60)
@@ -46,20 +68,10 @@ export default function FlightCardModern({ flight, passengers, onSelectCabin }: 
 
   const getCabinLabel = (type: string) => {
     switch (type) {
-      case 'ECONOMY': return '經濟艙'
-      case 'PREMIUM_ECONOMY': return '進階經濟艙'
-      case 'BUSINESS': return '商務艙'
-      case 'FIRST_CLASS': return '頭等艙'
-      default: return type
-    }
-  }
-
-  const getCabinLabelEn = (type: string) => {
-    switch (type) {
-      case 'ECONOMY': return 'Economy'
-      case 'PREMIUM_ECONOMY': return 'Premium Economy'
-      case 'BUSINESS': return 'Business'
-      case 'FIRST_CLASS': return 'First Class'
+      case 'ECONOMY': return t.economy
+      case 'PREMIUM_ECONOMY': return t.premiumEconomy
+      case 'BUSINESS': return t.business
+      case 'FIRST_CLASS': return t.first
       default: return type
     }
   }
@@ -90,7 +102,7 @@ export default function FlightCardModern({ flight, passengers, onSelectCabin }: 
                   <div className="flex-1 h-px bg-border"></div>
                 </div>
                 <div className="text-xs text-text-secondary mt-1">
-                  {flight.isDirect ? '直達' : `${flight.stops}次中轉`}
+                  {flight.isDirect ? t.direct : `${flight.stops} ${t.stops}`}
                 </div>
               </div>
 
@@ -137,10 +149,10 @@ export default function FlightCardModern({ flight, passengers, onSelectCabin }: 
                 >
                   <div className="text-center space-y-2">
                     <div className={`text-xs font-medium ${cabin.available ? 'text-navy' : 'text-gray-400'}`}>
-                      {getCabinLabelEn(cabin.type)}
+                      {getCabinLabel(cabin.type)}
                     </div>
                     <div className={`text-sm ${cabin.available ? 'text-text-secondary' : 'text-gray-400'}`}>
-                      從
+                      {t.from}
                     </div>
                     {cabin.available ? (
                       <>
@@ -148,12 +160,12 @@ export default function FlightCardModern({ flight, passengers, onSelectCabin }: 
                           HKD {(cabin.price * passengers).toLocaleString()}
                         </div>
                         <div className="text-xs text-text-secondary">
-                          {cabin.seats} 有空座
+                          {cabin.seats} {t.available}
                         </div>
                       </>
                     ) : (
                       <div className="text-sm text-gray-400 font-medium">
-                        不適用
+                        {t.unavailable}
                       </div>
                     )}
                   </div>
@@ -174,4 +186,3 @@ export default function FlightCardModern({ flight, passengers, onSelectCabin }: 
     </div>
   )
 }
-

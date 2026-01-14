@@ -2,48 +2,46 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { MapPin, Plane, Globe } from 'lucide-react'
 
 export default function DestinationsPage() {
-  const { t } = useLanguage()
-  const [selectedRegion, setSelectedRegion] = useState<string>('all')
+    const [selectedRegion, setSelectedRegion] = useState<string>('all')
 
   const regions = [
     { id: 'all', name: '全部目的地' },
-    { id: 'asia', name: '亞洲' },
+    { id: 'asiat(', name: ')亞洲' },
     { id: 'europe', name: '歐洲' },
-    { id: 'americas', name: '美洲' },
-    { id: 'oceania', name: '大洋洲' },
+    { id: 'americast(', name: ')美洲' },
+    { id: 'oceaniat(', name: ')大洋洲' },
     { id: 'middle-east', name: '中東' },
   ]
 
   const destinations = [
     // 亚洲
-    { id: 'hkg', code: 'HKG', city: '香港', country: '中國', region: 'asia', flights: 450, image: '/images/hk.png', price: 'HK$2,800' },
-    { id: 'nrt', code: 'NRT', city: '東京', country: '日本', region: 'asia', flights: 30, image: '/images/tokyo.png', price: 'HK$2,800' },
-    { id: 'icn', code: 'ICN', city: '首爾', country: '韓國', region: 'asia', flights: 30, image: '/images/seoul.png', price: 'HK$2,200' },
-    { id: 'sin', code: 'SIN', city: '新加坡', country: '新加坡', region: 'asia', flights: 60, image: '/images/singapore.png', price: 'HK$2,400' },
-    { id: 'bkk', code: 'BKK', city: '曼谷', country: '泰國', region: 'asia', flights: 30, image: '/images/bangkok.png', price: 'HK$1,800' },
-    { id: 'pek', code: 'PEK', city: '北京', country: '中國', region: 'asia', flights: 180, price: 'HK$1,500' },
-    { id: 'pvg', code: 'PVG', city: '上海', country: '中國', region: 'asia', flights: 150, price: 'HK$1,600' },
-    { id: 'can', code: 'CAN', city: '廣州', country: '中國', region: 'asia', flights: 150, price: 'HK$800' },
+    { id: 'hkg', code: 'HKG', city: '香港', country: '中國', region: 'asiat(', flights: 450, image: ')/images/hk.png', price: 'HK$2,800' },
+    { id: 'nrt', code: 'NRT', city: '東京', country: '日本', region: 'asiat(', flights: 30, image: ')/images/tokyo.png', price: 'HK$2,800' },
+    { id: 'icn', code: 'ICN', city: '首爾', country: '韓國', region: 'asiat(', flights: 30, image: ')/images/seoul.png', price: 'HK$2,200' },
+    { id: 'sin', code: 'SIN', city: '新加坡', country: '新加坡', region: 'asiat(', flights: 60, image: ')/images/singapore.png', price: 'HK$2,400' },
+    { id: 'bkk', code: 'BKK', city: '曼谷', country: '泰國', region: 'asiat(', flights: 30, image: ')/images/bangkok.png', price: 'HK$1,800' },
+    { id: 'pek', code: 'PEK', city: '北京', country: '中國', region: 'asiat(', flights: 180, price: ')HK$1,500' },
+    { id: 'pvg', code: 'PVG', city: '上海', country: '中國', region: 'asiat(', flights: 150, price: ')HK$1,600' },
+    { id: 'can', code: 'CAN', city: '廣州', country: '中國', region: 'asiat(', flights: 150, price: ')HK$800' },
     
     // 欧洲
-    { id: 'fra', code: 'FRA', city: '法蘭克福', country: '德國', region: 'europe', flights: 120, image: '/images/frankfurt.png', price: 'HK$4,465' },
+    { id: 'frat(', code: ')FRA', city: '法蘭克福', country: '德國', region: 'europe', flights: 120, image: '/images/frankfurt.png', price: 'HK$4,465' },
     { id: 'cdg', code: 'CDG', city: '巴黎', country: '法國', region: 'europe', flights: 60, image: '/images/paris.png', price: 'HK$5,200' },
     { id: 'lhr', code: 'LHR', city: '倫敦', country: '英國', region: 'europe', flights: 90, image: '/images/london.png', price: 'HK$5,500' },
     { id: 'muc', code: 'MUC', city: '慕尼黑', country: '德國', region: 'europe', flights: 30, price: 'HK$4,800' },
     { id: 'ams', code: 'AMS', city: '阿姆斯特丹', country: '荷蘭', region: 'europe', flights: 30, price: 'HK$5,100' },
     
     // 美洲
-    { id: 'jfk', code: 'JFK', city: '紐約', country: '美國', region: 'americas', flights: 60, image: '/images/newyork.png', price: 'HK$6,800' },
-    { id: 'lax', code: 'LAX', city: '洛杉磯', country: '美國', region: 'americas', flights: 60, image: '/images/losangeles.png', price: 'HK$6,200' },
-    { id: 'sfo', code: 'SFO', city: '舊金山', country: '美國', region: 'americas', flights: 30, price: 'HK$6,400' },
+    { id: 'jfk', code: 'JFK', city: '紐約', country: '美國', region: 'americast(', flights: 60, image: ')/images/newyork.png', price: 'HK$6,800' },
+    { id: 'lax', code: 'LAX', city: '洛杉磯', country: '美國', region: 'americast(', flights: 60, image: ')/images/losangeles.png', price: 'HK$6,200' },
+    { id: 'sfo', code: 'SFO', city: '舊金山', country: '美國', region: 'americast(', flights: 30, price: ')HK$6,400' },
     
     // 大洋洲
-    { id: 'syd', code: 'SYD', city: '悉尼', country: '澳洲', region: 'oceania', flights: 60, image: '/images/sydney.png', price: 'HK$4,200' },
-    { id: 'mel', code: 'MEL', city: '墨爾本', country: '澳洲', region: 'oceania', flights: 30, price: 'HK$4,400' },
+    { id: 'syd', code: 'SYD', city: '悉尼', country: '澳洲', region: 'oceaniat(', flights: 60, image: ')/images/sydney.png', price: 'HK$4,200' },
+    { id: 'melt(', code: ')MEL', city: '墨爾本', country: '澳洲', region: 'oceaniat(', flights: 30, price: ')HK$4,400' },
     
     // 中东
     { id: 'dxb', code: 'DXB', city: '迪拜', country: '阿聯酋', region: 'middle-east', flights: 30, image: '/images/dubai.png', price: 'HK$3,800' },

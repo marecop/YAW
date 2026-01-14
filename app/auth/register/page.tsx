@@ -3,12 +3,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { CheckCircle, ArrowLeft } from 'lucide-react'
 
 export default function RegisterPage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -34,7 +32,7 @@ export default function RegisterPage() {
 
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
-      setError('密码不匹配')
+      setError('密碼不匹配')
       setIsLoading(false)
       return
     }
@@ -63,10 +61,10 @@ export default function RegisterPage() {
         
         setIsSuccess(true)
       } else {
-        setError(data.error || '注册失败，请重试')
+        setError(data.error || '註冊失敗，請重試')
       }
     } catch (err) {
-      setError('网络错误，请稍后重试')
+      setError('網絡錯誤，請稍後重試')
     } finally {
       setIsLoading(false)
     }
@@ -97,7 +95,7 @@ export default function RegisterPage() {
               className="flex items-center justify-center gap-2 w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-ya-yellow-500 hover:bg-ya-yellow-600"
             >
               <ArrowLeft className="w-4 h-4" />
-              前往登錄
+              前往登入
             </Link>
             <Link
               href="/"
@@ -115,12 +113,12 @@ export default function RegisterPage() {
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              {t('auth.registerTitle')}
+              註冊
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              {t('auth.alreadyHaveAccount')}{' '}
+              已有帳戶？{' '}
               <Link href="/auth/login" className="font-medium text-ya-yellow-600 hover:text-ya-yellow-500">
-                {t('auth.signInNow')}
+                立即登入
               </Link>
             </p>
           </div>
@@ -136,7 +134,7 @@ export default function RegisterPage() {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                    {t('auth.firstName')}
+                    名字
                   </label>
                   <div className="mt-1">
                     <input
@@ -154,7 +152,7 @@ export default function RegisterPage() {
 
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                    {t('auth.lastName')}
+                    姓氏
                   </label>
                   <div className="mt-1">
                     <input
@@ -172,7 +170,7 @@ export default function RegisterPage() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    {t('auth.email')}
+                    電郵
                   </label>
                   <div className="mt-1">
                     <input
@@ -190,7 +188,7 @@ export default function RegisterPage() {
 
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    {t('auth.password')}
+                    密碼
                   </label>
                   <div className="mt-1">
                     <input
@@ -209,7 +207,7 @@ export default function RegisterPage() {
 
                 <div>
                   <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                    {t('auth.confirmPassword')}
+                    確認密碼
                   </label>
                   <div className="mt-1">
                     <input
@@ -231,20 +229,20 @@ export default function RegisterPage() {
                     disabled={isLoading}
                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ya-yellow-600 hover:bg-ya-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ya-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? t('auth.processing') : t('auth.register')}
+                    {isLoading ? '處理中...' : '註冊'}
                   </button>
                 </div>
               </form>
 
               {/* Terms */}
               <p className="mt-6 text-xs text-center text-gray-500">
-                {t('auth.agreeTo')}{' '}
+                註冊即表示你同意{' '}
                 <Link href="/terms" className="text-ya-yellow-600 hover:text-ya-yellow-500">
-                  {t('auth.termsOfService')}
+                  服務條款
                 </Link>{' '}
-                {t('auth.and')}{' '}
+                及{' '}
                 <Link href="/privacy" className="text-ya-yellow-600 hover:text-ya-yellow-500">
-                  {t('auth.privacyPolicy')}
+                  私隱政策
                 </Link>
               </p>
         </div>

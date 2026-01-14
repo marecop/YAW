@@ -1,14 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { Users } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import AirportAutocomplete from './AirportAutocomplete'
 
 export default function FlightSearchForm() {
   const router = useRouter()
-  const { t } = useLanguage()
+  const pathname = usePathname()
 
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
@@ -17,6 +16,138 @@ export default function FlightSearchForm() {
   const [passengers, setPassengers] = useState(1)
   const [cabinClass, setCabinClass] = useState('ECONOMY')
   const [tripType, setTripType] = useState('roundtrip')
+
+  // Flight number lookup (quick access)
+  const [lookupFlightNumber, setLookupFlightNumber] = useState('')
+  const [lookupDate, setLookupDate] = useState('')
+
+  // Helper to get current language prefix
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+  }
+  const langPrefix = getLangPrefix()
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': {
+      roundtrip: '往返',
+      oneway: '單程',
+      from: '從',
+      to: '至',
+      departure: '出發',
+      return: '回程',
+      passengers: '乘客',
+      search: '搜尋',
+      or: '或',
+      flightLookup: '航班號查詢',
+      flightNumber: '航班號',
+      date: '日期',
+      lookup: '查詢',
+      swap: '交換出發地和目的地',
+      fromPlaceholder: '從 (例如: HKG, 香港, 廣州)',
+      toPlaceholder: '至 (例如: FRA, 法蘭克福, 倫敦)',
+      flightNumPlaceholder: 'YA101 / 101'
+    },
+    'zh-cn': {
+      roundtrip: '往返',
+      oneway: '单程',
+      from: '从',
+      to: '至',
+      departure: '出发',
+      return: '回程',
+      passengers: '乘客',
+      search: '搜索',
+      or: '或',
+      flightLookup: '航班号查询',
+      flightNumber: '航班号',
+      date: '日期',
+      lookup: '查询',
+      swap: '交换出发地和目的地',
+      fromPlaceholder: '从 (例如: HKG, 香港, 广州)',
+      toPlaceholder: '至 (例如: FRA, 法兰克福, 伦敦)',
+      flightNumPlaceholder: 'YA101 / 101'
+    },
+    'en': {
+      roundtrip: 'Roundtrip',
+      oneway: 'One way',
+      from: 'From',
+      to: 'To',
+      departure: 'Depart',
+      return: 'Return',
+      passengers: 'Passengers',
+      search: 'Search',
+      or: 'Or',
+      flightLookup: 'Flight Number Lookup',
+      flightNumber: 'Flight Number',
+      date: 'Date',
+      lookup: 'Lookup',
+      swap: 'Swap locations',
+      fromPlaceholder: 'From (e.g. HKG, Hong Kong)',
+      toPlaceholder: 'To (e.g. FRA, Frankfurt)',
+      flightNumPlaceholder: 'YA101 / 101'
+    },
+    'de': {
+      roundtrip: 'Hin- und Rückflug',
+      oneway: 'Hinflug',
+      from: 'Von',
+      to: 'Nach',
+      departure: 'Abflug',
+      return: 'Rückflug',
+      passengers: 'Reisende',
+      search: 'Suchen',
+      or: 'Oder',
+      flightLookup: 'Flugnummer-Suche',
+      flightNumber: 'Flugnummer',
+      date: 'Datum',
+      lookup: 'Suchen',
+      swap: 'Orte tauschen',
+      fromPlaceholder: 'Von (z.B. HKG, Hongkong)',
+      toPlaceholder: 'Nach (z.B. FRA, Frankfurt)',
+      flightNumPlaceholder: 'YA101 / 101'
+    },
+    'jp': {
+      roundtrip: '往復',
+      oneway: '片道',
+      from: '出発地',
+      to: '目的地',
+      departure: '出発日',
+      return: '現地出発日',
+      passengers: '人数',
+      search: '検索',
+      or: 'または',
+      flightLookup: '便名検索',
+      flightNumber: '便名',
+      date: '日付',
+      lookup: '検索',
+      swap: '出発地と目的地を入れ替え',
+      fromPlaceholder: '出発地 (例: HKG, 香港)',
+      toPlaceholder: '目的地 (例: FRA, フランクフルト)',
+      flightNumPlaceholder: 'YA101 / 101'
+    },
+    'es': {
+      roundtrip: 'Ida y vuelta',
+      oneway: 'Solo ida',
+      from: 'Origen',
+      to: 'Destino',
+      departure: 'Salida',
+      return: 'Regreso',
+      passengers: 'Pasajeros',
+      search: 'Buscar',
+      or: 'O',
+      flightLookup: 'Búsqueda por número de vuelo',
+      flightNumber: 'Número de vuelo',
+      date: 'Fecha',
+      lookup: 'Buscar',
+      swap: 'Intercambiar ubicaciones',
+      fromPlaceholder: 'Origen (ej. HKG, Hong Kong)',
+      toPlaceholder: 'Destino (ej. FRA, Frankfurt)',
+      flightNumPlaceholder: 'YA101 / 101'
+    }
+  }
+
+  const t = translations[currentLangCode] || translations['zh-hk']
 
   // 设置最小日期为今天
   const today = new Date().toISOString().split('T')[0]
@@ -36,7 +167,7 @@ export default function FlightSearchForm() {
         passengers: passengers.toString(),
         cabinClass,
       })
-      router.push(`/flights/roundtrip?${params.toString()}`)
+      router.push(`${langPrefix}/flights/roundtrip?${params.toString()}`)
     } else {
       // 單程航班使用普通搜索頁面（默認包含中轉）
       const params = new URLSearchParams({
@@ -46,7 +177,7 @@ export default function FlightSearchForm() {
         passengers: passengers.toString(),
         cabinClass,
       })
-      router.push(`/flights/search?${params.toString()}`)
+      router.push(`${langPrefix}/flights/search?${params.toString()}`)
     }
   }
 
@@ -59,6 +190,17 @@ export default function FlightSearchForm() {
     const temp = from
     setFrom(to)
     setTo(temp)
+  }
+
+  const handleFlightNumberLookup = () => {
+    const num = lookupFlightNumber.trim()
+    if (!num) return
+
+    const params = new URLSearchParams()
+    params.set('number', num)
+    if (lookupDate) params.set('date', lookupDate)
+
+    router.push(`${langPrefix}/flights/lookup?${params.toString()}`)
   }
 
   return (
@@ -75,7 +217,7 @@ export default function FlightSearchForm() {
             className="h-4 w-4 text-ya-yellow-600 focus:ring-ya-yellow-500 border-gray-300"
           />
           <label htmlFor="roundtrip" className="ml-2 block text-sm font-medium text-gray-700">
-            {t('search.roundTrip')}
+            往返
           </label>
         </div>
         <div className="flex items-center">
@@ -88,7 +230,7 @@ export default function FlightSearchForm() {
             className="h-4 w-4 text-ya-yellow-600 focus:ring-ya-yellow-500 border-gray-300"
           />
           <label htmlFor="oneway" className="ml-2 block text-sm font-medium text-gray-700">
-            {t('search.oneWay')}
+            單程
           </label>
         </div>
       </div>
@@ -98,10 +240,10 @@ export default function FlightSearchForm() {
         <AirportAutocomplete
           id="from"
           name="from"
-          label={t('search.from')}
+          label="從"
           value={from}
           onChange={setFrom}
-          placeholder={t('search.from') + ' (例如: HKG, 香港, 广州)'}
+          placeholder={'從 (例如: HKG, 香港, 廣州)'}
           required
         />
 
@@ -122,10 +264,10 @@ export default function FlightSearchForm() {
         <AirportAutocomplete
           id="to"
           name="to"
-          label={t('search.to')}
+          label="至"
           value={to}
           onChange={setTo}
-          placeholder={t('search.to') + ' (例如: FRA, 法兰克福, 伦敦)'}
+          placeholder={'至 (例如: FRA, 法蘭克福, 倫敦)'}
           required
         />
       </div>
@@ -135,7 +277,7 @@ export default function FlightSearchForm() {
         {/* 出发日期 */}
         <div>
           <label htmlFor="departureDate" className="block text-sm font-bold text-gray-700 mb-2">
-            {t('search.departure')}
+            出發
           </label>
           <input
             id="departureDate"
@@ -153,7 +295,7 @@ export default function FlightSearchForm() {
         {tripType === 'roundtrip' && (
           <div>
             <label htmlFor="returnDate" className="block text-sm font-bold text-gray-700 mb-2">
-              {t('search.return')}
+              回程
             </label>
             <input
               id="returnDate"
@@ -171,7 +313,7 @@ export default function FlightSearchForm() {
         {/* 旅客数量 */}
         <div className={tripType === 'roundtrip' ? 'md:col-span-2' : ''}>
           <label htmlFor="passengers" className="block text-sm font-bold text-gray-700 mb-2">
-            {t('search.passengers')}
+            乘客
           </label>
           <div className="flex items-center border border-gray-200 rounded-xl shadow-sm bg-gray-50 overflow-hidden">
             <button
@@ -212,8 +354,76 @@ export default function FlightSearchForm() {
         type="submit"
         className="w-full py-4 px-6 border border-transparent rounded-xl shadow-lg text-lg font-bold text-black bg-ya-yellow-500 hover:bg-ya-yellow-400 hover:shadow-xl hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ya-yellow-500"
       >
-        {t('search.search')}
+        搜尋
       </button>
+
+      {/* Flight number lookup */}
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+          <div className="w-full border-t border-gray-200" />
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-3 bg-white text-gray-500">或</span>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4">
+        <div className="text-sm font-bold text-gray-800 mb-4">
+          航班號查詢
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-2">
+            <label htmlFor="lookupFlightNumber" className="block text-sm font-bold text-gray-700 mb-2">
+              航班號
+            </label>
+            <input
+              id="lookupFlightNumber"
+              name="lookupFlightNumber"
+              type="text"
+              value={lookupFlightNumber}
+              onChange={(e) => setLookupFlightNumber(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  handleFlightNumberLookup()
+                }
+              }}
+              placeholder="YA101 / 101"
+              className="py-4 px-5 w-full bg-white border border-gray-200 rounded-xl shadow-sm focus:border-ya-yellow-500 focus:ring-ya-yellow-500 transition-all"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="lookupDate" className="block text-sm font-bold text-gray-700 mb-2">
+              日期
+            </label>
+            <input
+              id="lookupDate"
+              name="lookupDate"
+              type="date"
+              min={today}
+              value={lookupDate}
+              onChange={(e) => setLookupDate(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  handleFlightNumberLookup()
+                }
+              }}
+              className="py-4 px-5 w-full bg-white border border-gray-200 rounded-xl shadow-sm focus:border-ya-yellow-500 focus:ring-ya-yellow-500 transition-all"
+            />
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleFlightNumberLookup}
+          className="mt-4 w-full py-3 px-6 border border-transparent rounded-xl shadow text-base font-bold text-black bg-ya-yellow-400 hover:bg-ya-yellow-300 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ya-yellow-500"
+        >
+          查詢
+        </button>
+      </div>
     </form>
   )
 }

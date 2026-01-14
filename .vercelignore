@@ -1,0 +1,25 @@
+# Backend directory - 不要部署到 Vercel
+backend/
+
+# Prisma database files - 前端不需要
+prisma/dev.db
+prisma/*.db
+prisma/migrations/
+
+# Backend scripts
+scripts/
+*.py
+
+# Test files
+quick-email-test.js
+test-email-now.js
+test-booking-email.js
+
+# Ecosystem config (PM2)
+ecosystem.config.cjs
+
+# Prisma config
+prisma.config.ts
+
+# Build artifacts
+tsconfig.tsbuildinfo

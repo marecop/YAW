@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import { ArrowLeft, Check, Loader2 } from 'lucide-react'
 
 export default function TransferAssistancePage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     passengerName: '',
@@ -33,7 +31,7 @@ export default function TransferAssistancePage() {
 
   const handleBookingLookup = async () => {
     if (!bookingLookupNumber) {
-      alert(t('specialAssistance.form.pleaseEnterBookingNumber'))
+      alert('請輸入預訂編號')
       return
     }
 
@@ -56,11 +54,11 @@ export default function TransferAssistancePage() {
         
         setBookingFound(true)
       } else {
-        alert(t('specialAssistance.form.bookingNotFound'))
+        alert('找不到該預訂')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(t('specialAssistance.form.bookingLookupFailed'))
+      alert('查詢預訂失敗，請稍後重試')
     } finally {
       setLookingUpBooking(false)
     }
@@ -70,7 +68,7 @@ export default function TransferAssistancePage() {
     e.preventDefault()
     
     if (!bookingFound) {
-      alert(t('specialAssistance.form.pleaseSearchBookingFirst'))
+      alert('請先查詢預訂')
       return
     }
     
@@ -104,14 +102,14 @@ export default function TransferAssistancePage() {
 
       if (response.ok) {
         const data = await response.json()
-        alert(`✅ ${t('specialAssistance.requestSubmitted')}\n\n${t('specialAssistance.requestNumber')}: ${data.requestNumber}`)
+        alert(`✅ 申請已提交\n\n申請編號: ${data.requestNumber}`)
         router.push('/special-assistance')
       } else {
-        alert(t('specialAssistance.requestFailed'))
+        alert('申請提交失敗，請重試')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(t('specialAssistance.requestFailed'))
+      alert('申請提交失敗，請重試')
     } finally {
       setIsSubmitting(false)
     }
@@ -122,7 +120,7 @@ export default function TransferAssistancePage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/special-assistance" className="inline-flex items-center text-ya-yellow-600 hover:text-ya-yellow-700 mb-6">
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('specialAssistance.backToServices')}
+          返回服務列表
         </Link>
 
         <div className="bg-white rounded-2xl shadow-md p-8 mb-8">
@@ -131,33 +129,33 @@ export default function TransferAssistancePage() {
               <span className="text-2xl">🚶</span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900">
-              {t('specialAssistance.transferAssistance.title')}
+              轉機協助
             </h1>
           </div>
           <p className="text-gray-600">
-            {t('specialAssistance.transferAssistance.longDescription')}
+            如您需要轉機指引、語言或行動協助，請提前提交申請。
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            {t('specialAssistance.applicationForm')}
+            申請表格
           </h2>
 
           {/* Booking Number Lookup */}
           <div className="mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.form.bookingNumberLookup')} *
+              預訂編號查詢 *
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              {t('specialAssistance.form.bookingNumberLookupDesc')}
+              輸入您的預訂編號以自動填入航班與乘客資料。
             </p>
             <div className="flex gap-4">
               <input
                 type="text"
                 value={bookingLookupNumber}
                 onChange={(e) => setBookingLookupNumber(e.target.value.toUpperCase())}
-                placeholder={t('specialAssistance.form.enterBookingNumber')}
+                placeholder="輸入預訂編號"
                 disabled={bookingFound}
                 className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent disabled:bg-gray-100"
               />
@@ -170,15 +168,15 @@ export default function TransferAssistancePage() {
                 {lookingUpBooking ? (
                   <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    {t('specialAssistance.form.searching')}
+                    查詢中...
                   </>
                 ) : bookingFound ? (
                   <>
                     <Check className="w-5 h-5 mr-2" />
-                    {t('specialAssistance.form.found')}
+                    已找到
                   </>
                 ) : (
-                  t('specialAssistance.form.search')
+                  '查詢'
                 )}
               </button>
             </div>
@@ -187,12 +185,12 @@ export default function TransferAssistancePage() {
           {/* Passenger Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.passengerInfo')}
+              乘客資料
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.passengerName')} *
+                  乘客姓名 *
                 </label>
                 <input
                   type="text"
@@ -205,7 +203,7 @@ export default function TransferAssistancePage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.email')} *
+                  電郵 *
                 </label>
                 <input
                   type="email"
@@ -218,7 +216,7 @@ export default function TransferAssistancePage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.phone')} *
+                  電話 *
                 </label>
                 <input
                   type="tel"
@@ -236,24 +234,24 @@ export default function TransferAssistancePage() {
             <div className="mb-8 p-6 bg-green-50 border-2 border-green-200 rounded-xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Check className="w-5 h-5 mr-2 text-green-600" />
-                {t('specialAssistance.flightInfo')}
+                航班資料（選填）
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.bookingNumber')}
+                    預訂編號
                   </label>
                   <input type="text" value={formData.bookingNumber} readOnly className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.flightNumber')}
+                    航班號
                   </label>
                   <input type="text" value={formData.flightNumber} readOnly className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.flightDate')}
+                    航班日期
                   </label>
                   <input type="date" value={formData.flightDate} readOnly className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" />
                 </div>
@@ -264,39 +262,39 @@ export default function TransferAssistancePage() {
           {/* Transfer Details */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.transferAssistance.transferDetails')}
+              轉機資料
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.transferAssistance.transferAirport')} *
+                  轉機機場 *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.transferAirport}
                   onChange={(e) => setFormData({ ...formData, transferAirport: e.target.value })}
-                  placeholder={t('specialAssistance.transferAssistance.transferAirportPlaceholder')}
+                  placeholder="例如：HKG"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.transferAssistance.connectionTime')} *
+                  轉機時間 *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.connectionTime}
                   onChange={(e) => setFormData({ ...formData, connectionTime: e.target.value })}
-                  placeholder={t('specialAssistance.transferAssistance.connectionTimePlaceholder')}
+                  placeholder="例如：2h 30m"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.transferAssistance.arrivalFlight')}
+                  到達航班
                 </label>
                 <input
                   type="text"
@@ -308,7 +306,7 @@ export default function TransferAssistancePage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.transferAssistance.departureFlight')}
+                  出發航班
                 </label>
                 <input
                   type="text"
@@ -322,26 +320,26 @@ export default function TransferAssistancePage() {
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.transferAssistance.languageAssistance')}
+                語言協助
               </label>
               <input
                 type="text"
                 value={formData.languageAssistance}
                 onChange={(e) => setFormData({ ...formData, languageAssistance: e.target.value })}
-                placeholder={t('specialAssistance.transferAssistance.languageAssistancePlaceholder')}
+                placeholder="例如：粵語 / 英語 / 日語"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               />
             </div>
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.transferAssistance.meetingPoint')}
+                會面地點
               </label>
               <input
                 type="text"
                 value={formData.meetingPoint}
                 onChange={(e) => setFormData({ ...formData, meetingPoint: e.target.value })}
-                placeholder={t('specialAssistance.transferAssistance.meetingPointPlaceholder')}
+                placeholder="例如：到達大堂 / 轉機櫃檯"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               />
             </div>
@@ -355,7 +353,7 @@ export default function TransferAssistancePage() {
                   className="w-5 h-5 text-ya-yellow-600 border-gray-300 rounded focus:ring-ya-yellow-500"
                 />
                 <span className="ml-3 text-sm font-medium text-gray-700">
-                  {t('specialAssistance.transferAssistance.mobilityAssistance')}
+                  需要行動協助
                 </span>
               </label>
               <label className="flex items-center">
@@ -366,14 +364,14 @@ export default function TransferAssistancePage() {
                   className="w-5 h-5 text-ya-yellow-600 border-gray-300 rounded focus:ring-ya-yellow-500"
                 />
                 <span className="ml-3 text-sm font-medium text-gray-700">
-                  {t('specialAssistance.transferAssistance.wheelchairNeeded')}
+                  需要輪椅
                 </span>
               </label>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.form.additionalNotes')}
+                額外資料
               </label>
               <textarea
                 value={formData.additionalNotes}
@@ -386,7 +384,7 @@ export default function TransferAssistancePage() {
 
           <div className="flex items-center justify-between pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-500">
-              * {t('specialAssistance.form.requiredFields')}
+              * 必填項目
             </p>
             <button
               type="submit"
@@ -396,12 +394,12 @@ export default function TransferAssistancePage() {
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  {t('specialAssistance.form.submitting')}
+                  提交中...
                 </>
               ) : (
                 <>
                   <Check className="w-5 h-5 mr-2" />
-                  {t('specialAssistance.form.submit')}
+                  提交申請
                 </>
               )}
             </button>

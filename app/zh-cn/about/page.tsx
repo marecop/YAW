@@ -1,0 +1,127 @@
+'use client'
+
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+
+export default function AboutPage() {
+  return (
+    <main className="min-h-screen bg-gray-50 pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-navy mb-4">
+            黄色航空集团
+          </h1>
+          <p className="text-xl text-gray-500 font-light">
+            航空 - 同心协力，点燃激情
+          </p>
+        </div>
+
+        {/* Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          {/* Card */}
+          <div className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+            <div className="relative h-64 overflow-hidden">
+              <img 
+                src="/images/airlines/yellow-airlines.png" 
+                alt="Yellow Airlines Group"
+                className="w-full h-full object-contain p-8 bg-gray-50 transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-8 flex-1 flex flex-col">
+              <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-primary transition-colors">
+              Yellow Airlines Group
+            </h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              了解黄鹤背后的公司。
+            </p>
+            <div className="flex items-center text-gray-500 group-hover:text-primary transition-colors mt-auto">
+              <div className="border border-current rounded-full p-1 mr-3">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium">Yellow Airlines Group</span>
+            </div>
+            </div>
+          </div>
+
+          {/* Card */}
+          <div className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+            <div className="relative h-64 overflow-hidden">
+              <img 
+                src="https://www.lufthansa.com/content/dam/lh/images/local_variations/c-2137798585-mam-2502-FlyingMoreSustainably_v1-16-9-2880x1620.jpg.transform/lh-dcep-transform-width-1440/img.jpg" 
+                alt="Yellow Cargo 黄色货运"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-8 flex-1 flex flex-col">
+              <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-primary transition-colors">
+              Yellow Cargo 黄色货运
+            </h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              黄色货运的专业航空货运人员值得信赖：我们将您的货物迅速、安全地运送至全球各地。
+            </p>
+            <div className="flex items-center text-gray-500 group-hover:text-primary transition-colors mt-auto">
+              <div className="border border-current rounded-full p-1 mr-3">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium">Yellow Cargo 黄色货运</span>
+            </div>
+            </div>
+          </div>
+
+          {/* Card */}
+          <div className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+            <div className="relative h-64 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1519671282429-b44660ead0a7?q=80&w=800&auto=format&fit=crop" 
+                alt="Yellow Aviation Training 黄色航空培训"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-8 flex-1 flex flex-col">
+              <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-primary transition-colors">
+              Yellow Aviation Training 黄色航空培训
+            </h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              培训大智慧。安全飞行。涵盖驾驶舱培训、客舱培训及飞行培训。
+            </p>
+            <div className="flex items-center text-gray-500 group-hover:text-primary transition-colors mt-auto">
+              <div className="border border-current rounded-full p-1 mr-3">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium">Yellow Aviation Training 黄色航空培训</span>
+            </div>
+            </div>
+          </div>
+
+          {/* Card */}
+          <div className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+            <div className="relative h-64 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?q=80&w=800&auto=format&fit=crop" 
+                alt="Yellow Technics 黄色技术"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-8 flex-1 flex flex-col">
+              <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-primary transition-colors">
+              Yellow Technics 黄色技术
+            </h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              了解领先的维护、修理和大修服务商的详细信息。黄色技术是民航机、民航机发动机及部件专家。
+            </p>
+            <div className="flex items-center text-gray-500 group-hover:text-primary transition-colors mt-auto">
+              <div className="border border-current rounded-full p-1 mr-3">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium">Yellow Technics 黄色技术</span>
+            </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  )
+}

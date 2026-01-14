@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react'
 import FlightSearchForm from '@/components/FlightSearchForm'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import { checkAndUpdateDBVersion } from '@/lib/dbVersion'
@@ -21,8 +20,6 @@ import {
 } from 'lucide-react'
 
 export default function Home() {
-  const { t } = useLanguage()
-  
   // 检查数据库版本
   useEffect(() => {
     const versionMatches = checkAndUpdateDBVersion()
@@ -98,10 +95,10 @@ export default function Home() {
             {/* 左侧：品牌文案 */}
             <div className="lg:col-span-5 text-white lg:text-left text-center">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-sm border border-white/20">
-                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulset("></span>
                 全新夏季航班現已開售
               </div>
-              <h1 className="text-5xl lg:text-6xl font-extrabold text-black mb-6 leading-tight">
+              <h1 className=")text-5xl lg:text-6xl font-extrabold text-black mb-6 leading-tight">
                 探索世界<br/>
                 <span className="text-white drop-shadow-md">從這裡出發</span>
               </h1>
@@ -115,8 +112,8 @@ export default function Home() {
                      <Shield className="w-5 h-5 text-black" />
                    </div>
                    <div className="text-left">
-                     <p className="text-xs text-black/60 font-bold uppercase">安全認證</p>
-                     <p className="text-sm text-black font-bold">五星級安全</p>
+                     <p className="text-xs text-black/60 font-bold uppercaset(">安全認證</p>
+                     <p className=")text-sm text-black font-bold">五星級安全</p>
                    </div>
                 </div>
                 <div className="w-px h-10 bg-black/10"></div>
@@ -125,8 +122,8 @@ export default function Home() {
                      <Clock className="w-5 h-5 text-black" />
                    </div>
                    <div className="text-left">
-                     <p className="text-xs text-black/60 font-bold uppercase">準點率</p>
-                     <p className="text-sm text-black font-bold">98.5%</p>
+                     <p className="text-xs text-black/60 font-bold uppercaset(">準點率</p>
+                     <p className=")text-sm text-black font-bold">98.5%</p>
                    </div>
                 </div>
               </div>
@@ -138,7 +135,7 @@ export default function Home() {
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
                     <Plane className="w-6 h-6 text-ya-yellow-600" />
-                    {t('search.flights')}
+                    航班
                   </h2>
                   <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">多種支付方式</span>
                 </div>
@@ -183,7 +180,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{t('home.popularDestinations')}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">熱門目的地</h2>
               <p className="text-gray-500 text-lg">精選熱門航線，優惠價格不容錯過</p>
             </div>
             <Link href="/destinations" className="hidden md:flex items-center px-6 py-3 rounded-xl bg-gray-50 text-gray-900 font-semibold hover:bg-gray-100 transition-colors">
@@ -250,7 +247,7 @@ export default function Home() {
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('home.yellowExperience')}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">黃色航空體驗</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">為什麼選擇黃色航空？</p>
           </div>
           
@@ -260,7 +257,7 @@ export default function Home() {
               <div className="w-16 h-16 bg-ya-yellow-50 rounded-2xl flex items-center justify-center mb-6">
                 <Cloud className="w-8 h-8 text-ya-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{t('home.comfortableCabin')}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">舒適客艙</h3>
               <p className="text-gray-600 leading-relaxed">
                 人體工學座椅設計，寬敞的腿部空間，讓您的長途飛行依然舒適愜意。
               </p>
@@ -271,7 +268,7 @@ export default function Home() {
                <div className="w-16 h-16 bg-ya-yellow-50 rounded-2xl flex items-center justify-center mb-6">
                 <Utensils className="w-8 h-8 text-ya-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{t('home.onboardCatering')}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">機上餐飲</h3>
               <p className="text-gray-600 leading-relaxed">
                 由星級大廚設計的機上菜單，搭配精選酒水，為您帶來雲端味蕾盛宴。
               </p>
@@ -282,7 +279,7 @@ export default function Home() {
                <div className="w-16 h-16 bg-ya-yellow-50 rounded-2xl flex items-center justify-center mb-6">
                 <Users className="w-8 h-8 text-ya-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{t('home.thoughtfulService')}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">貼心服務</h3>
               <p className="text-gray-600 leading-relaxed">
                 我們專業的機組人員時刻關注您的需求，為您提供無微不至的貼心服務。
               </p>

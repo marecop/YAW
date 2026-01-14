@@ -4,18 +4,115 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import NotificationBell from '@/components/NotificationBell'
 
 export default function Header() {
   const pathname = usePathname()
-  const { t } = useLanguage()
   const { user, logout } = useAuth()  // 使用 AuthContext 代替 getUser()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
+
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+  }
+
+  const langPrefix = getLangPrefix()
+  // Determine current language code (without slash) for translations
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': {
+      home: '主頁',
+      book: '預訂航班',
+      status: '航班動態',
+      myBookings: '我的預訂',
+      destinations: '探索目的地',
+      about: '關於我們',
+      login: '登入',
+      register: '註冊',
+      memberCenter: '會員中心',
+      settings: '設定',
+      logout: '登出',
+      member: '會員'
+    },
+    'zh-cn': {
+      home: '主页',
+      book: '预订航班',
+      status: '航班动态',
+      myBookings: '我的预订',
+      destinations: '探索目的地',
+      about: '关于我们',
+      login: '登录',
+      register: '注册',
+      memberCenter: '会员中心',
+      settings: '设置',
+      logout: '登出',
+      member: '会员'
+    },
+    'en': {
+      home: 'Home',
+      book: 'Book Flights',
+      status: 'Flight Status',
+      myBookings: 'My Bookings',
+      destinations: 'Destinations',
+      about: 'About Us',
+      login: 'Login',
+      register: 'Register',
+      memberCenter: 'Member Center',
+      settings: 'Settings',
+      logout: 'Logout',
+      member: 'Member'
+    },
+    'de': {
+      home: 'Startseite',
+      book: 'Flüge buchen',
+      status: 'Flugstatus',
+      myBookings: 'Meine Buchungen',
+      destinations: 'Reiseziele',
+      about: 'Über uns',
+      login: 'Anmelden',
+      register: 'Registrieren',
+      memberCenter: 'Mitgliederbereich',
+      settings: 'Einstellungen',
+      logout: 'Abmelden',
+      member: 'Mitglied'
+    },
+    'jp': {
+      home: 'ホーム',
+      book: 'フライト予約',
+      status: '運航状況',
+      myBookings: '予約確認',
+      destinations: '就航地',
+      about: '会社概要',
+      login: 'ログイン',
+      register: '登録',
+      memberCenter: '会員センター',
+      settings: '設定',
+      logout: 'ログアウト',
+      member: '会員'
+    },
+    'es': {
+      home: 'Inicio',
+      book: 'Reservar vuelos',
+      status: 'Estado del vuelo',
+      myBookings: 'Mis reservas',
+      destinations: 'Destinos',
+      about: 'Sobre nosotros',
+      login: 'Iniciar sesión',
+      register: 'Registrarse',
+      memberCenter: 'Centro de miembros',
+      settings: 'Configuración',
+      logout: 'Cerrar sesión',
+      member: 'Miembro'
+    }
+  }
+
+  const t = translations[currentLangCode] || translations['zh-hk']
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,12 +145,12 @@ export default function Header() {
   }
 
   const navigation = [
-    { name: t('nav.home'), href: '/', active: pathname === '/' },
-    { name: t('nav.bookFlight'), href: '/flights', active: pathname === '/flights' },
-    { name: '航班動態', href: '/flight-status', active: pathname.startsWith('/flight-status') },
-    { name: t('nav.myBookings'), href: '/bookings', active: pathname.startsWith('/bookings'), needsAuth: true },
-    { name: t('nav.destinations'), href: '/destinations', active: pathname === '/destinations' },
-    { name: '關於我們', href: '/about', active: pathname === '/about' },
+    { name: t.home, href: `${langPrefix}/`, active: pathname === `${langPrefix}/` || pathname === langPrefix },
+    { name: t.book, href: `${langPrefix}/flights`, active: pathname === `${langPrefix}/flights` || pathname.startsWith(`${langPrefix}/flights/`) },
+    { name: t.status, href: `${langPrefix}/flight-status`, active: pathname.startsWith(`${langPrefix}/flight-status`) },
+    { name: t.myBookings, href: `${langPrefix}/bookings`, active: pathname.startsWith(`${langPrefix}/bookings`), needsAuth: true },
+    { name: t.destinations, href: `${langPrefix}/destinations`, active: pathname === `${langPrefix}/destinations` },
+    { name: t.about, href: `${langPrefix}/about`, active: pathname === `${langPrefix}/about` },
   ]
 
   return (
@@ -63,7 +160,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="flex items-center">
+              <Link href={`${langPrefix}/`} className="flex items-center">
                 <div className="relative w-10 h-10">
                   <Image
                     src="/images/logoremovebkgnd.png" 
@@ -73,7 +170,7 @@ export default function Header() {
                     priority
                   />
                 </div>
-                <span className="ml-2 text-gray-800 font-semibold hidden sm:inline-block">{t('site.title')} | Yellow Airlines</span>
+                <span className="ml-2 text-gray-800 font-semibold hidden sm:inline-block">黃色航空 | Yellow Airlines</span>
               </Link>
             </div>
           </div>
@@ -123,24 +220,24 @@ export default function Header() {
                     role="menu"
                   >
                     <div className="px-4 py-2 text-sm text-gray-500 border-b border-gray-100">
-                      {t('nav.member')}<br />
+                      {t.member}<br />
                       <span className="font-medium text-gray-900">{user.email}</span>
                     </div>
                     
                     <Link 
-                      href="/member" 
+                      href={`${langPrefix}/member`} 
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setUserMenuOpen(false)}
                     >
-                      {t('nav.member')}
+                      {t.memberCenter}
                     </Link>
                     
                     <Link 
-                      href="/settings" 
+                      href={`${langPrefix}/settings`} 
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setUserMenuOpen(false)}
                     >
-                      設定
+                      {t.settings}
                     </Link>
                     
                     <button
@@ -151,7 +248,7 @@ export default function Header() {
                         logout()
                       }}
                     >
-                      {t('nav.logout')}
+                      {t.logout}
                     </button>
                   </div>
                 )}
@@ -159,11 +256,11 @@ export default function Header() {
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="text-sm font-medium text-gray-500 hover:text-gray-700">
-                  {t('nav.login')}
+                <Link href={`${langPrefix}/auth/login`} className="text-sm font-medium text-gray-500 hover:text-gray-700">
+                  {t.login}
                 </Link>
-                <Link href="/auth/register" className="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-ya-yellow-500 hover:bg-ya-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ya-yellow-500">
-                  註冊
+                <Link href={`${langPrefix}/auth/register`} className="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-ya-yellow-500 hover:bg-ya-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ya-yellow-500">
+                  {t.register}
                 </Link>
               </>
             )}
@@ -233,11 +330,11 @@ export default function Header() {
                   </div>
                 </div>
                 <div className="space-y-1 mt-3">
-                  <Link href="/member" className="block px-2 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md">
-                    {t('nav.member')}
+                  <Link href={`${langPrefix}/member`} className="block px-2 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md">
+                    {t.memberCenter}
                   </Link>
-                  <Link href="/member/settings" className="block px-2 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md">
-                    設定
+                  <Link href={`${langPrefix}/member/settings`} className="block px-2 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md">
+                    {t.settings}
                   </Link>
                   <button
                     onClick={() => {
@@ -247,17 +344,17 @@ export default function Header() {
                     }}
                     className="block w-full text-left px-2 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md"
                   >
-                    {t('nav.logout')}
+                    {t.logout}
                   </button>
                 </div>
               </div>
             ) : (
               <div className="flex items-center px-4 space-x-3">
-                <Link href="/auth/login" className="block text-base font-medium text-gray-600 hover:text-gray-800">
-                  {t('nav.login')}
+                <Link href={`${langPrefix}/auth/login`} className="block text-base font-medium text-gray-600 hover:text-gray-800">
+                  {t.login}
                 </Link>
-                <Link href="/auth/register" className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-ya-yellow-500 hover:bg-ya-yellow-600">
-                  註冊
+                <Link href={`${langPrefix}/auth/register`} className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-ya-yellow-500 hover:bg-ya-yellow-600">
+                  {t.register}
                 </Link>
               </div>
             )}

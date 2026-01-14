@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { searchAirports, getAirportByCode, type Airport } from '@/lib/airports'
 import { Plane } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 interface AirportAutocompleteProps {
   id: string
@@ -21,16 +22,38 @@ export default function AirportAutocomplete({
   label,
   value,
   onChange,
-  placeholder = '输入城市或机场代码',
+  placeholder,
   required = false,
   className = ''
 }: AirportAutocompleteProps) {
+  const pathname = usePathname()
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Airport[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const suggestionRef = useRef<HTMLDivElement>(null)
+
+  // Helper to get current language prefix
+  const getLangPrefix = () => {
+    const segments = pathname.split('/').filter(Boolean)
+    const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
+    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+  }
+  const langPrefix = getLangPrefix()
+  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+
+  const translations: Record<string, any> = {
+    'zh-hk': { placeholder: '輸入城市或機場代碼', noResults: '未搵到匹配嘅機場，請嘗試其他關鍵詞' },
+    'zh-cn': { placeholder: '输入城市或机场代码', noResults: '未找到匹配的机场，请尝试其他关键词' },
+    'en': { placeholder: 'Enter city or airport code', noResults: 'No matching airport found, please try other keywords' },
+    'de': { placeholder: 'Stadt oder Flughafencode eingeben', noResults: 'Kein passender Flughafen gefunden' },
+    'jp': { placeholder: '都市または空港コードを入力', noResults: '一致する空港が見つかりません' },
+    'es': { placeholder: 'Ingrese ciudad o código de aeropuerto', noResults: 'No se encontraron aeropuertos coincidentes' }
+  }
+
+  const t = translations[currentLangCode] || translations['zh-hk']
+  const finalPlaceholder = placeholder || t.placeholder
 
   // 当 value 改变时，更新显示的文本
   useEffect(() => {
@@ -135,7 +158,7 @@ export default function AirportAutocomplete({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={handleFocus}
-          placeholder={placeholder}
+          placeholder={finalPlaceholder}
           className="w-full py-4 px-4 pl-10 bg-gray-50 border border-gray-200 rounded-xl shadow-sm focus:border-ya-yellow-500 focus:ring-2 focus:ring-ya-yellow-500 focus:outline-none transition-all"
           autoComplete="off"
           required={required}
@@ -183,11 +206,10 @@ export default function AirportAutocomplete({
           className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-4"
         >
           <p className="text-sm text-gray-500 text-center">
-            未找到匹配的机场，请尝试其他关键词
+            {t.noResults}
           </p>
         </div>
       )}
     </div>
   )
 }
-

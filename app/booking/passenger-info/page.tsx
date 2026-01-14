@@ -2,14 +2,12 @@
 
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import { User, Mail, Phone, CreditCard } from 'lucide-react'
 
 function PassengerInfoContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
 
   const flightId = searchParams.get('flightId')
   const cabinOption = searchParams.get('cabinOption')

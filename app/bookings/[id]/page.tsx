@@ -16,7 +16,6 @@ import {
   Download,
   CheckCircle
 } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useCurrency } from '@/contexts/CurrencyContext'
 
 interface Booking {
@@ -54,7 +53,6 @@ interface Booking {
 export default function BookingDetailPage() {
   const params = useParams()
   const router = useRouter()
-  const { t } = useLanguage()
   const { formatPrice } = useCurrency()
   const [booking, setBooking] = useState<Booking | null>(null)
   const [loading, setLoading] = useState(true)

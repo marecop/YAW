@@ -1,11 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CareersPage() {
-  const { t } = useLanguage()
-
+  
   const jobCategories = [
     {
       id: 'flight',

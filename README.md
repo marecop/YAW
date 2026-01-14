@@ -1,6 +1,15 @@
-# Yellow Airlines 黄色航空官方网站
+# Yellow Airlines 黃色航空官方網站
 
-一个功能完整的航空公司网站，使用 Next.js 15、TypeScript、Tailwind CSS 和 SQLite 构建。
+一個功能完整的航空公司網站，使用 Next.js、TypeScript、Tailwind CSS 和 SQLite + Prisma 構建。
+
+## 架構（前後端拆分）
+
+為避免在自架伺服器上直接跑完整 Next.js（SSR / 靜態資源 / 記憶體壓力），本專案已拆分為：
+
+- **Frontend（Vercel）**：本 repo 根目錄（`/app` 只保留頁面，不再包含 `/app/api`）
+- **Backend（Server / API only）**：`/backend`（API-only Next.js，僅提供 `/api/*`，不提供頁面）
+
+Frontend 透過 `next.config.ts` 的 **rewrite** 把所有 `/api/*` 代理到後端（由 `API_BASE_URL` 控制）。
 
 ## 主要功能
 
@@ -22,15 +31,15 @@
 - **图标**: Lucide React
 - **日期处理**: date-fns
 
-## 安装和运行
+## 安裝與執行（本機開發）
 
-### 1. 安装依赖
+### 1. 安裝依賴
 
 ```bash
 npm install
 ```
 
-### 2. 设置数据库
+### 2. 設定資料庫
 
 数据库已经配置好，运行以下命令生成 Prisma Client 并填充示例数据：
 
@@ -40,13 +49,22 @@ npx prisma db push
 npm run db:seed
 ```
 
-### 3. 启动开发服务器
+### 3. 啟動後端 API（backend）
 
 ```bash
-npm run dev
+cd backend
+npm install
+npx prisma generate
+PORT=3001 npm run dev
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看网站。
+### 4. 啟動前端（root / Vercel）
+
+```bash
+API_BASE_URL=http://localhost:3001 npm run dev
+```
+
+訪問 `http://localhost:3000` 查看網站（前端會把 `/api/*` 代理到 `http://localhost:3001`）。
 
 ## 示例账户
 
@@ -73,38 +91,19 @@ npm run dev
 - 3 个会员权益等级
 - 2 个测试用户
 
-## 项目结构
+## 專案結構（重點）
 
-```
-/app
-  /api              # API 路由
-    /auth           # 认证 API
-    /flights        # 航班 API
-    /bookings       # 预订 API
-  /auth             # 认证页面
-  /flights          # 航班相关页面
-  /member           # 会员中心
-  layout.tsx        # 根布局
-  page.tsx          # 首页
-/components         # 可复用组件
-  Header.tsx        # 导航栏
-  Footer.tsx        # 页脚（含语言切换器）
-  FlightSearchForm.tsx  # 航班搜索表单
-/contexts           # React Context
-  LanguageContext.tsx   # 多语言管理
-/lib                # 工具函数
-  prisma.ts         # Prisma 客户端
-  /utils
-    auth.ts         # 认证工具
-/locales            # 翻译文件（public/locales）
-  de.json           # 德语
-  en.json           # 英语
-  zh-cn.json        # 简体中文
-  zh-hk.json        # 粤语繁体
-/prisma             # 数据库
-  schema.prisma     # 数据库模型
-  seed.ts           # 种子数据
-/types              # TypeScript 类型
+```txt
+/app                 # 前端頁面（已不再包含 /app/api）
+/backend             # 後端（API-only Next.js）
+  /app/api           # 後端 API 路由（/api/*）
+  /lib               # 後端使用的共用邏輯（已複製一份）
+  /prisma            # Prisma schema / migrations
+  package.json
+  next.config.ts
+  tsconfig.json
+/lib                 # 前端使用的共用邏輯
+/prisma              # 本機開發 DB / schema（仍保留）
 ```
 
 ## 主要页面
@@ -139,12 +138,18 @@ npm run dev
 - 大量留白和清晰的视觉层次
 - 流畅的动画和过渡效果
 
-## 环境变量
+## 環境變數
 
-`.env` 文件已配置：
+Frontend（root）需要額外設定：
 
 ```env
-DATABASE_URL="file:./dev.db"
+API_BASE_URL="http://localhost:3001"
+```
+
+Backend（`/backend`）沿用原本的：
+
+```env
+DATABASE_URL="file:./prisma/dev.db"
 NEXTAUTH_SECRET="yellow-airlines-secret-key-change-in-production"
 NEXTAUTH_URL="http://localhost:3000"
 ```

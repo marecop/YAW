@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plane, Calendar, MapPin, Clock } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { format } from 'date-fns'
 import Link from 'next/link'
@@ -32,7 +31,6 @@ interface Booking {
 
 export default function BookingsPage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const { user, isAuthenticated, isLoading: authLoading } = useAuth()
   const [bookings, setBookings] = useState<Booking[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -84,13 +82,13 @@ export default function BookingsPage() {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'CONFIRMED':
-        return t('booking.confirmed')
+        return '已確認'
       case 'CHECKED_IN':
-        return t('booking.checkedIn')
+        return '已值機'
       case 'CANCELLED':
-        return t('booking.cancelled')
+        return '已取消'
       case 'COMPLETED':
-        return t('booking.completed')
+        return '已完成'
       default:
         return status
     }
@@ -101,7 +99,7 @@ export default function BookingsPage() {
       <div className="min-h-screen flex items-center justify-center bg-background-gray">
         <div className="text-center">
           <Plane className="w-16 h-16 text-primary animate-bounce mx-auto mb-4" />
-          <p className="text-xl text-navy font-semibold">{t('common.loading')}</p>
+          <p className="text-xl text-navy font-semibold">載入中...</p>
         </div>
       </div>
     )
@@ -114,7 +112,7 @@ export default function BookingsPage() {
         <div className="mb-8 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-navy mb-2">
-              {t('booking.myBookings')}
+              我的預訂
             </h1>
             <p className="text-text-secondary">查看和管理您的所有预订</p>
           </div>

@@ -3,14 +3,12 @@
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { Plane, Calendar, User, Hash, CheckCircle, Download, Printer } from 'lucide-react'
 import { generateOccupiedSeats, getOccupancyPercentage } from '@/lib/seatOccupancy'
 
 function CheckInContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
   
   const [bookingNumber, setBookingNumber] = useState('')
   const [lastName, setLastName] = useState('')
@@ -159,7 +157,7 @@ function CheckInContent() {
     const cabinClass = booking.cabinClass
     let seats: string[] = []
 
-    if (cabinClass === 'ECONOMY' || cabinClass === 'PREMIUM_ECONOMY') {
+    if (cabinClass === ')ECONOMY' || cabinClass === 'PREMIUM_ECONOMY') {
       // 经济舱/高级经济舱座位 (20-35行, A-F)
       for (let row = 20; row <= 35; row++) {
         for (let col of ['A', 'B', 'C', 'D', 'E', 'F']) {

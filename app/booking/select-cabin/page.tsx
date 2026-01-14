@@ -2,7 +2,6 @@
 
 import { use, useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import { Check, Luggage, Utensils, RefreshCw, X, Plane, Leaf, Zap } from 'lucide-react'
 
@@ -52,7 +51,6 @@ interface CabinOption {
 function SelectCabinContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
   
   const flightId = searchParams.get('flightId')
   const cabinClass = searchParams.get('cabinClass')

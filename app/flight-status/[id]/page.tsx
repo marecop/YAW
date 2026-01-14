@@ -1,14 +1,11 @@
 'use client'
 
 import { useState, useEffect, use } from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import type { FlightInstance, Flight } from '@prisma/client'
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { Plane, Clock, MapPin, AlertTriangle, CheckCircle } from 'lucide-react'
 import dynamic from 'next/dynamic'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 // Dynamically import map with no SSR
 const FlightStatusMap = dynamic(() => import('@/components/FlightStatusMap'), {
@@ -19,7 +16,6 @@ const FlightStatusMap = dynamic(() => import('@/components/FlightStatusMap'), {
 type FlightInstanceWithFlight = FlightInstance & { flight: Flight }
 
 export default function FlightStatusDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { t } = useLanguage()
   const { id } = use(params)
   const [flight, setFlight] = useState<FlightInstanceWithFlight | null>(null)
   const [loading, setLoading] = useState(true)
@@ -42,14 +38,14 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'SCHEDULED': return t('flightStatus.statusScheduled')
-      case 'PREPARING': return t('flightStatus.statusPreparing')
-      case 'DELAYED': return t('flightStatus.statusDelayed')
-      case 'CANCELLED': return t('flightStatus.statusCancelled')
-      case 'BOARDING': return t('flightStatus.statusBoarding')
-      case 'GATE_CLOSED': return t('flightStatus.statusGateClosed')
-      case 'IN_AIR': return t('flightStatus.statusInAir')
-      case 'ARRIVED': return t('flightStatus.statusArrived')
+      case 'SCHEDULED': return '計劃'
+      case 'PREPARING': return '準備中'
+      case 'DELAYED': return '晚點'
+      case 'CANCELLED': return '取消'
+      case 'BOARDING': return '登機中'
+      case 'GATE_CLOSED': return '登機結束'
+      case 'IN_AIR': return '飛行中'
+      case 'ARRIVED': return '已到達'
       default: return status
     }
   }
@@ -116,24 +112,16 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <div className="flex-1 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ya-yellow-500"></div>
-        </div>
-        <Footer />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ya-yellow-500"></div>
       </div>
     )
   }
 
   if (!flight) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <div className="flex-1 flex items-center justify-center">
-          <p className="text-xl text-gray-500">{t('flightStatus.notFound')}</p>
-        </div>
-        <Footer />
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-500">找不到航班資訊</p>
       </div>
     )
   }
@@ -141,10 +129,8 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
   const statusBg = getStatusColor(flight.status)
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
-      
-      <main className="flex-1 relative">
+    <div className="min-h-screen bg-gray-50">
+      <main className="relative">
         {/* Back Button */}
         <Link 
             href="/flight-status" 
@@ -187,7 +173,7 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                             {flight.terminal && <div className="text-xs font-mono bg-gray-100 rounded px-1 mt-1 inline-block">{flight.terminal}</div>}
                         </div>
                         <div className="flex-1 px-4 flex flex-col items-center">
-                            <Plane className={`w-8 h-8 text-gray-400 transform rotate-90 ${flight.status === 'IN_AIR' ? 'text-ya-yellow-500 animate-pulse' : ''}`} />
+                            <Plane className={`w-8 h-8 text-gray-400 transform rotate-90 ${flight.status === 'IN_AIR' ? 'text-ya-yellow-500 animate-pulset(' : ')'}`} />
                             <div className="w-full h-0.5 bg-gray-300 mt-2 relative">
                                 {progress > 0 && progress < 1 && (
                                     <div 
@@ -208,15 +194,15 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                     {/* Times Grid */}
                     <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-sm border-t border-gray-100 pt-4">
                         <div>
-                            <div className="text-gray-500 mb-1">{t('flightStatus.detail.scheduledDeparture')}</div>
+                            <div className="text-gray-500 mb-1">計劃起飛</div>
                             <div className="font-semibold text-lg">{format(new Date(flight.scheduledDeparture), 'HH:mm')}</div>
                         </div>
                         <div className="text-right">
-                            <div className="text-gray-500 mb-1">{t('flightStatus.detail.scheduledArrival')}</div>
+                            <div className="text-gray-500 mb-1">計劃到達</div>
                             <div className="font-semibold text-lg">
                                 {format(new Date(flight.scheduledArrival), 'HH:mm')}
                                 {new Date(flight.scheduledArrival).getDate() !== new Date(flight.scheduledDeparture).getDate() && (
-                                    <span className="text-xs text-ya-yellow-600 font-bold ml-1 align-top">+1</span>
+                                    <span className="text-xs text-ya-yellow-600 font-bold ml-1 align-topt(">+1</span>
                                 )}
                             </div>
                         </div>
@@ -225,7 +211,7 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                             {/* Actual/Estimated Departure */}
                             {(flight.status === 'IN_AIR' || flight.status === 'ARRIVED') ? (
                                 <>
-                                    <div className="text-gray-500 mb-1">{t('flightStatus.detail.actualDeparture')}</div>
+                                    <div className=")text-gray-500 mb-1">實際起飛</div>
                                     <div className="font-semibold text-lg flex items-center">
                                         {format(new Date(flight.actualDeparture!), 'HH:mm')}
                                         {getDiffDisplay(new Date(flight.scheduledDeparture), new Date(flight.actualDeparture!))}
@@ -233,7 +219,7 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                                 </>
                             ) : (
                                 <>
-                                    <div className="text-gray-500 mb-1">{t('flightStatus.detail.estimatedDeparture')}</div>
+                                    <div className="text-gray-500 mb-1">預計起飛</div>
                                     <div className="font-semibold text-lg text-gray-400">
                                         {flight.actualDeparture ? format(new Date(flight.actualDeparture), 'HH:mm') : '--:--'}
                                     </div>
@@ -244,7 +230,7 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                             {/* Actual/Estimated Arrival */}
                             {flight.status === 'ARRIVED' ? (
                                 <>
-                                    <div className="text-gray-500 mb-1">{t('flightStatus.detail.actualArrival')}</div>
+                                    <div className="text-gray-500 mb-1">實際到達</div>
                                     <div className="font-semibold text-lg flex items-center justify-end">
                                         {getDiffDisplay(new Date(flight.scheduledArrival), new Date(flight.actualArrival!))}
                                         <span className="ml-2">{format(new Date(flight.actualArrival!), 'HH:mm')}</span>
@@ -252,7 +238,7 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                                 </>
                             ) : flight.status === 'IN_AIR' ? (
                                 <>
-                                    <div className="text-gray-500 mb-1">{t('flightStatus.detail.estimatedArrival')}</div>
+                                    <div className="text-gray-500 mb-1">預計到達</div>
                                     <div className="font-semibold text-lg text-ya-yellow-600 flex items-center justify-end">
                                         {flight.actualArrival && getDiffDisplay(new Date(flight.scheduledArrival), new Date(flight.actualArrival))}
                                         <span className="ml-2">{flight.actualArrival ? format(new Date(flight.actualArrival), 'HH:mm') : '--:--'}</span>
@@ -260,7 +246,7 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                                 </>
                             ) : (
                                 <>
-                                    <div className="text-gray-500 mb-1">{t('flightStatus.detail.estimatedArrival')}</div>
+                                    <div className="text-gray-500 mb-1">預計到達</div>
                                     <div className="font-semibold text-lg text-gray-400">
                                         {flight.actualArrival ? format(new Date(flight.actualArrival), 'HH:mm') : '--:--'}
                                     </div>
@@ -272,13 +258,13 @@ export default function FlightStatusDetailPage({ params }: { params: Promise<{ i
                     {/* Aircraft Info */}
                     <div className="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500">
                         <div>
-                            <span className="font-medium text-gray-700">{t('flightStatus.detail.aircraft')}:</span> {flight.aircraftType}
+                            <span className="font-medium text-gray-700">機型:</span> {flight.aircraftType}
                         </div>
                         <div>
-                            <span className="font-medium text-gray-700">{t('flightStatus.detail.reg')}:</span> {flight.aircraftRegistration}
+                            <span className="font-medium text-gray-700">註冊號:</span> {flight.aircraftRegistration}
                         </div>
                         <div>
-                            <span className="font-medium text-gray-700">{t('flightStatus.detail.weather')}:</span> {flight.weatherOrigin} → {flight.weatherDestination}
+                            <span className="font-medium text-gray-700">天氣:</span> {flight.weatherOrigin} → {flight.weatherDestination}
                         </div>
                     </div>
                 </div>

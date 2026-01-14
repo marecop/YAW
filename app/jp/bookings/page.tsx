@@ -1,0 +1,371 @@
+'use client'
+
+import { useState, useEffect, useMemo } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Search, Calendar, Plane, ChevronRight, Download, Clock, History } from 'lucide-react'
+import { useAuth } from '@/contexts/AuthContext'
+
+export default function BookingsPage() {
+  const router = useRouter()
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth()
+  const [searchQuery, setSearchQuery] = useState('')
+  const [bookings, setBookings] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [searched, setSearched] = useState(false)
+  const [activeTab, setActiveTab] = useState<'upcoming' | 'history'>('upcoming')
+
+  // 認証状態の確認
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push('/jp/auth/login?redirect=/bookings')
+    }
+  }, [isAuthenticated, authLoading, router])
+
+  // 現在のユーザーの予約を自動読み込み
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      loadAllBookings()
+    }
+  }, [isAuthenticated, user])
+
+  const loadAllBookings = async () => {
+    if (!user) return
+    
+    setLoading(true)
+    try {
+      // 現在のユーザーの予約のみ取得
+      const response = await fetch(`/api/bookings?userEmail=${encodeURIComponent(user.email)}`)
+      const data = await response.json()
+      setBookings(Array.isArray(data) ? data : [])
+    } catch (error) {
+      console.error('Failed to fetch bookings:', error)
+      setBookings([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!searchQuery.trim()) {
+      loadAllBookings()
+      return
+    }
+
+    setLoading(true)
+    setSearched(true)
+
+    try {
+      const response = await fetch(`/api/bookings?bookingNumber=${searchQuery}`)
+      const data = await response.json()
+      setBookings(Array.isArray(data) ? data : [data])
+    } catch (error) {
+      console.error('Failed to fetch bookings:', error)
+      setBookings([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  }
+
+  // 時間文字列をフォーマット（+1マークを削除）
+  const formatTime = (timeString: string) => {
+    return timeString.replace('+1', '')
+  }
+
+  // 日付と時間を組み合わせて表示
+  const formatDateTime = (flightDate: string, time: string) => {
+    return `${formatDate(flightDate)} ${formatTime(time)}`
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'CONFIRMED':
+        return 'bg-green-100 text-green-800'
+      case 'CHECKED_IN':
+        return 'bg-blue-100 text-blue-800'
+      case 'CANCELLED':
+        return 'bg-red-100 text-red-800'
+      case 'COMPLETED':
+        return 'bg-gray-100 text-gray-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
+    }
+  }
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'CONFIRMED':
+        return '確認済み'
+      case 'CHECKED_IN':
+        return 'チェックイン済み'
+      case 'CANCELLED':
+        return 'キャンセル済み'
+      case 'COMPLETED':
+        return '完了'
+      default:
+        return status
+    }
+  }
+
+  // 今後の旅程かどうかを判定
+  const isUpcoming = (booking: any) => {
+    if (booking.status === 'COMPLETED' || booking.status === 'CANCELLED') return false
+    
+    try {
+      const dateStr = booking.flightDate.toString().split('T')[0]
+      const timeStr = booking.flight.departureTime.replace('+1', '')
+      const flightDateTime = new Date(`${dateStr}T${timeStr}:00`)
+      const now = new Date()
+      return flightDateTime > now
+    } catch (e) {
+      return true // 解析に失敗した場合はデフォルトで今後として表示
+    }
+  }
+
+  const filteredBookings = useMemo(() => {
+    const upcoming = bookings.filter(isUpcoming).sort((a, b) => new Date(a.flightDate).getTime() - new Date(b.flightDate).getTime())
+    const history = bookings.filter(b => !isUpcoming(b)).sort((a, b) => new Date(b.flightDate).getTime() - new Date(a.flightDate).getTime())
+    return { upcoming, history }
+  }, [bookings])
+
+  const currentList = activeTab === 'upcoming' ? filteredBookings.upcoming : filteredBookings.history
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* タイトル */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">予約管理</h1>
+          <p className="text-gray-600">フライト予約の確認と管理</p>
+        </div>
+
+        {/* 検索フォーム */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <form onSubmit={handleSearch} className="flex gap-4">
+            <div className="flex-1">
+              <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
+                予約番号またはメールアドレス
+              </label>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  id="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="予約番号を入力（例：YAAB123456）"
+                  className="input-field pl-10"
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex items-end">
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-8 py-3 bg-ya-yellow-500 text-black font-bold rounded-lg hover:bg-ya-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {loading ? '検索中...' : '検索'}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* タブ切り替え */}
+        {!loading && bookings.length > 0 && !searched && (
+          <div className="flex space-x-6 mb-6 border-b border-gray-200">
+            <button
+              className={`pb-3 px-2 font-bold text-lg transition-all relative flex items-center gap-2 ${
+                activeTab === 'upcoming' ? 'text-ya-yellow-600' : 'text-gray-500 hover:text-gray-700'
+              }`}
+              onClick={() => setActiveTab('upcoming')}
+            >
+              <Clock className="w-5 h-5" />
+              今後の予定
+              <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs ml-1">
+                {filteredBookings.upcoming.length}
+              </span>
+              {activeTab === 'upcoming' && (
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-ya-yellow-500 rounded-t-full" />
+              )}
+            </button>
+            <button
+              className={`pb-3 px-2 font-bold text-lg transition-all relative flex items-center gap-2 ${
+                activeTab === 'history' ? 'text-ya-yellow-600' : 'text-gray-500 hover:text-gray-700'
+              }`}
+              onClick={() => setActiveTab('history')}
+            >
+              <History className="w-5 h-5" />
+              過去の履歴
+              <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs ml-1">
+                {filteredBookings.history.length}
+              </span>
+              {activeTab === 'history' && (
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-ya-yellow-500 rounded-t-full" />
+              )}
+            </button>
+          </div>
+        )}
+
+        {/* 検索結果 / 全予約 */}
+        <div>
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ya-yellow-600 mx-auto"></div>
+              <p className="mt-4 text-gray-600">読み込み中...</p>
+            </div>
+          ) : bookings.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-md p-12 text-center">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Plane className="w-8 h-8 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                {searched ? '予約が見つかりません' : '予約履歴がありません'}
+              </h3>
+              <p className="text-gray-600 mb-6">
+                {searched 
+                  ? '予約番号が正しいか確認してください' 
+                  : 'まだフライトの予約がありません'}
+              </p>
+              {searched ? (
+                <button
+                  onClick={() => {
+                    setSearched(false)
+                    setSearchQuery('')
+                    loadAllBookings()
+                  }}
+                  className="px-6 py-2 text-ya-yellow-600 hover:bg-ya-yellow-50 rounded-lg transition-colors"
+                >
+                  すべての予約を表示
+                </button>
+              ) : (
+                <Link
+                  href="/jp/"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-ya-yellow-500 text-black font-medium rounded-lg hover:bg-ya-yellow-600 transition-colors"
+                >
+                  <span>今すぐ予約</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* 検索状態なら全結果を表示、それ以外は現在のタブの結果を表示 */}
+              {(searched ? bookings : currentList).length === 0 ? (
+                <div className="bg-white rounded-lg p-12 text-center border-2 border-dashed border-gray-200">
+                  <div className="text-gray-500 text-lg">
+                    {activeTab === 'upcoming' ? '今後の予定はありません' : '過去の履歴はありません'}
+                  </div>
+                </div>
+              ) : (
+                (searched ? bookings : currentList).map((booking) => (
+                <div key={booking.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <div className="text-sm text-gray-600 mb-1">予約番号</div>
+                        <div className="text-xl font-bold text-gray-900">{booking.bookingNumber}</div>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(booking.status)}`}>
+                        {getStatusText(booking.status)}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+                      {/* フライト情報 */}
+                      <div className="flex items-start gap-3">
+                        <Plane className="w-5 h-5 text-gray-400 mt-1" />
+                        <div>
+                          <div className="text-sm text-gray-600 mb-1">フライト</div>
+                          <div className="font-medium text-gray-900">
+                            {booking.flight.flightNumber}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {booking.flight.fromCity} → {booking.flight.toCity}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 日時 */}
+                      <div className="flex items-start gap-3">
+                        <Calendar className="w-5 h-5 text-gray-400 mt-1" />
+                        <div>
+                          <div className="text-sm text-gray-600 mb-1">出発時刻</div>
+                          <div className="font-medium text-gray-900">
+                            {formatDate(booking.flightDate)}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {formatTime(booking.flight.departureTime)}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 乗客情報 */}
+                      <div>
+                        <div className="text-sm text-gray-600 mb-1">乗客</div>
+                        <div className="font-medium text-gray-900">
+                          {booking.passengerName}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {booking.cabinClass === 'ECONOMY' && 'エコノミー'}
+                          {booking.cabinClass === 'PREMIUM_ECONOMY' && 'プレミアムエコノミー'}
+                          {booking.cabinClass === 'BUSINESS' && 'ビジネス'}
+                          {booking.cabinClass === 'FIRST_CLASS' && 'ファースト'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                      <div>
+                        <div className="text-sm text-gray-600 mb-1">合計</div>
+                        <div className="text-xl font-bold text-gray-900">
+                          HKD {booking.totalPrice.toLocaleString()}
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        {booking.status === 'CONFIRMED' && activeTab === 'upcoming' && (
+                          <Link 
+                            href={`/jp/check-in?bookingNumber=${booking.bookingNumber}&email=${booking.passengerEmail}`}
+                            className="px-4 py-2 bg-ya-yellow-500 text-black font-medium rounded-lg hover:bg-ya-yellow-600 transition-colors"
+                          >
+                            チェックイン
+                          </Link>
+                        )}
+                        {booking.checkedIn && (
+                          <Link
+                            href={`/jp/boarding-pass/${booking.id}`}
+                            target="_blank"
+                            className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+                          >
+                            <Download className="w-4 h-4" />
+                            <span>搭乗券を表示</span>
+                          </Link>
+                        )}
+                        <Link
+                          href={`/jp/bookings/${booking.id}`}
+                          className="px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
+                        >
+                          <span>詳細を見る</span>
+                          <ChevronRight className="w-4 h-4" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:api": "cd backend && npm run dev",
     "build": "next build",
+    "build:api": "cd backend && npm run build",
     "start": "next start",
+    "start:api": "cd backend && npm run start",
     "lint": "eslint",
-    "postinstall": "prisma generate",
+    "postinstall": "node -e \"if (require('fs').existsSync('prisma/schema.prisma')) { require('child_process').execSync('npx prisma generate', {stdio: 'inherit'}) }\"",
     "db:seed": "tsx prisma/seed.ts"
   },
   "prisma": {

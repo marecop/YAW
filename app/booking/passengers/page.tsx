@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import Link from 'next/link'
 import { User, Plus, Trash2, Users, CreditCard } from 'lucide-react'
@@ -21,7 +20,6 @@ interface Passenger {
 function PassengersPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
   const { formatPrice } = useCurrency()
 
   const flightId = searchParams.get('flightId')

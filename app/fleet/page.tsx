@@ -1,12 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { Plane, Users, Gauge, Calendar } from 'lucide-react'
 
 export default function FleetPage() {
-  const { t } = useLanguage()
-
+  
   const fleetData = [
     {
       id: 1,

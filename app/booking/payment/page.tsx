@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { checkAndUpdateDBVersion } from '@/lib/dbVersion'
@@ -12,7 +11,6 @@ import { CreditCard, Lock, CheckCircle2, Plane } from 'lucide-react'
 function PaymentPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
   const { formatPrice } = useCurrency()
   const { user } = useAuth()
 

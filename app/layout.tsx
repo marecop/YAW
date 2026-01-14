@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Yellow Airlines - 黄色航空",
@@ -25,15 +25,15 @@ export default function RootLayout({
     <html lang="zh-HK">
       <body className="antialiased">
         <AuthProvider>
-          <LanguageProvider>
-            <CurrencyProvider>
-              <div className="flex flex-col min-h-screen">
-                <Header />
-                <main className="flex-1">{children}</main>
+          <CurrencyProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Suspense fallback={null}>
                 <Footer />
-              </div>
-            </CurrencyProvider>
-          </LanguageProvider>
+              </Suspense>
+            </div>
+          </CurrencyProvider>
         </AuthProvider>
       </body>
     </html>

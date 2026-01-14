@@ -4,12 +4,10 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Search, Calendar, Plane, ChevronRight, Download, Clock, History } from 'lucide-react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function BookingsPage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const { user, isAuthenticated, isLoading: authLoading } = useAuth()
   const [searchQuery, setSearchQuery] = useState('')
   const [bookings, setBookings] = useState<any[]>([])
@@ -146,7 +144,7 @@ export default function BookingsPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 标题 */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('booking.myBookings')}</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">我的預訂</h1>
           <p className="text-gray-600">查看和管理您的航班預訂</p>
         </div>
 

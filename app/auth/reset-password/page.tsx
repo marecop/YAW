@@ -3,13 +3,11 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { Lock, CheckCircle, XCircle } from 'lucide-react'
 
 function ResetPasswordContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
   
   const [token, setToken] = useState('')
   const [password, setPassword] = useState('')

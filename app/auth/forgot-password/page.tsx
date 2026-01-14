@@ -2,11 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { Mail, ArrowLeft, CheckCircle } from 'lucide-react'
 
 export default function ForgotPasswordPage() {
-  const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)

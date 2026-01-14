@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Link from 'next/link'
 import { ArrowLeft, Check, Loader2 } from 'lucide-react'
 
 export default function SpecialMealPage() {
   const router = useRouter()
-  const { t } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     passengerName: '',
@@ -27,20 +25,20 @@ export default function SpecialMealPage() {
   const [bookingFound, setBookingFound] = useState(false)
 
   const mealTypes = [
-    { value: 'VEGETARIAN', label: t('specialAssistance.specialMeal.types.vegetarian') },
-    { value: 'VEGAN', label: t('specialAssistance.specialMeal.types.vegan') },
-    { value: 'HALAL', label: t('specialAssistance.specialMeal.types.halal') },
-    { value: 'KOSHER', label: t('specialAssistance.specialMeal.types.kosher') },
-    { value: 'GLUTEN_FREE', label: t('specialAssistance.specialMeal.types.glutenFree') },
-    { value: 'DIABETIC', label: t('specialAssistance.specialMeal.types.diabetic') },
-    { value: 'LOW_SODIUM', label: t('specialAssistance.specialMeal.types.lowSodium') },
-    { value: 'CHILD_MEAL', label: t('specialAssistance.specialMeal.types.childMeal') },
-    { value: 'INFANT_MEAL', label: t('specialAssistance.specialMeal.types.infantMeal') },
+    { value: 'VEGETARIAN', label: '素食' },
+    { value: 'VEGAN', label: '純素' },
+    { value: 'HALAL', label: '清真' },
+    { value: 'KOSHER', label: '猶太潔食' },
+    { value: 'GLUTEN_FREE', label: '無麩質' },
+    { value: 'DIABETIC', label: '糖尿病餐' },
+    { value: 'LOW_SODIUM', label: '低鹽' },
+    { value: 'CHILD_MEAL', label: '兒童餐' },
+    { value: 'INFANT_MEAL', label: '嬰兒餐' },
   ]
 
   const handleBookingLookup = async () => {
     if (!bookingLookupNumber) {
-      alert(t('specialAssistance.form.pleaseEnterBookingNumber'))
+      alert('請輸入預訂編號')
       return
     }
 
@@ -65,11 +63,11 @@ export default function SpecialMealPage() {
         setBookingFound(true)
         console.log('✅ 預訂信息已自動填充')
       } else {
-        alert(t('specialAssistance.form.bookingNotFound'))
+        alert('找不到該預訂')
       }
     } catch (error) {
       console.error('Error looking up booking:', error)
-      alert(t('specialAssistance.form.bookingLookupFailed'))
+      alert('查詢預訂失敗，請稍後重試')
     } finally {
       setLookingUpBooking(false)
     }
@@ -79,7 +77,7 @@ export default function SpecialMealPage() {
     e.preventDefault()
     
     if (!bookingFound) {
-      alert(t('specialAssistance.form.pleaseSearchBookingFirst'))
+      alert('請先查詢預訂')
       return
     }
     
@@ -110,14 +108,14 @@ export default function SpecialMealPage() {
 
       if (response.ok) {
         const data = await response.json()
-        alert(`✅ ${t('specialAssistance.requestSubmitted')}\n\n${t('specialAssistance.requestNumber')}: ${data.requestNumber}`)
+        alert(`✅ 申請已提交\n\n申請編號: ${data.requestNumber}`)
         router.push('/special-assistance')
       } else {
-        alert(t('specialAssistance.requestFailed'))
+        alert('申請提交失敗，請重試')
       }
     } catch (error) {
       console.error('Error submitting request:', error)
-      alert(t('specialAssistance.requestFailed'))
+      alert('申請提交失敗，請重試')
     } finally {
       setIsSubmitting(false)
     }
@@ -132,7 +130,7 @@ export default function SpecialMealPage() {
           className="inline-flex items-center text-ya-yellow-600 hover:text-ya-yellow-700 mb-6"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('specialAssistance.backToServices')}
+          返回服務列表
         </Link>
 
         {/* Header */}
@@ -142,34 +140,34 @@ export default function SpecialMealPage() {
               <span className="text-2xl">🍽️</span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900">
-              {t('specialAssistance.specialMeal.title')}
+              特殊餐食
             </h1>
           </div>
           <p className="text-gray-600">
-            {t('specialAssistance.specialMeal.longDescription')}
+            為您提供符合宗教、健康或飲食習慣的特殊餐食，請提前申請。
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            {t('specialAssistance.applicationForm')}
+            申請表格
           </h2>
 
           {/* Booking Number Lookup */}
           <div className="mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.form.bookingNumberLookup')} *
+              預訂編號查詢 *
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              {t('specialAssistance.form.bookingNumberLookupDesc')}
+              輸入您的預訂編號以自動填入航班與乘客資料。
             </p>
             <div className="flex gap-4">
               <input
                 type="text"
                 value={bookingLookupNumber}
                 onChange={(e) => setBookingLookupNumber(e.target.value.toUpperCase())}
-                placeholder={t('specialAssistance.form.enterBookingNumber')}
+                placeholder="輸入預訂編號"
                 disabled={bookingFound}
                 className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent disabled:bg-gray-100"
               />
@@ -182,15 +180,15 @@ export default function SpecialMealPage() {
                 {lookingUpBooking ? (
                   <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    {t('specialAssistance.form.searching')}
+                    查詢中...
                   </>
                 ) : bookingFound ? (
                   <>
                     <Check className="w-5 h-5 mr-2" />
-                    {t('specialAssistance.form.found')}
+                    已找到
                   </>
                 ) : (
-                  t('specialAssistance.form.search')
+                  '查詢'
                 )}
               </button>
             </div>
@@ -199,12 +197,12 @@ export default function SpecialMealPage() {
           {/* Passenger Information */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.passengerInfo')}
+              乘客資料
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.passengerName')} *
+                  乘客姓名 *
                 </label>
                 <input
                   type="text"
@@ -217,7 +215,7 @@ export default function SpecialMealPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.email')} *
+                  電郵 *
                 </label>
                 <input
                   type="email"
@@ -230,7 +228,7 @@ export default function SpecialMealPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('specialAssistance.form.phone')} *
+                  電話 *
                 </label>
                 <input
                   type="tel"
@@ -248,12 +246,12 @@ export default function SpecialMealPage() {
             <div className="mb-8 p-6 bg-green-50 border-2 border-green-200 rounded-xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Check className="w-5 h-5 mr-2 text-green-600" />
-                {t('specialAssistance.flightInfo')}
+                航班資料（選填）
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.bookingNumber')}
+                    預訂編號
                   </label>
                   <input
                     type="text"
@@ -264,7 +262,7 @@ export default function SpecialMealPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.flightNumber')}
+                    航班號
                   </label>
                   <input
                     type="text"
@@ -275,7 +273,7 @@ export default function SpecialMealPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('specialAssistance.form.flightDate')}
+                    航班日期
                   </label>
                   <input
                     type="date"
@@ -291,12 +289,12 @@ export default function SpecialMealPage() {
           {/* Special Meal Details */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {t('specialAssistance.specialMeal.mealDetails')}
+              {'specialAssistance.specialMeal.mealDetails'}
             </h3>
             
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.specialMeal.mealType')} *
+                {'specialAssistance.specialMeal.mealType'} *
               </label>
               <select
                 required
@@ -304,7 +302,7 @@ export default function SpecialMealPage() {
                 onChange={(e) => setFormData({ ...formData, mealType: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
               >
-                <option value="">{t('specialAssistance.form.selectOption')}</option>
+                <option value="">{'specialAssistance.form.selectOption'}</option>
                 {mealTypes.map((type) => (
                   <option key={type.value} value={type.value}>
                     {type.label}
@@ -315,33 +313,33 @@ export default function SpecialMealPage() {
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.specialMeal.dietaryRestrictions')}
+                {'specialAssistance.specialMeal.dietaryRestrictions'}
               </label>
               <textarea
                 value={formData.dietaryRestrictions}
                 onChange={(e) => setFormData({ ...formData, dietaryRestrictions: e.target.value })}
                 rows={3}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
-                placeholder={t('specialAssistance.specialMeal.dietaryRestrictionsPlaceholder')}
+                placeholder={'specialAssistance.specialMeal.dietaryRestrictionsPlaceholder'}
               />
             </div>
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.specialMeal.allergies')}
+                {'specialAssistance.specialMeal.allergies'}
               </label>
               <textarea
                 value={formData.allergies}
                 onChange={(e) => setFormData({ ...formData, allergies: e.target.value })}
                 rows={3}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ya-yellow-500 focus:border-transparent"
-                placeholder={t('specialAssistance.specialMeal.allergiesPlaceholder')}
+                placeholder={'specialAssistance.specialMeal.allergiesPlaceholder'}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('specialAssistance.form.additionalNotes')}
+                {'specialAssistance.form.additionalNotest('}
               </label>
               <textarea
                 value={formData.additionalNotes}
@@ -355,7 +353,7 @@ export default function SpecialMealPage() {
           {/* Submit Button */}
           <div className="flex items-center justify-between pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-500">
-              * {t('specialAssistance.form.requiredFields')}
+              * {')specialAssistance.form.requiredFields'}
             </p>
             <button
               type="submit"
@@ -365,12 +363,12 @@ export default function SpecialMealPage() {
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  {t('specialAssistance.form.submitting')}
+                  {'specialAssistance.form.submitting'}
                 </>
               ) : (
                 <>
                   <Check className="w-5 h-5 mr-2" />
-                  {t('specialAssistance.form.submit')}
+                  {'specialAssistance.form.submit'}
                 </>
               )}
             </button>

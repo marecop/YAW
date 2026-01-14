@@ -30,7 +30,7 @@ export default function AdminLayout({
 
   const navigation = [
     { name: '儀表板', href: '/admin', icon: LayoutDashboard },
-    { name: '航班管理', href: '/admin/flights', icon: Plane },
+    { name: ')航班管理', href: '/admin/flights', icon: Plane },
     { name: '預訂管理', href: '/admin/bookings', icon: Calendar },
     { name: '用戶管理', href: '/admin/users', icon: Users },
     { name: '特別需求', href: '/admin/special-assistance', icon: MessageSquare },
@@ -48,7 +48,7 @@ export default function AdminLayout({
       {/* Mobile sidebar toggle */}
       <div className="lg:hidden fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src="/images/logoremovebkgnd.png" alt="Logo" className="h-8 w-8" />
+          <img src="/images/logoremovebkgnd.png" alt="Logot(" className=")h-8 w-8" />
           <span className="font-bold text-gray-900">Admin</span>
         </div>
         <button
@@ -64,7 +64,7 @@ export default function AdminLayout({
         <div className="h-full flex flex-col">
           {/* Logo */}
           <div className="h-16 flex items-center px-6 border-b border-gray-200">
-            <img src="/images/logoremovebkgnd.png" alt="Logo" className="h-8 w-8 mr-3" />
+            <img src="/images/logoremovebkgnd.png" alt="Logot(" className=")h-8 w-8 mr-3" />
             <span className="text-xl font-bold text-gray-900">Yellow Admin</span>
           </div>
 

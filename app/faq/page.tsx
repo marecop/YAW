@@ -1,11 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function FAQPage() {
-  const { t } = useLanguage()
-
+  
   const faqCategories = [
     {
       id: 'booking',
@@ -30,8 +28,8 @@ export default function FAQPage() {
       ]
     },
     {
-      id: 'baggage',
-      title: '行李規定',
+      id: 'baggaget(',
+      title: ')行李規定',
       questions: [
         {
           question: '不同機票類型的行李限額是多少？',

@@ -3,13 +3,11 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 
 function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLanguage()
   const { login, isAuthenticated, isLoading: authLoading } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -49,11 +47,11 @@ function LoginForm() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{t('auth.loginTitle')}</h2>
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">登入</h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          {t('auth.orRegister')}{' '}
+          還未有帳戶？{' '}
           <Link href="/auth/register" className="font-medium text-ya-yellow-600 hover:text-ya-yellow-500">
-            {t('auth.registerNewAccount')}
+            註冊新帳戶
           </Link>
         </p>
       </div>
@@ -69,7 +67,7 @@ function LoginForm() {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                {t('auth.email')}
+                電郵
               </label>
               <div className="mt-1">
                 <input
@@ -88,7 +86,7 @@ function LoginForm() {
             <div>
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  {t('auth.password')}
+                  密碼
                 </label>
               </div>
               <div className="mt-1">
@@ -114,13 +112,13 @@ function LoginForm() {
                   className="h-4 w-4 text-ya-yellow-600 focus:ring-ya-yellow-500 border-gray-300 rounded"
                 />
                 <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                  {t('auth.rememberMe')}
+                  記住我
                 </label>
               </div>
 
               <div className="text-sm">
                 <a href="/auth/forgot-password" className="font-medium text-ya-yellow-600 hover:text-ya-yellow-500">
-                  {t('auth.forgotPassword')}
+                  忘記密碼？
                 </a>
               </div>
             </div>
@@ -137,18 +135,18 @@ function LoginForm() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    {t('auth.processing')}
+                    處理中...
                   </>
-                ) : t('auth.login')}
+                ) : '登入'}
               </button>
             </div>
           </form>
 
           {/* Demo Credentials */}
           <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm font-medium text-blue-900 mb-2">{t('auth.demoAccount')}</p>
-            <p className="text-xs text-blue-700">{t('auth.email')}: john@example.com</p>
-            <p className="text-xs text-blue-700">{t('auth.password')}: password123</p>
+            <p className="text-sm font-medium text-blue-900 mb-2">示範帳戶</p>
+            <p className="text-xs text-blue-700">電郵: john@example.com</p>
+            <p className="text-xs text-blue-700">密碼: password123</p>
           </div>
         </div>
       </div>

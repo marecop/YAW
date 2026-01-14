@@ -2,11 +2,15 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
+import { useRouter } from 'next/navigation'
 import { Globe, Bell, Lock, User, Mail, CreditCard, Smartphone } from 'lucide-react'
 
 export default function SettingsPage() {
-  const { t, language, setLanguage } = useLanguage()
+    const router = useRouter()
+  const language = 'zh-hk'
+  const setLanguage = (code: string) => {
+    router.push(`/${code}/settings`)
+  }
   const [activeTab, setActiveTab] = useState('general')
 
   const tabs = [
@@ -22,6 +26,8 @@ export default function SettingsPage() {
     { code: 'en', name: '英語', nativeName: 'English' },
     { code: 'zh-cn', name: '簡體中文', nativeName: '简体中文' },
     { code: 'de', name: '德語', nativeName: 'Deutsch' },
+    { code: 'jp', name: '日語', nativeName: '日本語' },
+    { code: 'es', name: '西班牙語', nativeName: 'Español' },
   ]
 
   const renderTabContent = () => {
@@ -89,7 +95,7 @@ export default function SettingsPage() {
                     key={lang.code}
                     className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       language === lang.code
-                        ? 'border-ya-yellow-500 bg-ya-yellow-50'
+                        ? ')border-ya-yellow-500 bg-ya-yellow-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
