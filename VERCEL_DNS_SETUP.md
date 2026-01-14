@@ -79,15 +79,20 @@ TTL: 3600 (或自动)
 在 Vercel 项目设置中添加环境变量：
 
 1. 进入项目 **Settings** → **Environment Variables**
-2. 添加以下变量：
+2. 点击 **Add New** 添加环境变量
+3. 添加以下变量：
 
-```
-API_BASE_URL=http://98.159.109.110:3001
-```
+**变量名**：`API_BASE_URL`  
+**值**：`http://98.159.109.110:3001`  
+**环境**：选择 `Production`, `Preview`, `Development`（全选）
+
+点击 **Save** 保存
 
 **重要提示**：
+- 变量名必须是 `API_BASE_URL`（不是 `NEXT_PUBLIC_API_BASE_URL`）
 - 如果你的后端也配置了域名（例如：`api.yellowairlines.com`），应该使用域名而不是 IP
 - 如果使用 HTTPS，确保后端也支持 HTTPS，否则会有混合内容警告
+- 添加环境变量后，需要重新部署项目才能生效
 
 ## 步骤 6：重新部署（如果需要）
 
