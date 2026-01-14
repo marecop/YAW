@@ -66,28 +66,33 @@ export async function POST(request: NextRequest) {
     const flight = await prisma.flight.create({
       data: {
         flightNumber: body.flightNumber,
-        airline: body.airline,
-        airlineCode: body.airlineCode,
+        airline: body.airline || 'Yellow Airlines',
+        airlineCode: body.airlineCode || 'YA',
+        airlineLogo: body.airlineLogo || null,
         from: body.from,
         fromCity: body.fromCity,
+        fromAirport: body.fromAirport || body.fromCity + ' Airport', // 必需字段
         to: body.to,
         toCity: body.toCity,
+        toAirport: body.toAirport || body.toCity + ' Airport', // 必需字段
         departureTime: body.departureTime,
         arrivalTime: body.arrivalTime,
-        duration: body.duration, // Should be calculated or provided
+        duration: body.duration || '0h 0m', // Should be calculated or provided
         aircraft: body.aircraft,
+        status: body.status || 'SCHEDULED',
         economyPrice: parseFloat(body.economyPrice),
+        premiumEconomyPrice: parseFloat(body.premiumEconomyPrice || 0),
         businessPrice: parseFloat(body.businessPrice),
         firstClassPrice: parseFloat(body.firstClassPrice),
         economySeats: parseInt(body.economySeats),
+        premiumEconomySeats: parseInt(body.premiumEconomySeats || 0),
         businessSeats: parseInt(body.businessSeats),
         firstClassSeats: parseInt(body.firstClassSeats),
         operatingDays: body.operatingDays || '1234567',
-        hasEconomy: true,
-        hasBusiness: true,
-        hasFirstClass: true,
-        hasPremiumEconomy: true,
-        // Add defaults for other fields if necessary
+        hasEconomy: body.hasEconomy !== undefined ? body.hasEconomy : true,
+        hasBusiness: body.hasBusiness !== undefined ? body.hasBusiness : true,
+        hasFirstClass: body.hasFirstClass !== undefined ? body.hasFirstClass : true,
+        hasPremiumEconomy: body.hasPremiumEconomy !== undefined ? body.hasPremiumEconomy : false,
       }
     })
     return NextResponse.json(flight)
