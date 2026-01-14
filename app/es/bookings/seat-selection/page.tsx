@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeft, User, Info } from 'lucide-react'
 
@@ -19,7 +19,7 @@ interface Passenger {
   seat?: string
 }
 
-export default function SeatSelectionPage() {
+function SeatSelectionContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const bookingId = searchParams.get('bookingId')
@@ -249,5 +249,20 @@ export default function SeatSelectionPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SeatSelectionPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-ya-yellow-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Cargando...</p>
+        </div>
+      </div>
+    }>
+      <SeatSelectionContent />
+    </Suspense>
   )
 }
