@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Wheelchair, Eye } from 'lucide-react'
+import { Eye } from 'lucide-react'
 
 export default function AdminSpecialAssistancePage() {
   const [requests, setRequests] = useState<any[]>([])
