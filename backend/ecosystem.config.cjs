@@ -1,27 +1,37 @@
 module.exports = {
-  apps: [{
-    name: 'yellow-airlines-api',
-    script: 'node_modules/.bin/next',
-    args: 'start',
-    cwd: process.cwd(),
-    instances: 1,
-    exec_mode: 'fork',
-    // 限制 Node.js 堆內存為 512MB（避免 OOM）
-    node_args: '--max-old-space-size=512',
-    env: {
-      NODE_ENV: 'production',
-      PORT: 3001
+  apps: [
+    {
+      name: 'yellow-airlines-api',
+
+      // ⚠️ 关键：直接指向 next 的 Node 入口
+      script: 'node_modules/next/dist/bin/next',
+      args: 'start -p 3001',
+
+      cwd: process.cwd(),
+
+      instances: 1,
+      exec_mode: 'fork',
+
+      // 强制限制 V8 堆
+      node_args: '--max-old-space-size=512',
+
+      env: {
+        NODE_ENV: 'production',
+      },
+
+      // 日志
+      error_file: './logs/error.log',
+      out_file: './logs/out.log',
+      merge_logs: true,
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+
+      // 重启策略（防 OOM 连锁反应）
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '700M',
+
+      min_uptime: '30s',
+      max_restarts: 3,
     },
-    error_file: './logs/error.log',
-    out_file: './logs/out.log',
-    log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
-    merge_logs: true,
-    autorestart: true,
-    watch: false,
-    // PM2 內存監控：當進程超過 700MB 時重啟（給 Node.js 堆內存 512MB + 其他開銷留餘地）
-    max_memory_restart: '700M',
-    // 如果服务崩溃，等待 10 秒后重启
-    min_uptime: '10s',
-    max_restarts: 10
-  }]
+  ],
 }
