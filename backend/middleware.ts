@@ -5,16 +5,26 @@ export function middleware(request: NextRequest) {
   // 允許的前端域名（從環境變數讀取，或使用默認值）
   const allowedOrigins = process.env.FRONTEND_URL 
     ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
-    : ['http://localhost:3000', 'https://*.vercel.app']
+    : [
+        'http://localhost:3000',
+        'https://*.vercel.app',
+        /^https:\/\/.*\.vercel\.app$/,
+        /^https:\/\/.*\.vercel\.dns$/,
+      ]
 
   const origin = request.headers.get('origin')
   const isAllowedOrigin = origin && (
     allowedOrigins.some(allowed => {
-      if (allowed.includes('*')) {
-        const pattern = allowed.replace('*', '.*')
-        return new RegExp(`^${pattern}$`).test(origin)
+      if (typeof allowed === 'string') {
+        if (allowed.includes('*')) {
+          const pattern = allowed.replace(/\*/g, '.*')
+          return new RegExp(`^${pattern}$`).test(origin)
+        }
+        return origin === allowed
+      } else if (allowed instanceof RegExp) {
+        return allowed.test(origin)
       }
-      return origin === allowed
+      return false
     })
   )
 
