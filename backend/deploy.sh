@@ -49,9 +49,12 @@ fi
 echo "🗄️  运行数据库迁移..."
 npx prisma migrate deploy || echo "⚠️  数据库迁移失败或不需要迁移"
 
-# 构建项目
+# 构建项目（TypeScript 編譯）
 echo "🏗️  构建项目..."
 npm run build
+
+# 確保 logs 目錄存在
+mkdir -p logs
 
 # 检查 PM2
 if command -v pm2 &> /dev/null; then

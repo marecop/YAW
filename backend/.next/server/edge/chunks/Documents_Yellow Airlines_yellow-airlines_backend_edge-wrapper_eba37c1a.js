@@ -1,0 +1,3 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["chunks/Documents_Yellow Airlines_yellow-airlines_backend_edge-wrapper_eba37c1a.js",25636,(e,l,n)=>{self._ENTRIES||={};let t=Promise.resolve().then(()=>e.i(26366));t.catch(()=>{}),self._ENTRIES.middleware_middleware=new Proxy(t,{get(e,l){if("then"===l)return(l,n)=>e.then(l,n);let n=(...n)=>e.then(e=>(0,e[l])(...n));return n.then=(n,t)=>e.then(e=>e[l]).then(n,t),n}})}]);
+
+//# sourceMappingURL=Documents_Yellow%20Airlines_yellow-airlines_backend_edge-wrapper_eba37c1a.js.map

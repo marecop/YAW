@@ -3,23 +3,23 @@ module.exports = {
     {
       name: 'yellow-airlines-api',
 
-      // ⚠️ 关键：直接指向 next 的 Node 入口
-      script: 'node_modules/next/dist/bin/next',
-      args: 'start -p 3001',
+      // 使用編譯後的 Express 服務器
+      script: 'dist/server.js',
 
       cwd: process.cwd(),
 
       instances: 1,
       exec_mode: 'fork',
 
-      // 强制限制 V8 堆
+      // 强制限制 V8 堆內存為 512MB
       node_args: '--max-old-space-size=512',
 
       env: {
         NODE_ENV: 'production',
+        PORT: 3001,
       },
 
-      // 日志
+      // 日志 
       error_file: './logs/error.log',
       out_file: './logs/out.log',
       merge_logs: true,

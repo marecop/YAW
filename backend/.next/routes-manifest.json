@@ -1,0 +1,309 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/boarding-pass/[id]",
+      "regex": "^/api/boarding\\-pass/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/boarding\\-pass/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/bookings/[id]",
+      "regex": "^/api/bookings/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/bookings/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/flight-status/[id]",
+      "regex": "^/api/flight\\-status/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/flight\\-status/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/flights/[id]",
+      "regex": "^/api/flights/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/flights/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/notifications/[id]/read",
+      "regex": "^/api/notifications/([^/]+?)/read(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/notifications/(?<nxtPid>[^/]+?)/read(?:/)?$"
+    },
+    {
+      "page": "/api/special-assistance/[id]/status",
+      "regex": "^/api/special\\-assistance/([^/]+?)/status(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/special\\-assistance/(?<nxtPid>[^/]+?)/status(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/admin/bookings",
+      "regex": "^/api/admin/bookings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/bookings(?:/)?$"
+    },
+    {
+      "page": "/api/admin/flights",
+      "regex": "^/api/admin/flights(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/flights(?:/)?$"
+    },
+    {
+      "page": "/api/admin/notifications",
+      "regex": "^/api/admin/notifications(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/notifications(?:/)?$"
+    },
+    {
+      "page": "/api/admin/stats",
+      "regex": "^/api/admin/stats(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/stats(?:/)?$"
+    },
+    {
+      "page": "/api/admin/users",
+      "regex": "^/api/admin/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/users(?:/)?$"
+    },
+    {
+      "page": "/api/auth/forgot-password",
+      "regex": "^/api/auth/forgot\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/forgot\\-password(?:/)?$"
+    },
+    {
+      "page": "/api/auth/login",
+      "regex": "^/api/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/login(?:/)?$"
+    },
+    {
+      "page": "/api/auth/me",
+      "regex": "^/api/auth/me(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/me(?:/)?$"
+    },
+    {
+      "page": "/api/auth/register",
+      "regex": "^/api/auth/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/register(?:/)?$"
+    },
+    {
+      "page": "/api/auth/reset-password",
+      "regex": "^/api/auth/reset\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/reset\\-password(?:/)?$"
+    },
+    {
+      "page": "/api/auth/send-verification",
+      "regex": "^/api/auth/send\\-verification(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/send\\-verification(?:/)?$"
+    },
+    {
+      "page": "/api/auth/verify-email",
+      "regex": "^/api/auth/verify\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/verify\\-email(?:/)?$"
+    },
+    {
+      "page": "/api/auth/verify-reset-token",
+      "regex": "^/api/auth/verify\\-reset\\-token(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/verify\\-reset\\-token(?:/)?$"
+    },
+    {
+      "page": "/api/bookings",
+      "regex": "^/api/bookings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/bookings(?:/)?$"
+    },
+    {
+      "page": "/api/bookings/lookup",
+      "regex": "^/api/bookings/lookup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/bookings/lookup(?:/)?$"
+    },
+    {
+      "page": "/api/check-in",
+      "regex": "^/api/check\\-in(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/check\\-in(?:/)?$"
+    },
+    {
+      "page": "/api/check-in/search",
+      "regex": "^/api/check\\-in/search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/check\\-in/search(?:/)?$"
+    },
+    {
+      "page": "/api/cron/process-points",
+      "regex": "^/api/cron/process\\-points(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cron/process\\-points(?:/)?$"
+    },
+    {
+      "page": "/api/flight-status",
+      "regex": "^/api/flight\\-status(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flight\\-status(?:/)?$"
+    },
+    {
+      "page": "/api/flights",
+      "regex": "^/api/flights(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flights(?:/)?$"
+    },
+    {
+      "page": "/api/flights/connections",
+      "regex": "^/api/flights/connections(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flights/connections(?:/)?$"
+    },
+    {
+      "page": "/api/flights/lookup",
+      "regex": "^/api/flights/lookup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flights/lookup(?:/)?$"
+    },
+    {
+      "page": "/api/flights/roundtrip",
+      "regex": "^/api/flights/roundtrip(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flights/roundtrip(?:/)?$"
+    },
+    {
+      "page": "/api/flights/search",
+      "regex": "^/api/flights/search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flights/search(?:/)?$"
+    },
+    {
+      "page": "/api/immigration/check",
+      "regex": "^/api/immigration/check(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/immigration/check(?:/)?$"
+    },
+    {
+      "page": "/api/immigration/countries",
+      "regex": "^/api/immigration/countries(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/immigration/countries(?:/)?$"
+    },
+    {
+      "page": "/api/notifications",
+      "regex": "^/api/notifications(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/notifications(?:/)?$"
+    },
+    {
+      "page": "/api/notifications/mark-all-read",
+      "regex": "^/api/notifications/mark\\-all\\-read(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/notifications/mark\\-all\\-read(?:/)?$"
+    },
+    {
+      "page": "/api/rewards",
+      "regex": "^/api/rewards(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/rewards(?:/)?$"
+    },
+    {
+      "page": "/api/rewards/redeem",
+      "regex": "^/api/rewards/redeem(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/rewards/redeem(?:/)?$"
+    },
+    {
+      "page": "/api/send-booking-email",
+      "regex": "^/api/send\\-booking\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/send\\-booking\\-email(?:/)?$"
+    },
+    {
+      "page": "/api/special-assistance",
+      "regex": "^/api/special\\-assistance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/special\\-assistance(?:/)?$"
+    },
+    {
+      "page": "/api/test-email",
+      "regex": "^/api/test\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/test\\-email(?:/)?$"
+    },
+    {
+      "page": "/api/users/by-email",
+      "regex": "^/api/users/by\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/users/by\\-email(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

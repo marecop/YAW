@@ -1,0 +1,31 @@
+{
+  "sorted_middleware": [],
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge/chunks/Documents_Yellow Airlines_yellow-airlines_backend_a307d379._.js",
+        "server/edge/chunks/[root-of-the-server]__38608bfa._.js",
+        "server/edge/chunks/358b3_Yellow Airlines_yellow-airlines_backend_edge-wrapper_619c8385.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "matchers": [
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/:path*{(\\\\.json)}?",
+          "originalSource": "/api/:path*"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "Xt4jSctpZ7OxNdNAZRLczzKp9NNXcIO1R316fwpbFpk=",
+        "__NEXT_PREVIEW_MODE_ID": "7f6f7210c3c1359bdf6a164d1b71648d",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "23d74987966cf7b612117e50bf174a80cad9a4ef7266f9c1331e65270da6e22d",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "fe6e6f73cad8e914fa3666ee98e57fd734d110f7aa59a17d15bd9cd1059fcbe9"
+      }
+    }
+  },
+  "instrumentation": null,
+  "functions": {}
+}
