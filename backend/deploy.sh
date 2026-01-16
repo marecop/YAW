@@ -47,7 +47,12 @@ fi
 
 # 运行数据库迁移
 echo "🗄️  运行数据库迁移..."
-npx prisma migrate deploy || echo "⚠️  数据库迁移失败或不需要迁移"
+npx prisma migrate deploy || {
+    echo "⚠️  数据库迁移失败，尝试修复..."
+    # 如果 migrate deploy 失败，尝试创建并应用迁移
+    npx prisma migrate dev --name fix_schema --create-only 2>/dev/null || true
+    npx prisma migrate deploy || echo "⚠️  迁移失败，请手动检查数据库结构"
+}
 
 # 构建项目（TypeScript 編譯）
 echo "🏗️  构建项目..."
