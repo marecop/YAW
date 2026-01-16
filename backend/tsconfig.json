@@ -19,8 +19,20 @@
     }
   },
   "include": [
-    "**/*.ts"
+    "server.ts",
+    "routes/**/*.ts",
+    "middleware/**/*.ts",
+    "lib/**/*.ts",
+    "types/**/*.ts",
+    "prisma/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", "lib/dbVersion.ts", "lib/utils/auth.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib/dbVersion.ts",
+    "lib/utils/auth.ts",
+    "../middleware.ts",
+    "../next.config.ts"
+  ]
 }
 
