@@ -30,13 +30,42 @@ router.get('/users', async (req, res) => {
   }
 })
 
-// 獲取航班列表
+// 獲取航班列表（支持分頁和搜索）
 router.get('/flights', async (req, res) => {
   try {
-    const flights = await prisma.flight.findMany({
-      orderBy: { flightNumber: 'asc' }
+    const page = parseInt(req.query.page as string || '1')
+    const search = (req.query.search as string || '').trim()
+    const pageSize = 10
+
+    const where: any = {}
+    if (search) {
+      where.OR = [
+        { flightNumber: { contains: search } },
+        { from: { contains: search } },
+        { to: { contains: search } },
+        { fromCity: { contains: search } },
+        { toCity: { contains: search } }
+      ]
+    }
+
+    const [flights, total] = await Promise.all([
+      prisma.flight.findMany({
+        where,
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+        orderBy: { flightNumber: 'asc' }
+      }),
+      prisma.flight.count({ where })
+    ])
+
+    res.json({
+      flights,
+      pagination: {
+        total,
+        pages: Math.ceil(total / pageSize),
+        currentPage: page
+      }
     })
-    res.json(flights)
   } catch (error) {
     console.error('Error fetching flights:', error)
     res.status(500).json({ error: '獲取航班失敗' })
@@ -51,29 +80,55 @@ router.post('/flights', async (req, res) => {
       data: {
         flightNumber: data.flightNumber,
         airline: data.airline || 'Yellow Airlines',
+        airlineCode: data.airlineCode || 'YA',
+        airlineLogo: data.airlineLogo || null,
         from: data.from,
-        to: data.to,
         fromCity: data.fromCity || data.from,
+        fromAirport: data.fromAirport || (data.fromCity || data.from) + ' Airport',
+        to: data.to,
         toCity: data.toCity || data.to,
-        fromAirport: data.fromAirport || data.from,
-        toAirport: data.toAirport || data.to,
+        toAirport: data.toAirport || (data.toCity || data.to) + ' Airport',
         departureTime: data.departureTime,
         arrivalTime: data.arrivalTime,
-        duration: data.duration || 0,
-        economyPrice: data.economyPrice || 0,
-        businessPrice: data.businessPrice || 0,
-        firstClassPrice: data.firstClassPrice || 0,
-        operatingDays: data.operatingDays || '1234567',
-        economySeats: data.economySeats || 0,
-        businessSeats: data.businessSeats || 0,
-        firstClassSeats: data.firstClassSeats || 0,
+        duration: data.duration || '0h 0m',
         aircraft: data.aircraft || data.aircraftType || 'Boeing 737',
+        status: data.status || 'SCHEDULED',
+        economyPrice: parseFloat(data.economyPrice) || 0,
+        premiumEconomyPrice: parseFloat(data.premiumEconomyPrice || 0),
+        businessPrice: parseFloat(data.businessPrice) || 0,
+        firstClassPrice: parseFloat(data.firstClassPrice) || 0,
+        economySeats: parseInt(data.economySeats) || 0,
+        premiumEconomySeats: parseInt(data.premiumEconomySeats || 0),
+        businessSeats: parseInt(data.businessSeats) || 0,
+        firstClassSeats: parseInt(data.firstClassSeats) || 0,
+        operatingDays: data.operatingDays || '1234567',
+        hasEconomy: data.hasEconomy !== undefined ? data.hasEconomy : true,
+        hasBusiness: data.hasBusiness !== undefined ? data.hasBusiness : true,
+        hasFirstClass: data.hasFirstClass !== undefined ? data.hasFirstClass : true,
+        hasPremiumEconomy: data.hasPremiumEconomy !== undefined ? data.hasPremiumEconomy : false,
       }
     })
     res.status(201).json(flight)
   } catch (error) {
     console.error('Error creating flight:', error)
     res.status(500).json({ error: '創建航班失敗' })
+  }
+})
+
+// 刪除航班
+router.delete('/flights', async (req, res) => {
+  try {
+    const { id } = req.query
+
+    if (!id || typeof id !== 'string') {
+      return res.status(400).json({ error: 'ID is required' })
+    }
+
+    await prisma.flight.delete({ where: { id } })
+    res.json({ success: true })
+  } catch (error) {
+    console.error('Error deleting flight:', error)
+    res.status(500).json({ error: '刪除航班失敗' })
   }
 })
 
