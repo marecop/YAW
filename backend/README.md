@@ -1,38 +1,100 @@
-# Yellow Airlines Backend (API Only)
+# Yellow Airlines Backend API
 
-此目錄為 **後端 API 專案**（API-only Next.js），只提供 `/api/*`，不提供任何頁面渲染。
+純 Node.js + Express 後端 API 服務器，用於 Yellow Airlines 應用。
 
-## 本機啟動
+## 特性
+
+- ✅ 純 Node.js + Express（無 Next.js 開銷）
+- ✅ 內存優化（限制堆內存為 512MB）
+- ✅ TypeScript 支持
+- ✅ Prisma ORM
+- ✅ CORS 配置
+- ✅ Cookie 認證
+- ✅ JWT Token 支持
+
+## 快速開始
+
+### 安裝依賴
 
 ```bash
-cd backend
 npm install
-npx prisma generate
-PORT=3001 npm run dev
 ```
 
-## 需要的環境變數（範例）
+### 環境變數
+
+創建 `.env` 文件：
 
 ```env
-# Database
 DATABASE_URL="file:./prisma/dev.db"
-
-# JWT
-NEXTAUTH_SECRET="yellow-airlines-secret-key-change-in-production"
-
-# 用於寄信/連結（若有用到）
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key"
+NODE_ENV="production"
+PORT=3001
+FRONTEND_URL=https://your-vercel-domain.vercel.app
 ```
 
-## 生產部署（伺服器）
+### 開發模式
 
 ```bash
-cd backend
-npm install
-npx prisma generate
-npm run build
-PORT=3001 npm run start
+npm run dev
 ```
 
-> 建議用 PM2 / systemd 管理進程，並放在反向代理（Nginx）後方。
+服務器將在 `http://localhost:3001` 啟動。
 
+### 構建
+
+```bash
+npm run build
+```
+
+### 生產模式
+
+```bash
+npm start
+```
+
+## 使用 PM2 部署
+
+```bash
+# 使用部署腳本
+bash deploy.sh
+
+# 或手動部署
+npm run build
+pm2 start ecosystem.config.cjs
+pm2 save
+```
+
+## API 路由
+
+- `/api/auth/*` - 認證相關（登錄、註冊、忘記密碼等）
+- `/api/flights/*` - 航班查詢
+- `/api/flight-status/*` - 航班狀態
+- `/api/bookings/*` - 預訂管理
+- `/api/admin/*` - 管理員功能
+- `/api/notifications/*` - 通知
+- `/api/special-assistance/*` - 特殊協助
+- `/api/check-in/*` - 值機
+- `/api/rewards/*` - 積分獎勵
+- `/api/immigration/*` - 入境要求
+- `/api/boarding-pass/*` - 登機證
+- `/api/users/*` - 用戶信息
+- `/api/send-booking-email` - 發送預訂郵件
+- `/api/cron/*` - 定時任務
+
+## 健康檢查
+
+```bash
+curl http://localhost:3001/health
+```
+
+## 內存優化
+
+後端已配置內存限制：
+- Node.js 堆內存：512MB
+- PM2 自動重啟閾值：700MB
+
+詳見 `MEMORY_OPTIMIZATION.md`。
+
+## 從 Next.js API 遷移
+
+所有 API 路由已從 Next.js 遷移到 Express。詳見 `MIGRATION_GUIDE.md`。

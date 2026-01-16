@@ -28,10 +28,10 @@ module.exports = {
       // 重启策略（防 OOM 连锁反应）
       autorestart: true,
       watch: false,
-      max_memory_restart: '700M',
+      max_memory_restart: '520M',
 
-      min_uptime: '30s',
-      max_restarts: 3,
+      min_uptime: '20s',
+      max_restarts: 5,
     },
   ],
 }

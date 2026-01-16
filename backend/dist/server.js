@@ -20,6 +20,7 @@ const getAllowedOrigins = () => {
         'http://localhost:3000',
         /^https:\/\/.*\.vercel\.app$/,
         /^https:\/\/.*\.vercel\.dns$/,
+        'https://fly.flaps1f.com',
     ];
 };
 // CORS 配置

@@ -50,7 +50,7 @@ export default function Footer() {
       email: '郵箱',
       address: '地址',
       addressText: '埃森兰共和国青城市太平川區機場路45號',
-      copyright: '© 2025 黃色航空。版權所有。',
+      copyright: `© ${new Date().getFullYear() } 黃色航空。版權所有。`,
       terms: '服務條款',
       privacy: '私隱政策',
       legal: '法律聲明'
@@ -75,7 +75,7 @@ export default function Footer() {
       email: '邮箱',
       address: '地址',
       addressText: '埃森兰共和国青城市太平川区机场路45号',
-      copyright: '© 2025 黄色航空。版权所有。',
+      copyright: `© ${new Date().getFullYear() } 黄色航空。版权所有。`,
       terms: '服务条款',
       privacy: '隐私政策',
       legal: '法律声明'
@@ -100,7 +100,7 @@ export default function Footer() {
       email: 'Email',
       address: 'Address',
       addressText: '45 Airport Road, Taipingchuan District, Qing City, Republic of Eisenland',
-      copyright: '© 2025 Yellow Airlines. All rights reserved.',
+      copyright: `© ${new Date().getFullYear() } Yellow Airlines. All rights reserved.`,
       terms: 'Terms of Service',
       privacy: 'Privacy Policy',
       legal: 'Legal'
@@ -125,7 +125,7 @@ export default function Footer() {
       email: 'E-Mail',
       address: 'Adresse',
       addressText: '45 Flughafenstraße, Bezirk Taipingchuan, Qing City, Republik Eisenland',
-      copyright: '© 2025 Yellow Airlines. Alle Rechte vorbehalten.',
+      copyright: `© ${new Date().getFullYear() } Yellow Airlines. Alle Rechte vorbehalten.`,
       terms: 'Nutzungsbedingungen',
       privacy: 'Datenschutz',
       legal: 'Rechtliches'
@@ -150,7 +150,7 @@ export default function Footer() {
       email: 'メール',
       address: '住所',
       addressText: 'エイゼンラント共和国青城市太平川区空港路45号',
-      copyright: '© 2025 Yellow Airlines. All rights reserved.',
+      copyright: `© ${new Date().getFullYear() } Yellow Airlines. All rights reserved.`,
       terms: '利用規約',
       privacy: 'プライバシーポリシー',
       legal: '法的通知'
@@ -175,7 +175,7 @@ export default function Footer() {
       email: 'Correo electrónico',
       address: 'Dirección',
       addressText: '45 Airport Road, Distrito de Taipingchuan, Ciudad de Qing, República de Eisenland',
-      copyright: '© 2025 Yellow Airlines. Todos los derechos reservados.',
+      copyright: `© ${new Date().getFullYear() } Yellow Airlines. Todos los derechos reservados.`,
       terms: 'Términos de servicio',
       privacy: 'Política de privacidad',
       legal: 'Legal'
