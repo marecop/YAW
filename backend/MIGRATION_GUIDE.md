@@ -1,13 +1,25 @@
 # Next.js API 遷移到 Express 指南
 
-由於文件較多（40個），這裡提供一個遷移模板和剩餘路由的創建指南。
+**✅ 遷移已完成！** 所有 40 個 API 路由已成功從 Next.js 遷移到 Express。
 
 ## 已遷移的路由
 
-✅ `/api/auth/*` - `routes/auth.ts`
-✅ `/api/flights/*` - `routes/flights.ts`
-✅ `/api/flight-status/*` - `routes/flight-status.ts`
-✅ `/api/bookings/*` - `routes/bookings.ts`
+✅ `/api/auth/*` - `routes/auth.ts` (8 個端點)
+✅ `/api/flights/*` - `routes/flights.ts` (6 個端點)
+✅ `/api/flight-status/*` - `routes/flight-status.ts` (2 個端點)
+✅ `/api/bookings/*` - `routes/bookings.ts` (3 個端點)
+✅ `/api/admin/*` - `routes/admin.ts` (5 個端點)
+✅ `/api/notifications/*` - `routes/notifications.ts` (3 個端點)
+✅ `/api/special-assistance/*` - `routes/special-assistance.ts` (3 個端點)
+✅ `/api/check-in/*` - `routes/check-in.ts` (2 個端點)
+✅ `/api/rewards/*` - `routes/rewards.ts` (2 個端點)
+✅ `/api/immigration/*` - `routes/immigration.ts` (2 個端點)
+✅ `/api/boarding-pass/*` - `routes/boarding-pass.ts` (1 個端點)
+✅ `/api/users/*` - `routes/users.ts` (1 個端點)
+✅ `/api/send-booking-email` - `routes/email.ts` (2 個端點)
+✅ `/api/cron/*` - `routes/cron.ts` (1 個端點)
+
+**總計：40 個 API 路由已全部遷移**
 
 ## 遷移模板
 

@@ -4,13 +4,14 @@
 
 ## 特性
 
-- ✅ 純 Node.js + Express（無 Next.js 開銷）
+- ✅ 純 Node.js + Express（無 Next.js 開銷，已完全遷移）
 - ✅ 內存優化（限制堆內存為 512MB）
 - ✅ TypeScript 支持
 - ✅ Prisma ORM
 - ✅ CORS 配置
 - ✅ Cookie 認證
 - ✅ JWT Token 支持
+- ✅ 所有 API 路由已從 Next.js 遷移到 Express
 
 ## 快速開始
 

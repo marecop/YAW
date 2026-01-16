@@ -21,6 +21,11 @@
   "include": [
     "**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", "app", "lib/dbVersion.ts", "lib/utils/auth.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib/dbVersion.ts",
+    "lib/utils/auth.ts"
+  ]
 }
 
