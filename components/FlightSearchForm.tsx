@@ -23,12 +23,14 @@ export default function FlightSearchForm() {
 
   // Helper to get current language prefix
   const getLangPrefix = () => {
+    if (typeof window === 'undefined') return '' // SSR safe fallback
     const segments = pathname.split('/').filter(Boolean)
     const currentLang = ['en', 'zh-hk', 'zh-cn', 'de', 'jp', 'es'].includes(segments[0]) ? segments[0] : 'zh-hk'
-    return currentLang === 'zh-hk' ? '' : `/${currentLang}`
+    return `/${currentLang}`
   }
   const langPrefix = getLangPrefix()
-  const currentLangCode = langPrefix ? langPrefix.substring(1) : 'zh-hk'
+  // Extract lang code from prefix (remove leading /)
+  const currentLangCode = langPrefix.substring(1)
 
   const translations: Record<string, any> = {
     'zh-hk': {
