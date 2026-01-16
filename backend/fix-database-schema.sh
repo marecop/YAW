@@ -58,6 +58,43 @@ if [[ "$DATABASE_URL" == *"sqlite"* ]] || [[ "$DATABASE_URL" == *".db"* ]]; then
         else
             echo "✅ emailVerificationToken 列已存在"
         fi
+        
+        # 檢查 FlightInstance 表是否存在
+        FLIGHT_INSTANCE_TABLE_EXISTS=$(sqlite3 "$DB_PATH" "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='FlightInstance';" 2>/dev/null || echo "0")
+        
+        if [ "$FLIGHT_INSTANCE_TABLE_EXISTS" = "0" ]; then
+            echo "⚠️  FlightInstance 表不存在，正在創建..."
+            sqlite3 "$DB_PATH" <<EOF
+CREATE TABLE "FlightInstance" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "flightId" TEXT NOT NULL,
+    "date" DATETIME NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'SCHEDULED',
+    "scheduledDeparture" DATETIME NOT NULL,
+    "scheduledArrival" DATETIME NOT NULL,
+    "actualDeparture" DATETIME,
+    "actualArrival" DATETIME,
+    "aircraftRegistration" TEXT,
+    "aircraftType" TEXT,
+    "gate" TEXT,
+    "terminal" TEXT,
+    "baggageClaim" TEXT,
+    "weatherOrigin" TEXT,
+    "weatherDestination" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "FlightInstance_flightId_fkey" FOREIGN KEY ("flightId") REFERENCES "Flight" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE UNIQUE INDEX "FlightInstance_flightId_date_key" ON "FlightInstance"("flightId", "date");
+EOF
+            if [ $? -eq 0 ]; then
+                echo "✅ FlightInstance 表已創建"
+            else
+                echo "❌ 創建 FlightInstance 表時出錯"
+            fi
+        else
+            echo "✅ FlightInstance 表已存在"
+        fi
     else
         echo "⚠️  sqlite3 未安裝或數據庫文件不存在，將使用 Prisma migrate"
     fi
