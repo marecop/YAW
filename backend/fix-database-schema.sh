@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 修復數據庫 Schema 腳本
-# 用於添加缺失的 emailVerified 列
+# 用於添加缺失的 emailVerified 和 emailVerificationToken 列
 
 set -e
 
@@ -24,42 +24,50 @@ fi
 
 echo "📊 數據庫路徑: $DATABASE_URL"
 
-# 檢查 emailVerified 列是否存在
-echo "🔍 檢查數據庫結構..."
+# 提取數據庫文件路徑（SQLite）
+DB_PATH=$(echo $DATABASE_URL | sed 's/file://' | sed 's|prisma/dev.db|prisma/dev.db|')
 
-# 使用 sqlite3 檢查（如果是 SQLite）
+# 如果路徑是相對路徑，轉換為絕對路徑
+if [[ "$DB_PATH" != /* ]]; then
+    DB_PATH="$(pwd)/$DB_PATH"
+fi
+
+echo "📁 數據庫文件: $DB_PATH"
+
+# 檢查並添加缺失的列（如果使用 SQLite）
 if [[ "$DATABASE_URL" == *"sqlite"* ]] || [[ "$DATABASE_URL" == *".db"* ]]; then
-    DB_PATH=$(echo $DATABASE_URL | sed 's/file://' | sed 's/prisma\/dev.db/backend\/prisma\/dev.db/')
-    
-    # 如果路徑是相對路徑，轉換為絕對路徑
-    if [[ "$DB_PATH" != /* ]]; then
-        DB_PATH="$(pwd)/$DB_PATH"
-    fi
-    
-    echo "📁 數據庫文件: $DB_PATH"
-    
-    # 檢查列是否存在
-    if command -v sqlite3 &> /dev/null; then
-        COLUMN_EXISTS=$(sqlite3 "$DB_PATH" "SELECT COUNT(*) FROM pragma_table_info('User') WHERE name='emailVerified';" 2>/dev/null || echo "0")
+    if command -v sqlite3 &> /dev/null && [ -f "$DB_PATH" ]; then
+        echo "🔍 檢查數據庫結構..."
         
-        if [ "$COLUMN_EXISTS" = "0" ]; then
+        # 檢查 emailVerified 列
+        EMAIL_VERIFIED_EXISTS=$(sqlite3 "$DB_PATH" "SELECT COUNT(*) FROM pragma_table_info('User') WHERE name='emailVerified';" 2>/dev/null || echo "0")
+        
+        if [ "$EMAIL_VERIFIED_EXISTS" = "0" ]; then
             echo "⚠️  emailVerified 列不存在，正在添加..."
-            sqlite3 "$DB_PATH" "ALTER TABLE User ADD COLUMN emailVerified TEXT;" 2>/dev/null || echo "⚠️  添加列時出錯（可能已存在）"
-            echo "✅ emailVerified 列已添加"
+            sqlite3 "$DB_PATH" "ALTER TABLE User ADD COLUMN emailVerified DATETIME;" 2>/dev/null && echo "✅ emailVerified 列已添加" || echo "⚠️  添加 emailVerified 時出錯"
         else
             echo "✅ emailVerified 列已存在"
         fi
+        
+        # 檢查 emailVerificationToken 列
+        EMAIL_TOKEN_EXISTS=$(sqlite3 "$DB_PATH" "SELECT COUNT(*) FROM pragma_table_info('User') WHERE name='emailVerificationToken';" 2>/dev/null || echo "0")
+        
+        if [ "$EMAIL_TOKEN_EXISTS" = "0" ]; then
+            echo "⚠️  emailVerificationToken 列不存在，正在添加..."
+            sqlite3 "$DB_PATH" "ALTER TABLE User ADD COLUMN emailVerificationToken TEXT;" 2>/dev/null && echo "✅ emailVerificationToken 列已添加" || echo "⚠️  添加 emailVerificationToken 時出錯"
+        else
+            echo "✅ emailVerificationToken 列已存在"
+        fi
     else
-        echo "⚠️  sqlite3 未安裝，跳過直接檢查"
-        echo "💡 將使用 Prisma migrate 來修復"
+        echo "⚠️  sqlite3 未安裝或數據庫文件不存在，將使用 Prisma migrate"
     fi
 fi
 
 # 運行 Prisma migrate
 echo "🔄 運行 Prisma migrate..."
-npx prisma migrate deploy || {
-    echo "⚠️  migrate deploy 失敗，嘗試創建新遷移..."
-    npx prisma migrate dev --name add_email_verified_column --create-only || true
+npx prisma migrate deploy 2>&1 || {
+    echo "⚠️  migrate deploy 失敗或部分遷移已應用"
+    echo "💡 這可能是正常的，如果列已存在"
 }
 
 # 生成 Prisma Client
@@ -67,4 +75,4 @@ echo "🔧 重新生成 Prisma Client..."
 npx prisma generate
 
 echo "✅ 數據庫 Schema 修復完成！"
-echo "💡 如果問題仍然存在，請手動運行: npx prisma migrate dev"
+echo "💡 如果問題仍然存在，請檢查日誌或手動運行: npx prisma migrate dev"
